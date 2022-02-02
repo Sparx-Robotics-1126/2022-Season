@@ -3,11 +3,9 @@ package frc.drives.commands;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import frc.drives.DrivesOutput;
-import frc.drives.DrivesSensorInterface;
 import frc.drives.DrivesTestSensors;
 
 public class TurnRightTests {

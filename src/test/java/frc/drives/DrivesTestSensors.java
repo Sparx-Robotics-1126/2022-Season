@@ -1,6 +1,6 @@
 package frc.drives;
 
-import com.revrobotics.CANEncoder;
+import com.revrobotics.RelativeEncoder;
 
 public class DrivesTestSensors implements DrivesSensorInterface{
 
@@ -72,5 +72,5 @@ public class DrivesTestSensors implements DrivesSensorInterface{
 
 	//NOT USED
 	@Override
-	public void addEncoders(CANEncoder leftSpark, CANEncoder rightSpark) {}
+	public void addEncoders(RelativeEncoder leftSpark, RelativeEncoder rightSpark) {}
 }

@@ -2,7 +2,6 @@ package frc.drives.commands;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import frc.drives.DrivesOutput;

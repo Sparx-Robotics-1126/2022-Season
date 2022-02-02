@@ -5,10 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import frc.drives.DrivesCommand;
 import frc.drives.DrivesOutput;
 import frc.drives.DrivesTestSensors;
-import frc.health.HealthReport;
 
 public class DriveBackwardsTest {
 
@@ -73,79 +71,4 @@ public class DriveBackwardsTest {
 		assertEquals(0, lastOutput.getLeftMotor(), 0);
 		assertEquals(0, lastOutput.getRightMotor(), 0);
 	}
-	
-	@Test
-	public void neitherSideMoves_ShouldCreateError() {
-		sensors.setRightEncoderSpeed(0);
-		sensors.setRightEncoderSpeed(0);
-		HealthReport report = new DriveBackwards(sensors, 10).checkHealth();
-		assertEquals(true, report.isError());
-		assertEquals("Both L/R not moving!", report.getMessage());
-	}
-	
-	@Test
-	public void leftSideNoMoves_ShouldCreateError() {
-		sensors.setRightEncoderSpeed(-1);
-		sensors.setLeftEncoderSpeed(0);
-		HealthReport report = new DriveBackwards(sensors, 10).checkHealth();
-		assertEquals(true, report.isError());
-		assertEquals("RIO side not moving!", report.getMessage());
-	}
-	
-	@Test
-	public void rightSideNoMoves_ShouldCreateError() {
-		sensors.setRightEncoderSpeed(0);
-		sensors.setLeftEncoderSpeed(-1);
-		HealthReport report = new DriveBackwards(sensors, 10).checkHealth();
-		assertEquals(true, report.isError());
-		assertEquals("Scissor Lift side not moving!", report.getMessage());
-	}
-	
-	@Test
-	public void leftSideMovingWrongWay_ShouldCreateError() {
-		sensors.setRightEncoderSpeed(0);
-		sensors.setRightEncoderDistance(0);
-		sensors.setLeftEncoderSpeed(0);
-		sensors.setLeftEncoderDistance(0);
-		DrivesCommand command = new DriveBackwards(sensors, 10);
-		sensors.setRightEncoderSpeed(-1);
-		sensors.setRightEncoderDistance(-2);
-		sensors.setLeftEncoderSpeed(1);
-		sensors.setLeftEncoderDistance(2);
-		HealthReport report = command.checkHealth();
-		assertEquals(true, report.isError());
-		assertEquals("RIO Side encoder is moving in the wrong direction!", report.getMessage());
-	}
-	
-	@Test
-	public void rightSideMovingWrongWay_ShouldCreateError() {
-		sensors.setRightEncoderSpeed(0);
-		sensors.setRightEncoderDistance(0);
-		sensors.setLeftEncoderSpeed(0);
-		sensors.setLeftEncoderDistance(0);
-		DrivesCommand command = new DriveBackwards(sensors, 10);
-		sensors.setRightEncoderSpeed(1);
-		sensors.setRightEncoderDistance(2);
-		sensors.setLeftEncoderSpeed(-1);
-		sensors.setLeftEncoderDistance(-2);
-		HealthReport report = command.checkHealth();
-		assertEquals(true, report.isError());
-		assertEquals("Scissor Side encoder is moving in the wrong direction!", report.getMessage());
-	}
-	
-	@Test
-	public void drivesGood_ShouldntCreateError() {
-		sensors.setRightEncoderSpeed(0);
-		sensors.setRightEncoderDistance(0);
-		sensors.setLeftEncoderSpeed(0);
-		sensors.setLeftEncoderDistance(0);
-		DrivesCommand command = new DriveBackwards(sensors, 10);
-		sensors.setRightEncoderSpeed(-1);
-		sensors.setRightEncoderDistance(-2);
-		sensors.setLeftEncoderSpeed(-1);
-		sensors.setLeftEncoderDistance(-2);
-		HealthReport report = command.checkHealth();
-		assertEquals(false, report.isError());
-	}
-
 } 

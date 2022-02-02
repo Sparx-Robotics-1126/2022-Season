@@ -3,11 +3,9 @@ package frc.drives.commands;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import frc.drives.DrivesOutput;
-import frc.drives.DrivesSensorInterface;
 import frc.drives.DrivesTestSensors;
 
 public class SpinLeftTests {
@@ -24,7 +22,7 @@ public class SpinLeftTests {
 		//Set fake sensor data
 		sensors.setGyroAngle(0);
 		
-		SpinLeft spinCommand = new SpinLeft(sensors, 0.5, 180);
+		TurnLeft spinCommand = new TurnLeft(sensors, 0.5, 180);
 		DrivesOutput output = spinCommand.execute();
 		
 		//Make sure left motor is moving forward at requested speed
@@ -40,7 +38,7 @@ public class SpinLeftTests {
 		//Set fake sensor data
 		sensors.setGyroAngle(180);
 		
-		SpinLeft spinCommand = new SpinLeft(sensors, 0.5, -180);
+		TurnLeft spinCommand = new TurnLeft(sensors, 0.5, -180);
 		DrivesOutput output = spinCommand.execute();
 		
 		//Make sure left motor is moving forward at requested speed

@@ -1,16 +1,19 @@
 package frc.auto;
 
-public class AutoTask {
-	
-	public static AutoTask createTask(AutoFeature feature) {
+public class AutoTask 
+{	
+	public static AutoTask createTask(AutoFeature feature) 
+	{
 		return new AutoTask(feature, 0, 0);
 	}
 	
-	public static AutoTask createTask(AutoFeature feature, double value1) {
+	public static AutoTask createTask(AutoFeature feature, double value1) 
+	{
 		return new AutoTask(feature, value1, 0);
 	}
 	
-	public static AutoTask createTask(AutoFeature feature, double value1, double value2) {
+	public static AutoTask createTask(AutoFeature feature, double value1, double value2) 
+	{
 		return new AutoTask(feature, value1, value2);
 	}
 
@@ -18,13 +21,15 @@ public class AutoTask {
 	public final double value1;
 	public final double value2;
 	
-	private AutoTask(AutoFeature feature, double value1, double value2) {
+	private AutoTask(AutoFeature feature, double value1, double value2) 
+	{
 		this.feature = feature;
 		this.value1 = value1;
 		this.value2 = value2;
 	}
 	
-	public AutoFeature getFeature() {
+	public AutoFeature getFeature() 
+	{
 		return feature;
 	}
 	
@@ -32,5 +37,4 @@ public class AutoTask {
 	public String toString() {
 		return feature.toString() + " | " + value1 + " : " + value2;
 	}
-	
 }

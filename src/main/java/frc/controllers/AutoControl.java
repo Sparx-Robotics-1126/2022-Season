@@ -1,65 +1,72 @@
 package frc.controllers;
 
-import frc.subsystem.Drives;
-
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import frc.subsystem.Drives;
+
 import frc.auto.AutoFeature;
 import frc.auto.AutoRoutine;
 import frc.auto.AutoTask;
+
 import frc.auto.routine.DoNothing;
-import frc.auto.routine.SixBallsFromTrench;
-import frc.auto.routine.DriveBackwards;
-import frc.auto.routine.ShootBallsOnly;
 
-public class AutoControl extends Controller{
-
+public class AutoControl extends Controller
+{
 	private SendableChooser<AutoRoutine> autoSelector;
 	private AutoRoutine[] possibleAutos = {
 			new DoNothing(),
-			new DriveBackwards(),
-			new ShootBallsOnly(),
-			new SixBallsFromTrench()
-			//Add new Auto Routines here
 	};
 	private AutoTask[] currentAuto;
 	private int autoStep = 0;
 
-	public AutoControl(Drives drives) {
+	public AutoControl(Drives drives) 
+	{
 		super(drives);
 		createDashboard();
 	}
 
-	private void createDashboard() {
+	private void createDashboard() 
+	{
 		autoSelector = new SendableChooser<AutoRoutine>();
-		for(AutoRoutine auto: possibleAutos) {
+
+		for (AutoRoutine auto: possibleAutos) 
+		{
 			autoSelector.addOption(auto.getAutoName(), auto);
 		}
-		autoSelector.setDefaultOption("Default: Shoot 3", new ShootBallsOnly());
+
+		autoSelector.setDefaultOption("Default: Do Nothing", new DoNothing());
 		SmartDashboard.putData("Auto Selector", autoSelector);
 	}
 
-	private AutoTask[] getSelectedAuto() {
+	private AutoTask[] getSelectedAuto() 
+	{
 		AutoRoutine auto = autoSelector.getSelected();
 		System.out.println("Auto Selected: " + auto.getAutoName());
 		return auto.getAutoSequence();
 	}
 	
-	public void resetAuto() {
+	public void resetAuto() 
+	{
 		currentAuto = null;
 		autoStep = 0;
 	}
 
 	@Override
-	public void execute() {
-		if(currentAuto == null) { //First time auto has run
+	public void execute() 
+	{
+		if(currentAuto == null) 
+		{
 			autoStep = 0;
 			currentAuto = getSelectedAuto();
 		}
+
 		AutoTask currentTask = currentAuto[autoStep];
 		AutoFeature currentFeature = currentTask.getFeature();
-		switch(currentFeature) {
-		//Commands go here
+		
+		switch(currentFeature) 
+		{
+		
 		case STOP:
 			autoStep--;//This offsets the autostep increment at the bottom causing the step to remain stuck here
 			break;

@@ -1,111 +1,63 @@
 package frc.auto;
 
+/**
+ * Specifies all potential types of features used during autonomous.
+ */
 public enum AutoFeature {
 	/**
-	 * End Autonomous Routine
+	 * End the current autonomous routine.
 	 */
 	STOP("Stopping Auto"),
 	
 	/**
-	 * Wait number of milliseconds
-	 * Value1: milliseconds to wait
+	 * Wait the specified number of milliseconds.
+	 * Value one specifies the amount of milliseconds to wait.
 	 */
 	WAIT("Waiting..."),
 	
 	/**
-	 * Wait for last drives command to complete
+	 * Wait for the current drives command to finish.
 	 */
 	DRIVE_DONE("Drive: Waiting for Complete..."),
 	
 	/**
-	 * Have robot drive straight
-	 * Value 1: Speed
-	 * Value 2: Distance
+	 * Drive the robot straight forward the specified distance at the specified speed.
+	 * Value one dictates speed.
+	 * Value two dictates the desired distance.
 	 */
 	DRIVE_FORWARD("Drive: Forward"),
 	
 	/**
-	 * Have robot drive backwards
-	 * Value1: Speed
-	 * Value2: Distance
+	 * Drive the robot straight backward the specified distance at the specified speed.
+	 * Value one dictates speed.
+	 * Value two dictates the desired distance.
 	 */
 	DRIVE_BACKWARDS("Drive: Backward"),
 	
 	/**
-	 * Have robot turn right
-	 * Value1: Speed
-	 * Value2: Degrees
+	 * Turn the robot right by the specified speed and degrees.
+	 * Value one dictates speed.
+	 * Value two dictates the desired angle.
 	 */
 	DRIVE_TURN_RIGHT("Drive: Turn Right"),
 	
 	/**
-	 * HAve robot turn left
-	 * Value1: Speed
-	 * Value2: Degrees
+	 * Turn the robot left by the specified speed and degrees.
+	 * Value one dictates speed.
+	 * Value two dictates the desired angle.
 	 */
-	DRIVE_TURN_LEFT("Drive: Turn Left"),
-	
-	/**
-	 * Wait for shooter to complete last shooter command
-	 */
-	SHOOTER_DONE("Shooter: Waiting for Complete..."),
-	
-	/**
-	 * Wait for the shooter to be ready to fire
-	 */
-	SHOOTER_READY_TO_FIRE("Shooter: Ready to Fire"),
-	
-	/**
-	 * Active Limelight targeting system
-	 * Will enable both active turreting and flywheel control
-	 */
-	SHOOTER_ACTIVATE_LIMELIGHT("Shooter: Limelight Enabled"),
-	
-	/**
-	 * Deactivate Limelight targeting system
-	 * Will turn off limelight and spin down flywheel
-	 */
-	SHOOTER_DEACTIVATE_LIMELIGHT("Shooter: Limelight Disabled"),
-	
-	/**
-	 * Will shoot ONE power cell when ready
-	 */
-	STORAGE_SHOOT("Storage: Shooting"),
-	
-	/**
-	 * Wait for last Storage command to complete
-	 */
-	STORAGE_DONE("Storage: Waiting for Complete..."),
-	
-	/**
-	 * Will bring highest ball to top of shooter ready for launch
-	 * WILL NOT SHOOT BALL
-	 */
-	STORAGE_PREPARE_FOR_SHOOTING("Storage: Preparing to Shoot"),
-	
-	/**
-	 * Wait for last Acq command to complete
-	 */
-	ACQ_DONE("Acq: Waiting for Complete..."),
-	
-	/**
-	 * Turn on Acq Rollers
-	 * Will also deal with the storage indexing
-	 */
-	ACQ_ACQUIRE("Acq: Acquiring"),
-	
-	/**
-	 * Turn off Acq Rollers
-	 */
-	ACQ_STOP_ACQUIRING("Acq: Stop Acquiring");
+	DRIVE_TURN_LEFT("Drive: Turn Left");
 	
 	private String name;
-	private AutoFeature(String name){
+
+	private AutoFeature(String name)
+	{
 		this.name = name;
 	}
 	
 	@Override
-	public String toString() {
+	public String toString() 
+	{
 		return name;
 	}
 }

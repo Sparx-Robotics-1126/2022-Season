@@ -33,7 +33,7 @@ public class Limelight
 	public double getDistanceFromTarget()
 	{
 		double a2 = ty.getDouble(0);
-		double distance = (TARGET_HEIGHT-ROBOT_HEIGHT) / Math.tan(Math.toRadians(CAMERA_ANGLE + a2));
+		double distance = (TARGET_HEIGHT - ROBOT_HEIGHT) / Math.tan(Math.toRadians(CAMERA_ANGLE + a2));
 		return distance;
 	}
 	

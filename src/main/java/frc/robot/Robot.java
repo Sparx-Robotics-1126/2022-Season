@@ -16,7 +16,7 @@ import frc.subsystem.Drives;
  */
 public class Robot extends RobotBase
 {
-    //States robot can be in
+    //Every possible state of control for the robot.
     public enum RobotState
     {
 		STANDBY,

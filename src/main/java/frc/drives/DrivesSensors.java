@@ -1,6 +1,6 @@
 package frc.drives;
 
-import edu.wpi.first.wpilibj.SerialPort;
+import frc.robot.IO;
 
 import com.revrobotics.RelativeEncoder;
 
@@ -26,7 +26,7 @@ public class DrivesSensors implements DrivesSensorInterface
 	 */
 	public DrivesSensors() 
 	{
-		gyro = new AHRS(SerialPort.Port.kUSB);
+		gyro = new AHRS(IO.USB_ONBOARD);
 		rightJoystick = 0;
 		leftJoystick = 0;
 	}

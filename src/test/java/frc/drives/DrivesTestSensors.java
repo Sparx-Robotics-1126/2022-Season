@@ -2,8 +2,8 @@ package frc.drives;
 
 import com.revrobotics.RelativeEncoder;
 
-public class DrivesTestSensors implements DrivesSensorInterface{
-
+public class DrivesTestSensors implements DrivesSensorInterface
+{
 	private double rightEncoderDistance;
 	private double rightEncoderSpeed;
 	private double leftEncoderDistance;
@@ -41,36 +41,43 @@ public class DrivesTestSensors implements DrivesSensorInterface{
 	public double getLeftJoyStick() { return leftJoystick; }
 
 	
-	//------------------SETTERS----------------------------
-	public void setRightEncoderDistance(double rightEncoderDistance) {
+	//Setters.
+	public void setRightEncoderDistance(double rightEncoderDistance) 
+	{
 		this.rightEncoderDistance = rightEncoderDistance;
 	}
 
-	public void setRightEncoderSpeed(double rightEncoderSpeed) {
+	public void setRightEncoderSpeed(double rightEncoderSpeed) 
+	{
 		this.rightEncoderSpeed = rightEncoderSpeed;
 	}
 
-	public void setLeftEncoderDistance(double leftEncoderDistance) {
+	public void setLeftEncoderDistance(double leftEncoderDistance) 
+	{
 		this.leftEncoderDistance = leftEncoderDistance;
 	}
 
-	public void setLeftEncoderSpeed(double leftEncoderSpeed) {
+	public void setLeftEncoderSpeed(double leftEncoderSpeed) 
+	{
 		this.leftEncoderSpeed = leftEncoderSpeed;
 	}
 
-	public void setGyroAngle(double gyroAngle) {
+	public void setGyroAngle(double gyroAngle) 
+	{
 		this.gyroAngle = gyroAngle;
 	}
 
-	public void setLeftJoystick(double leftJoystick) {
+	public void setLeftJoystick(double leftJoystick) 
+	{
 		this.leftJoystick = leftJoystick;
 	}
 
-	public void setRightJoystick(double rightJoystick) {
+	public void setRightJoystick(double rightJoystick) 
+	{
 		this.rightJoystick = rightJoystick;
 	}
 
-	//NOT USED
+	//Not used.
 	@Override
 	public void addEncoders(RelativeEncoder leftSpark, RelativeEncoder rightSpark) {}
 }

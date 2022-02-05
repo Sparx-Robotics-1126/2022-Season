@@ -4,6 +4,9 @@ import frc.drives.DrivesCommand;
 import frc.drives.DrivesOutput;
 import frc.drives.DrivesSensorInterface;
 
+/**
+ * DrivesCommand to manually instruct the robot to turn right.
+ */
 public class TurnRight extends DrivesCommand
 {
 	private double minSpeed = 0.3;
@@ -13,6 +16,12 @@ public class TurnRight extends DrivesCommand
 	private double speedToStop = 0;
 	private double distanceToStop = 0;
 
+	/**
+	 * Creates a DrivesCommand instructing the robot to turn right by the specified angle.
+	 * @param sensors A DrivesSensorInterface containing the sensors that should be used with this DrivesCommand.
+	 * @param speed The speed at which to turn by.
+	 * @param angle The amount of degrees that the robot should turn.
+	 */
 	public TurnRight(DrivesSensorInterface sensor, double speed, double angle) 
 	{
 		super(sensor);
@@ -24,26 +33,20 @@ public class TurnRight extends DrivesCommand
 	public DrivesOutput execute() 
 	{
 		distanceToStop = Math.abs(finalAngle - sensors.getGyroAngle());
-		if (sensors.getGyroAngle() >= finalAngle) 
-		{
-			//Stop motors, let drives know we are finished
-			return new DrivesOutput(0, 0, true); //LeftMotor: 0, RightMotor: 0, isDone: true
 
-		}
+		if (sensors.getGyroAngle() >= finalAngle)
+			return new DrivesOutput(0, 0, true);
 		else if (distanceToStop <= stopAngle)
-		{ // slows down robot based on distance before stopping
+		{
 			speedToStop = distanceToStop / stopAngle;
-			if(speedToStop < minSpeed) // sets minimum speed if the robot is close to 
-				// desired angle so the speed doesnt go to 0
-			{
-				speedToStop = minSpeed;
-			}
 
-			return new DrivesOutput(speedToStop,-speedToStop); 
-		} else {
-			//If we still need to spin
-			return new DrivesOutput(SPEED, -SPEED);//LeftMotor: -SPEED, RightMotor: SPEED, isDone: false
-			//Can also use new DrivesOutput(SPEED, -SPEED, false)
+			//Slow down the robot when we near the desired angle to avoid overshooting it.
+			if (speedToStop < minSpeed)
+				speedToStop = minSpeed;
+
+			return new DrivesOutput(speedToStop, -speedToStop);
 		}
+			
+		return new DrivesOutput(SPEED, -SPEED);
 	}
 }

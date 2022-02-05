@@ -8,48 +8,53 @@ import org.junit.Test;
 import frc.drives.DrivesOutput;
 import frc.drives.DrivesTestSensors;
 
-public class DriveBackwardsTest {
-
+public class DriveBackwardsTest 
+{
 	private DrivesTestSensors sensors;
 
 	@Before
-	public void setup() {
+	public void setup() 
+	{
 		sensors = new DrivesTestSensors();
 	}
 
 	@Test
-	public void motorsAreEqual() {
+	public void motorsAreEqual() 
+	{
 		DriveBackwards backwardC = new DriveBackwards(sensors, 10);
 		sensors.setLeftEncoderDistance(20);
 		sensors.setRightEncoderDistance(20);
 		DrivesOutput output = backwardC.execute();
-		assertEquals("motors are not the same speed", output.getRightMotor(), output.getLeftMotor(), 0.001);
+		assertEquals("Motors are not the same speed.", output.getRightMotor(), output.getLeftMotor(), 0.001);
 	}
 
 	@Test
-	public void pointedRight_ShouldSlowLeft() {
+	public void pointedRight_ShouldSlowLeft() 
+	{
 		DriveBackwards backwardC = new DriveBackwards(sensors, 10);
 		sensors.setLeftEncoderDistance(20);
 		sensors.setRightEncoderDistance(20);
 		sensors.setGyroAngle(5);
 		DrivesOutput output = backwardC.execute();
 
-		assertTrue("Front pointed right should slow down right", output.getRightMotor() < output.getLeftMotor());//Negative Numbers
+		assertTrue("Front pointed right should slow down right", output.getRightMotor() < output.getLeftMotor()); //Negative numbers.
 	}
 
 	@Test
-	public void pointedLeft_ShouldSlowRight() {
+	public void pointedLeft_ShouldSlowRight() 
+	{
 		DriveBackwards backwardC = new DriveBackwards(sensors, 10);
 		sensors.setLeftEncoderDistance(20);
 		sensors.setRightEncoderDistance(20);
 		sensors.setGyroAngle(-5);
 		DrivesOutput output = backwardC.execute();
 
-		assertTrue("Front pointed right should slow down right", output.getRightMotor() > output.getLeftMotor());//Negative Numbers
+		assertTrue("Front pointed right should slow down right", output.getRightMotor() > output.getLeftMotor()); //Negative numbers.
 	}
 
 	@Test
-	public void atDistance_ShouldStop(){
+	public void atDistance_ShouldStop()
+	{
 		sensors.setLeftEncoderDistance(0);
 		sensors.setRightEncoderDistance(0);
 		DriveBackwards backwardC = new DriveBackwards(sensors, 10);

@@ -2,7 +2,6 @@ package frc.controllers;
 
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
-import frc.controllers.Button.ButtonType;
 import frc.subsystem.Drives;
 
 public class TeleopControls extends Controller 

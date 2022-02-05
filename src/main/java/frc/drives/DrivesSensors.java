@@ -143,5 +143,4 @@ public class DrivesSensors implements DrivesSensorInterface
 	{
 		leftJoystick = value;
 	}
-
 }

@@ -1,16 +1,9 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.controllers;
 
 import frc.subsystem.Drives;
 
 /**
- * Add your docs here.
+ * Controller for testing.
  */
 public class TestControls extends Controller 
 {
@@ -20,7 +13,7 @@ public class TestControls extends Controller
     public TestControls(Drives drives) 
     {
         super(drives);
-        RUNTIME = 10000;//10 seconds
+        RUNTIME = 10000; //In milliseconds.
         reset();
     }
 
@@ -36,9 +29,8 @@ public class TestControls extends Controller
         {
             startTimeStamp = System.currentTimeMillis();
             drives.moveBackward(9999);
-        
-        
-        }else if (startTimeStamp != Long.MAX_VALUE && System.currentTimeMillis() > startTimeStamp + RUNTIME)
+        }
+        else if (startTimeStamp != Long.MAX_VALUE && System.currentTimeMillis() > startTimeStamp + RUNTIME)
         {
             startTimeStamp = Long.MAX_VALUE;
             drives.setJoysticks(0, 0);

@@ -1,18 +1,22 @@
 package frc.robot;
 
 import edu.wpi.first.hal.HAL;
+
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.controllers.AutoControl;
 import frc.controllers.Controller;
 import frc.controllers.TeleopControls;
 import frc.controllers.TestControls;
+
 import frc.drives.DrivesSensorInterface;
 import frc.drives.DrivesSensors;
+
 import frc.subsystem.Drives;
 
 /**
- * Controls when subsystems are engadged as well as gives control to correct controller (auto/teleop/test)
+ * Controls when subsystems are engaged and grants control to the correct Controller.
  */
 public class Robot extends RobotBase
 {
@@ -25,36 +29,36 @@ public class Robot extends RobotBase
         TEST;
 	}
 
-    //Controllers
+    //Possible controllers.
     private TeleopControls teleopControls;
     private AutoControl autoControls;
     private TestControls testControls;
     
-    //Robot Subsystems
+    //The robot subsystems.
     private Drives drives;
 
-    //Acting Controller (Auto/Teleop/Test)
+    //The acting Controller of the robot.
     private Controller currentController;
 
-    //Keeps track of current state
+    //Keeps track of the current state of the robot.
     private RobotState state;
 
     private void robotInit()
     {
-        state = RobotState.STANDBY; //When robot turns on, we don't want anything running in the background
+        state = RobotState.STANDBY; //When robot turns on, we don't want anything running in the background.
         
-        //Sensors
+        //Initialize sensors.
         DrivesSensorInterface drivesSensors = new DrivesSensors();
         
-        //Subsystems
-        drives = new Drives(drivesSensors); // Creates drives instance
+        //Initialize Subsystems.
+        drives = new Drives(drivesSensors);
         
-        //Controls
-        teleopControls = new TeleopControls(drives); //Creates controller instance, passes in drives subsystem
+        //Initialize Controllers.
+        teleopControls = new TeleopControls(drives);
         autoControls = new AutoControl(drives);
         testControls = new TestControls(drives);
 
-        //Starting Subsystems
+        //Start subsystem threads.
         new Thread(drives).start();
     }
 
@@ -65,7 +69,7 @@ public class Robot extends RobotBase
     }
 
     /**
-     * Called by Robot.java when auto has been started
+     * Called when autonomous begins.
      */
     private void autoStarted()
     {
@@ -74,7 +78,7 @@ public class Robot extends RobotBase
     }
 
     /**
-     * Called by Robot.java when teleop has been started
+     * Called when teleoperated begins.
      */
     private void teleopStarted()
     {
@@ -83,6 +87,9 @@ public class Robot extends RobotBase
     	state = RobotState.TELE;
     }
 
+    /**
+     * Called when test mode is activated.
+     */
     private void testStarted()
     {
         testControls.reset();
@@ -90,7 +97,9 @@ public class Robot extends RobotBase
         state = RobotState.TEST;
     }
 
-    //Main Method
+    /**
+     * The main loop of the robot. Ran every update/tick of the RIO.
+     */
     private void mainLoop() 
     {
         switch (state)

@@ -3,8 +3,7 @@ package frc.drives;
 import com.revrobotics.RelativeEncoder;
 
 /**
- * Any and all sensor data required for operation of the Drives subsystem, including encoders, limit switches, 
- * vision, joysitck input, etc..
+ * Any and all sensor data required for operation of the Drives subsystem such as encoders, limit switches, etc..
  */
 public interface DrivesSensorInterface 
 {

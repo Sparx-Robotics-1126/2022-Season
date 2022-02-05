@@ -3,7 +3,7 @@ package frc.subsystem;
 public abstract class Subsystem implements Runnable 
 {
     /**
-     * This is called continuously by the Thread created in Robot.java.
+     * Called every update/tick of the main loop.
      */
     @Override
     public void run()
@@ -15,12 +15,12 @@ public abstract class Subsystem implements Runnable
     }
 
     /**
-     * Called by run(). This is where the code for the subsystem goes.
+     * Called every update/tick of this subsystem.
      */
     abstract void execute();
 
     /**
-     * Used during autonomous to see what a task (such as drives a certain distance forward) is completed.
+     * Used during autonomous to detect when a task is completed.
      */
     public abstract boolean isDone();
 }

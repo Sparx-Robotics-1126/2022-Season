@@ -3,7 +3,8 @@ package frc.auto;
 /**
  * Specifies all potential types of features used during autonomous.
  */
-public enum AutoFeature {
+public enum AutoFeature 
+{
 	/**
 	 * End the current autonomous routine.
 	 */

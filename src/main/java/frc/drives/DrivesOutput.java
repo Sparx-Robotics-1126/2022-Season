@@ -1,14 +1,17 @@
 package frc.drives;
 
+/**
+ * Class allowing the storage of speed values for motors. Used when setting motor speeds in the Drives subsystem.
+ */
 public class DrivesOutput 
 {
     /**
-     * Output for the left motor. Value between -1 and 1.
+     * Output for the left motors. Value between -1 and 1.
      */
     private double leftMotor;
 
     /**
-     * Output for the right motor. Value between -1 and 1.
+     * Output for the right motors. Value between -1 and 1.
      */
     private double rightMotor;
 
@@ -18,9 +21,9 @@ public class DrivesOutput
     private boolean isDone;
 
     /**
+     * Used to set and store new speed values for the motors.
      * @param leftMotor The speed that the left motor should be set to.
      * @param rightMotor The speed that the right motor should be set to.
-     * Used to set and store new speed values for the motors.
      */
     public DrivesOutput(double leftMotor, double rightMotor)
     {
@@ -30,10 +33,10 @@ public class DrivesOutput
     }
 
     /**
+     * Used to set and store new speed values for the motors.
      * @param leftMotor The speed that the left motor should be set to.
      * @param rightMotor The speed that the right motor should be set to.
      * @param isDone True if the command has finished executing.
-     * Used to set and store new speed values for the motors.
      */
     public DrivesOutput(double leftMotor, double rightMotor, boolean isDone)
     {
@@ -59,7 +62,7 @@ public class DrivesOutput
     }
 
     /**
-     * @return Whether or not the command has finished executing.
+     * @return Whether or not the command has finished executing and should no longer be ran in the subsystem thread.
      */
     public boolean isDone() 
     {

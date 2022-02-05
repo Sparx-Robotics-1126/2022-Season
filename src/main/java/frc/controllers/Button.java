@@ -44,8 +44,7 @@ public class Button
 	}
 	
 	/**
-	 * THIS IS FOR INTERNAL USE AND TESTING ONLY
-	 * DO NOT CALL!!!!
+	 * For testing only. Do not use.
 	 */
 	protected boolean getTriggered(boolean isCurrentlyPressed, boolean buttonPreviouslyPressed) 
 	{

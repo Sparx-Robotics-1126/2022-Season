@@ -20,6 +20,9 @@ public class AxisButton extends Button
 		axis = new Axis(joystick, axisNum, false);
 	}
 	
+	/**
+	 * @return A boolean indicating whether or not the button should be considered as pressed.
+	 */
 	@Override
 	public boolean get() 
 	{

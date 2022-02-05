@@ -9,17 +9,19 @@ import frc.drives.DrivesCommand;
 import frc.drives.DrivesOutput;
 import frc.drives.DrivesTestSensors;
 
-public class DriverControlledTests {
-	
+public class DriverControlledTests 
+{	
 	private DrivesTestSensors sensors;
 	
 	@Before
-	public void setup() {
+	public void setup() 
+	{
 		sensors = new DrivesTestSensors();
 	}
 	
 	@Test
-	public void command_shouldReturnJoystickValue() {
+	public void command_shouldReturnJoystickValue() 
+	{
 		DrivesCommand command = new DriverControlled(sensors);
 		sensors.setLeftJoystick(0);
 		sensors.setRightJoystick(0);
@@ -39,5 +41,4 @@ public class DriverControlledTests {
 		assertEquals(-0.5, output.getLeftMotor(), 0.000001);
 		assertEquals(0.5, output.getRightMotor(), 0.000001);
 	}
-
 }

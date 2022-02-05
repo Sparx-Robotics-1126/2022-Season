@@ -55,7 +55,7 @@ public class AutoControl extends Controller
 	@Override
 	public void execute() 
 	{
-		if(currentAuto == null) 
+		if (currentAuto == null) 
 		{
 			autoStep = 0;
 			currentAuto = getSelectedAuto();
@@ -64,35 +64,34 @@ public class AutoControl extends Controller
 		AutoTask currentTask = currentAuto[autoStep];
 		AutoFeature currentFeature = currentTask.getFeature();
 		
-		switch(currentFeature) 
+		switch (currentFeature) 
 		{
-		
-		case STOP:
-			autoStep--;//This offsets the autostep increment at the bottom causing the step to remain stuck here
-			break;
+			case STOP:
+				autoStep--;//This offsets the autostep increment at the bottom causing the step to remain stuck here
+				break;
 
-		//DRIVES
-		case DRIVE_FORWARD:
-			drives.moveForward(currentTask.value1);
-			break;
-		case DRIVE_BACKWARDS:
-			drives.moveBackward(currentTask.value1);
-			break;
-		case DRIVE_TURN_LEFT:
-			drives.turnLeft(currentTask.value1);
-			break;
-		case DRIVE_TURN_RIGHT:
-			drives.turnRight(currentTask.value1);
-			break;
-		case DRIVE_DONE:
-			if(!drives.isDone()){
-				autoStep--;
-			}
-			break;
+			//DRIVES
+			case DRIVE_FORWARD:
+				drives.moveForward(currentTask.value1);
+				break;
+			case DRIVE_BACKWARDS:
+				drives.moveBackward(currentTask.value1);
+				break;
+			case DRIVE_TURN_LEFT:
+				drives.turnLeft(currentTask.value1);
+				break;
+			case DRIVE_TURN_RIGHT:
+				drives.turnRight(currentTask.value1);
+				break;
+			case DRIVE_DONE:
+				if (!drives.isDone())
+					autoStep--;
+				break;
 
-		default:
-			System.out.println("Unimplemented Feature: " + currentTask);
+			default:
+				System.out.println("Unimplemented Feature: " + currentTask);
 		}
+
 		autoStep++;
 	}
 }

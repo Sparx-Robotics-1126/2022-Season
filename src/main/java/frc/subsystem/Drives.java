@@ -24,7 +24,7 @@ public class Drives extends Subsystem
     /**
      * The maximum amount of current in amps that should be permitted during motor operation.
      */
-    private static final int MAX_CURRENT = 10;
+    private static final int MAX_CURRENT = 30;
 
     /**
      * The ideal voltage that the motors should attempt to match.
@@ -86,6 +86,14 @@ public class Drives extends Subsystem
             slave.follow(master);
             slave.setIdleMode(IdleMode.kCoast);
         }
+    }
+
+    /**
+     * @return The DrivesSensorInterface being used by this Drives instance.
+     */
+    public DrivesSensorInterface getSensors()
+    {
+        return drivesSensors;
     }
 
     @Override

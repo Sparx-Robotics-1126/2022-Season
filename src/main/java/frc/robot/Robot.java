@@ -40,6 +40,9 @@ public class Robot extends RobotBase
     //The acting Controller of the robot.
     private Controller currentController;
 
+    //Sensors.
+    private DrivesSensorInterface drivesSensors;
+
     //Keeps track of the current state of the robot.
     private RobotState state;
 
@@ -48,7 +51,7 @@ public class Robot extends RobotBase
         state = RobotState.STANDBY; //When robot turns on, we don't want anything running in the background.
         
         //Initialize sensors.
-        DrivesSensorInterface drivesSensors = new DrivesSensors();
+        drivesSensors = new DrivesSensors();
         
         //Initialize Subsystems.
         drives = new Drives(drivesSensors);
@@ -65,7 +68,6 @@ public class Robot extends RobotBase
     private void disabledStarted()
     {
         state = RobotState.STANDBY;
-        autoControls.resetAuto();
     }
 
     /**
@@ -92,7 +94,6 @@ public class Robot extends RobotBase
      */
     private void testStarted()
     {
-        testControls.reset();
         currentController = testControls;
         state = RobotState.TEST;
     }

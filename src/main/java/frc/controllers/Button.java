@@ -44,7 +44,10 @@ public class Button
 	}
 	
 	/**
-	 * For testing only. Do not use.
+	 * Indicates whether or not the button should be considered pressed based on its ButtonType.
+	 * @param isCurrentlyPressed Whether or not the button is currently pressed.
+	 * @param buttonPreviouslyPressed If the button was pressed before now.
+	 * @return A boolean indicating whether or not the button is triggered.
 	 */
 	protected boolean getTriggered(boolean isCurrentlyPressed, boolean buttonPreviouslyPressed) 
 	{
@@ -54,5 +57,13 @@ public class Button
 			return !isCurrentlyPressed && buttonPreviouslyPressed; //Not pressed now, was pressed before.
 		
 		return isCurrentlyPressed;
+	}
+
+	/**
+	 * @return A boolean indicating whether or not the button was pressed before this call.
+	 */
+	public boolean previouslyPressed()
+	{
+		return buttonPreviouslyPressed;
 	}
 }

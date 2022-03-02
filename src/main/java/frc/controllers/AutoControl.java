@@ -2,7 +2,7 @@ package frc.controllers;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import frc.subsystem.Acquisitions;
 import frc.subsystem.Drives;
 
 import frc.auto.AutoFeature;
@@ -20,9 +20,9 @@ public class AutoControl extends Controller
 	private AutoTask[] currentAuto;
 	private int autoStep = 0;
 
-	public AutoControl(Drives drives) 
+	public AutoControl(Drives drives, Acquisitions acquisitions) 
 	{
-		super(drives);
+		super(drives, acquisitions);
 		createDashboard();
 	}
 

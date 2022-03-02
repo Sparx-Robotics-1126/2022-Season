@@ -1,6 +1,7 @@
 package frc.controllers;
 
 import frc.subsystem.Drives;
+import frc.subsystem.Acquisitions;
 
 /**
  * Controller for testing.
@@ -10,9 +11,9 @@ public class TestControls extends Controller
     private long startTimeStamp;
     private final long RUNTIME;
 
-    public TestControls(Drives drives) 
+    public TestControls(Drives drives, Acquisitions acquisitions) 
     {
-        super(drives);
+        super(drives, acquisitions);
         RUNTIME = 10000; //In milliseconds.
         reset();
     }

@@ -10,10 +10,11 @@ import frc.controllers.Controller;
 import frc.controllers.TeleopControls;
 import frc.controllers.TestControls;
 
+import frc.subsystem.Acquisitions;
+import frc.subsystem.Drives;
+
 import frc.drives.DrivesSensorInterface;
 import frc.drives.DrivesSensors;
-
-import frc.subsystem.Drives;
 
 /**
  * Controls when subsystems are engaged and grants control to the correct Controller.
@@ -36,9 +37,13 @@ public class Robot extends RobotBase
     
     //The robot subsystems.
     private Drives drives;
+    private Acquisitions acquisitions;
 
     //The acting Controller of the robot.
     private Controller currentController;
+
+    //Sensors.
+    private DrivesSensorInterface drivesSensors;
 
     //Keeps track of the current state of the robot.
     private RobotState state;
@@ -48,15 +53,15 @@ public class Robot extends RobotBase
         state = RobotState.STANDBY; //When robot turns on, we don't want anything running in the background.
         
         //Initialize sensors.
-        DrivesSensorInterface drivesSensors = new DrivesSensors();
+        drivesSensors = new DrivesSensors();
         
         //Initialize Subsystems.
         drives = new Drives(drivesSensors);
         
         //Initialize Controllers.
-        teleopControls = new TeleopControls(drives);
-        autoControls = new AutoControl(drives);
-        testControls = new TestControls(drives);
+        teleopControls = new TeleopControls(drives, acquisitions);
+        autoControls = new AutoControl(drives, acquisitions);
+        testControls = new TestControls(drives, acquisitions);
 
         //Start subsystem threads.
         new Thread(drives).start();

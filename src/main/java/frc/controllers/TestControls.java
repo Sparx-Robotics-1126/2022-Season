@@ -1,6 +1,7 @@
 package frc.controllers;
 
 import frc.subsystem.Drives;
+import frc.subsystem.Acquisitions;
 
 import frc.drives.DrivesSensorInterface;
 
@@ -13,9 +14,9 @@ public class TestControls extends Controller
 {
     DrivesSensorInterface drivesSensors;
 
-    public TestControls(Drives drives) 
+    public TestControls(Drives drives, Acquisitions acquisitions) 
     {
-        super(drives);
+        super(drives, acquisitions);
 
         drivesSensors = drives.getSensors();
 

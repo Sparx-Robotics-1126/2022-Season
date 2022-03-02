@@ -4,16 +4,18 @@ import edu.wpi.first.hal.HAL;
 
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import frc.acquisitions.AcquisitionsSensorInterface;
+import frc.acquisitions.AcquisitionsSensors;
 import frc.controllers.AutoControl;
 import frc.controllers.Controller;
 import frc.controllers.TeleopControls;
 import frc.controllers.TestControls;
 
+import frc.subsystem.Acquisitions;
+import frc.subsystem.Drives;
+
 import frc.drives.DrivesSensorInterface;
 import frc.drives.DrivesSensors;
-
-import frc.subsystem.Drives;
 
 /**
  * Controls when subsystems are engaged and grants control to the correct Controller.
@@ -36,12 +38,14 @@ public class Robot extends RobotBase
     
     //The robot subsystems.
     private Drives drives;
+    private Acquisitions acquisitions;
 
     //The acting Controller of the robot.
     private Controller currentController;
 
     //Sensors.
     private DrivesSensorInterface drivesSensors;
+    private AcquisitionsSensorInterface acquisitionsSensors;
 
     //Keeps track of the current state of the robot.
     private RobotState state;
@@ -52,17 +56,20 @@ public class Robot extends RobotBase
         
         //Initialize sensors.
         drivesSensors = new DrivesSensors();
+        acquisitionsSensors = new AcquisitionsSensors();
         
         //Initialize Subsystems.
         drives = new Drives(drivesSensors);
+        acquisitions = new Acquisitions(acquisitionsSensors);
         
         //Initialize Controllers.
-        teleopControls = new TeleopControls(drives);
-        autoControls = new AutoControl(drives);
-        testControls = new TestControls(drives);
+        teleopControls = new TeleopControls(drives, acquisitions);
+        autoControls = new AutoControl(drives, acquisitions);
+        testControls = new TestControls(drives, acquisitions);
 
         //Start subsystem threads.
         new Thread(drives).start();
+        new Thread(acquisitions).start();
     }
 
     private void disabledStarted()

@@ -75,7 +75,6 @@ public class Robot extends RobotBase
     private void disabledStarted()
     {
         state = RobotState.STANDBY;
-        autoControls.resetAuto();
     }
 
     /**
@@ -102,7 +101,6 @@ public class Robot extends RobotBase
      */
     private void testStarted()
     {
-        testControls.reset();
         currentController = testControls;
         state = RobotState.TEST;
     }

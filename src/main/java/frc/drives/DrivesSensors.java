@@ -49,7 +49,7 @@ public class DrivesSensors implements DrivesSensorInterface
 	@Override
 	public double getLeftEncoderDistance() 
 	{
-		return leftEncoder.getPosition() * -MULTIPLIER;
+		return leftEncoder.getPosition() * MULTIPLIER;
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class DrivesSensors implements DrivesSensorInterface
 	@Override
 	public double getLeftEncoderSpeed() 
 	{
-		return leftEncoder.getVelocity() * -1;
+		return leftEncoder.getVelocity();
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class DrivesSensors implements DrivesSensorInterface
 	@Override
 	public double getRightEncoderDistance() 
 	{
-		return rightEncoder.getPosition() * MULTIPLIER;
+		return rightEncoder.getPosition() * -MULTIPLIER;
 	}
 
 	/**
@@ -76,7 +76,7 @@ public class DrivesSensors implements DrivesSensorInterface
 	@Override
 	public double getRightEncoderSpeed() 
 	{
-		return rightEncoder.getVelocity();
+		return -rightEncoder.getVelocity();
 	}
 
 	/**
@@ -103,7 +103,7 @@ public class DrivesSensors implements DrivesSensorInterface
 	@Override
 	public double getGyroAngle() 
 	{
-		return -gyro.getAngle();
+		return gyro.getAngle();
 	}
 
 	/**

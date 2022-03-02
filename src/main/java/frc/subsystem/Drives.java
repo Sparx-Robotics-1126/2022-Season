@@ -24,7 +24,12 @@ public class Drives extends Subsystem
     /**
      * The maximum amount of current in amps that should be permitted during motor operation.
      */
-    private static final int MAX_CURRENT = 10;
+    private static final int MAX_CURRENT = 30;
+
+    /**
+     * The ideal voltage that the motors should attempt to match.
+     */
+    private static final double NOMINAL_VOLTAGE = 12;
 
     /**
      * The current DrivesCommand being ran. Examples include DriveForward, TurnRight, DriverControlled, etc..
@@ -41,8 +46,8 @@ public class Drives extends Subsystem
     private CANSparkMax leftMotorMaster;
 
     /**
-     * @param driveSensors The sensors to use for the drives subsystem.
      * Main initializer for the drives subsystem. Called in Robot.java.
+     * @param driveSensors The sensors to use for the drives subsystem.
      */
     public Drives(DrivesSensorInterface driveSensors) 
     {
@@ -58,22 +63,22 @@ public class Drives extends Subsystem
         drivesSensors = driveSensors;
 
         rightMotorMaster.setSmartCurrentLimit(MAX_CURRENT);
-        leftMotorSlave.setSmartCurrentLimit(MAX_CURRENT);
+        leftMotorMaster.setSmartCurrentLimit(MAX_CURRENT);
         rightMotorSlave.setSmartCurrentLimit(MAX_CURRENT);
         leftMotorSlave.setSmartCurrentLimit(MAX_CURRENT);
     }
 
     /**
+     * Configures motors to follow one controller.
      * @param master The controller to follow.
      * @param slaves The controllers that should follow master.
-     * Configures motors to follow one controller.
      */
     private static void configureMotor(CANSparkMax master, CANSparkMax... slaves) 
     {
         master.restoreFactoryDefaults();
         master.set(0);
         master.setIdleMode(IdleMode.kCoast);
-        master.enableVoltageCompensation(12);
+        master.enableVoltageCompensation(NOMINAL_VOLTAGE);
 
         for (CANSparkMax slave : slaves) 
         {
@@ -81,6 +86,14 @@ public class Drives extends Subsystem
             slave.follow(master);
             slave.setIdleMode(IdleMode.kCoast);
         }
+    }
+
+    /**
+     * @return The DrivesSensorInterface being used by this Drives instance.
+     */
+    public DrivesSensorInterface getSensors()
+    {
+        return drivesSensors;
     }
 
     @Override

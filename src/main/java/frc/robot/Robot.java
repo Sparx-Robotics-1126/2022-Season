@@ -4,7 +4,8 @@ import edu.wpi.first.hal.HAL;
 
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import frc.acquisitions.AcquisitionsSensorInterface;
+import frc.acquisitions.AcquisitionsSensors;
 import frc.controllers.AutoControl;
 import frc.controllers.Controller;
 import frc.controllers.TeleopControls;
@@ -44,6 +45,7 @@ public class Robot extends RobotBase
 
     //Sensors.
     private DrivesSensorInterface drivesSensors;
+    private AcquisitionsSensorInterface acquisitionsSensors;
 
     //Keeps track of the current state of the robot.
     private RobotState state;
@@ -54,9 +56,11 @@ public class Robot extends RobotBase
         
         //Initialize sensors.
         drivesSensors = new DrivesSensors();
+        acquisitionsSensors = new AcquisitionsSensors();
         
         //Initialize Subsystems.
         drives = new Drives(drivesSensors);
+        acquisitions = new Acquisitions(acquisitionsSensors);
         
         //Initialize Controllers.
         teleopControls = new TeleopControls(drives, acquisitions);
@@ -65,6 +69,7 @@ public class Robot extends RobotBase
 
         //Start subsystem threads.
         new Thread(drives).start();
+        new Thread(acquisitions).start();
     }
 
     private void disabledStarted()

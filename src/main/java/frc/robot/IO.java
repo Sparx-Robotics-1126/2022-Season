@@ -14,13 +14,13 @@ public final class IO
 	public static final int DRIVES_LEFT_MOTOR_1				= 27;
 	public static final int DRIVES_LEFT_MOTOR_2				= 25; 
 
-	public static final int ACQUISITIONS_ARM_MOTOR_1		= -1;
-	public static final int ACQUISITIONS_INTAKE_MOTOR_2		= -1;
+	public static final int ACQUISITIONS_ARM_MOTOR_1		= 28; //PLACEHOLDER
+	public static final int ACQUISITIONS_INTAKE_MOTOR_2		= 29; //PLACEHOLDER
 	
 	//SENSORS
 	public static final I2C.Port I2C_ONBOARD				= I2C.Port.kOnboard;
 	public static final SerialPort.Port USB_ONBOARD 		= SerialPort.Port.kUSB;
 
-	public static final int ACQUISITIONS_ARM_ENCODER_A		= -1;
-	public static final int ACQUISITIONS_ARM_ENCODER_B		= -1;
+	public static final int ACQUISITIONS_ARM_ENCODER_A		= 30; //PLACEHOLDER
+	public static final int ACQUISITIONS_ARM_ENCODER_B		= 31; //PLACEHOLDER
 }

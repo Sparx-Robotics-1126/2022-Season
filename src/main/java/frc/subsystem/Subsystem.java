@@ -1,7 +1,26 @@
 package frc.subsystem;
 
+/**
+ * An abstract class that provides the framework for all active systems on the robot.
+ */
 public abstract class Subsystem implements Runnable 
 {
+    /**
+     * Determines how this Subsystem should behave (dependent on subclass implementation).
+     */
+    public enum SubsystemState
+    {
+        NORMAL,
+        OVERRIDE
+    }
+
+    private SubsystemState state;
+
+    Subsystem()
+    {
+        state = SubsystemState.NORMAL;
+    }
+
     /**
      * Called every update/tick of the main loop.
      */
@@ -9,9 +28,24 @@ public abstract class Subsystem implements Runnable
     public void run()
     {
     	while (true)
-        {
     		execute();
-    	}
+    }
+
+    /**
+     * @return The current SubsystemState attached to this Subsystem.
+     */
+    public final SubsystemState getState()
+    {
+        return state;
+    }
+
+    /**
+     * Sets the state of this Subsystem to the specified newState.
+     * @param newState The SubsystemState to set this Subsystem to.
+     */
+    public final void setState(SubsystemState newState)
+    {
+        state = newState;
     }
 
     /**
@@ -20,7 +54,7 @@ public abstract class Subsystem implements Runnable
     abstract void execute();
 
     /**
-     * Used during autonomous to detect when a task is completed.
+     * @return A boolean indicating whether or not the Subsystem is idle.
      */
     public abstract boolean isDone();
 }

@@ -1,6 +1,6 @@
 package frc.subsystem;
 
-public abstract class Subsystem implements Runnable 
+public abstract class Subsystem implements Runnable
 {
     /**
      * Called every update/tick of the main loop.

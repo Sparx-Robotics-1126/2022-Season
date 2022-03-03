@@ -5,10 +5,10 @@ import edu.wpi.first.hal.HAL;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import frc.controllers.AutoControl;
 import frc.controllers.Controller;
-import frc.controllers.TeleopControls;
-import frc.controllers.TestControls;
+import frc.controllers.AutonomousController;
+import frc.controllers.TeleoperatedController;
+import frc.controllers.TestController;
 
 import frc.drives.DrivesSensorInterface;
 import frc.drives.DrivesSensors;
@@ -30,9 +30,9 @@ public class Robot extends RobotBase
 	}
 
     //Possible controllers.
-    private TeleopControls teleopControls;
-    private AutoControl autoControls;
-    private TestControls testControls;
+    private TeleoperatedController teleopControls;
+    private AutonomousController autoControls;
+    private TestController testControls;
     
     //The robot subsystems.
     private Drives drives;
@@ -57,9 +57,9 @@ public class Robot extends RobotBase
         drives = new Drives(drivesSensors);
         
         //Initialize Controllers.
-        teleopControls = new TeleopControls(drives);
-        autoControls = new AutoControl(drives);
-        testControls = new TestControls(drives);
+        teleopControls = new TeleoperatedController(drives);
+        autoControls = new AutonomousController(drives);
+        testControls = new TestController(drives);
 
         //Start subsystem threads.
         new Thread(drives).start();

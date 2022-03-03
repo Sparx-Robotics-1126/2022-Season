@@ -9,20 +9,23 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * Controller for testing.
  */
-public class TestControls extends Controller 
+public class TestController extends Controller 
 {
     DrivesSensorInterface drivesSensors;
 
-    public TestControls(Drives drives) 
+    static
     {
-        super(drives);
-
-        drivesSensors = drives.getSensors();
-
         SmartDashboard.putNumber("DRIVE_FORWARD", 0);
         SmartDashboard.putNumber("DRIVE_BACKWARD", 0);
         SmartDashboard.putNumber("TURN_RIGHT", 0);
         SmartDashboard.putNumber("TURN_LEFT", 0);
+    }
+
+    public TestController(Drives drives) 
+    {
+        super(drives);
+
+        drivesSensors = drives.getSensors();
     }
 
     @Override

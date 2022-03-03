@@ -14,7 +14,7 @@ public class TurnLeft extends DrivesCommand
 
 	private double minSpeed = 0.25;
 	private double finalAngle = 0;
-	private double stopAngle = 90;
+	private double stopAngle = 180;
 	private double speedToStop = 0;
 	private double distanceToStop = 0;
 
@@ -46,9 +46,9 @@ public class TurnLeft extends DrivesCommand
 			speedToStop = distanceToStop / stopAngle;
 
 			//Slow down the robot when we near the desired angle to avoid overshooting it.
-			if(speedToStop < minSpeed)
+			if (speedToStop < minSpeed)
 				speedToStop = minSpeed;
-			
+
 			return new DrivesOutput(-speedToStop, speedToStop); 
 		} 
 

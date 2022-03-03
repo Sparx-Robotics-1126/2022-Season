@@ -9,8 +9,10 @@ import frc.drives.DrivesSensorInterface;
  */
 public class TurnRight extends DrivesCommand
 {
-	private double minSpeed = 0.3;
 	private final double SPEED;
+	private final double ANGLE;
+	
+	private double minSpeed = 0.3;
 	private double finalAngle = 0;
 	private double stopAngle = 90;
 	private double speedToStop = 0;
@@ -25,8 +27,11 @@ public class TurnRight extends DrivesCommand
 	public TurnRight(DrivesSensorInterface sensor, double speed, double angle) 
 	{
 		super(sensor);
+
 		this.SPEED = speed;
-		finalAngle = sensors.getGyroAngle() + angle;
+		this.ANGLE = angle;
+
+		finalAngle = sensors.getGyroAngle() + ANGLE;
 	}
 
 	@Override

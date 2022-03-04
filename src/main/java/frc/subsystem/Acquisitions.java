@@ -39,8 +39,8 @@ public class Acquisitions extends Subsystem
      */
     public Acquisitions(AcquisitionsSensorInterface acquisitionsSensors) 
     {
-        armMotor = new TalonSRX(IO.ACQUISITIONS_ARM_MOTOR_1);
-        intakeMotor = new TalonSRX(IO.ACQUISITIONS_INTAKE_MOTOR_2);
+        armMotor = new TalonSRX(IO.ACQUISITIONS_ARM_MOTOR);
+        intakeMotor = new TalonSRX(IO.ACQUISITIONS_INTAKE_MOTOR);
     }
 
     @Override

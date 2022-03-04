@@ -39,8 +39,8 @@ public class Acquisitions extends Subsystem
      */
     public Acquisitions(AcquisitionsSensorInterface acquisitionsSensors) 
     {
-        armMotor = new TalonSRX(IO.ACQUISITIONS_ARM_MOTOR_1);
-        intakeMotor = new TalonSRX(IO.ACQUISITIONS_INTAKE_MOTOR_2);
+        armMotor = new TalonSRX(IO.ACQUISITIONS_ARM_MOTOR);
+        intakeMotor = new TalonSRX(IO.ACQUISITIONS_INTAKE_MOTOR);
     }
 
     @Override
@@ -80,17 +80,6 @@ public class Acquisitions extends Subsystem
         }
     }
 
-    /**
-     * Configures the buttons that control the arm and rollers.
-     * @param arm The button for the arm.
-     * @param intake The button for the rollers.
-     */
-    public void setButtons(boolean arm, boolean intake) 
-    {
-        acquisitionsSensors.setArmButton(arm);
-        acquisitionsSensors.setIntakeButton(intake);
-    }
-
     public void dropArm() 
     {
         armCommand = new DropArm(acquisitionsSensors);
@@ -101,17 +90,17 @@ public class Acquisitions extends Subsystem
         armCommand = new RaiseArm(acquisitionsSensors);
     }
 
-    public synchronized void intakeRollers() 
+    public void intakeRollers() 
     {
         intakeCommand = new IntakeRollers(acquisitionsSensors);
     }
 
-    public synchronized void stopRollers() 
+    public void stopRollers() 
     {
         intakeCommand = new StopRollers(acquisitionsSensors);
     }
 
-    public synchronized void ejectRollers() 
+    public void ejectRollers() 
     {
         intakeCommand = new EjectRollers(acquisitionsSensors);
     }

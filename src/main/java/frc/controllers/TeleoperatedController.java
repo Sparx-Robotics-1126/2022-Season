@@ -1,8 +1,8 @@
 package frc.controllers;
 
 import frc.subsystem.Drives;
+import frc.subsystem.Acquisitions;
 
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -13,10 +13,7 @@ public class TeleoperatedController extends Controller
 	private Axis driverLeftAxisY;
   private Axis driverLeftAxisX;
 	private Axis driverRightAxis;
-
-  private Axis driverRightTrigger;
-  private Axis driverLeftTrigger;
-	
+  
   static 
   {
     SmartDashboard.putBoolean("USE_BOTH_JOYSTICKS", true);
@@ -26,9 +23,9 @@ public class TeleoperatedController extends Controller
 	 * Creates the Controller manager for teleoperated.
 	 * @param drives The Drives subsystem to associate with this Controller.
 	 */
-  public TeleoperatedController(Drives drives)
+  public TeleoperatedController(Drives drives, Acquisitions acquisitions)
   {
-    super(drives);
+    super(drives, acquisitions);
     
     driverJoystick = new Joystick(0);
 
@@ -45,9 +42,6 @@ public class TeleoperatedController extends Controller
   {
     //Driver
     if (SmartDashboard.getBoolean("USE_BOTH_JOYSTICKS", true))
-      if (driverRightTrigger.get() >= 0.5 && driverLeftTrigger.get() >= 0.5)
-        drives.setJoysticks(driverLeftAxisY.get() * 0.25, driverRightAxis.get() * 0.25);
-      else
         drives.setJoysticks(driverLeftAxisY.get(), driverRightAxis.get());
     else
     {
@@ -59,13 +53,5 @@ public class TeleoperatedController extends Controller
 
       drives.setJoysticks(leftAxisY - leftAxisX, leftAxisY + leftAxisX);
     }
-
-    //Rumble
-  }
-  
-  private void setRumble(Joystick joy, double value) 
-  {
-    joy.setRumble(RumbleType.kLeftRumble, value);
-    joy.setRumble(RumbleType.kRightRumble, value);
   }
 }

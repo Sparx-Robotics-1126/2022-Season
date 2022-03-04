@@ -24,9 +24,9 @@ public class TurnRight extends DrivesCommand
 	 * @param speed The speed at which to turn by.
 	 * @param angle The amount of degrees that the robot should turn.
 	 */
-	public TurnRight(DrivesSensorInterface sensor, double speed, double angle) 
+	public TurnRight(DrivesSensorInterface sensors, double speed, double angle) 
 	{
-		super(sensor);
+		super(sensors);
 
 		this.SPEED = speed;
 		this.ANGLE = angle;

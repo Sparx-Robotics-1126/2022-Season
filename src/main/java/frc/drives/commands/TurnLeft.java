@@ -14,7 +14,7 @@ public class TurnLeft extends DrivesCommand
 
 	private double minSpeed = 0.25;
 	private double finalAngle = 0;
-	private double stopAngle = 180;
+	private double stopAngle = 90;
 	private double speedToStop = 0;
 	private double distanceToStop = 0;
 

@@ -15,8 +15,6 @@ public class AcquisitionsOutput
      */
     private boolean isDone;
 
-    
-
     /**
      * Used to set and store new speed values for the motors.
      * @param armMotor The speed that the arm motor should be set to.

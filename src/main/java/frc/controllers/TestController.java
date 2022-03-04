@@ -1,6 +1,7 @@
 package frc.controllers;
 
 import frc.subsystem.Drives;
+import frc.subsystem.Acquisitions;
 
 import frc.drives.DrivesSensorInterface;
 
@@ -13,19 +14,16 @@ public class TestController extends Controller
 {
     DrivesSensorInterface drivesSensors;
 
-    static
+    public TestController(Drives drives, Acquisitions acquisitions) 
     {
+        super(drives, acquisitions);
+
+        drivesSensors = drives.getSensors();
+
         SmartDashboard.putNumber("DRIVE_FORWARD", 0);
         SmartDashboard.putNumber("DRIVE_BACKWARD", 0);
         SmartDashboard.putNumber("TURN_RIGHT", 0);
         SmartDashboard.putNumber("TURN_LEFT", 0);
-    }
-
-    public TestController(Drives drives) 
-    {
-        super(drives);
-
-        drivesSensors = drives.getSensors();
     }
 
     @Override

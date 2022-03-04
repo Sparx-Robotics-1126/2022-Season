@@ -6,14 +6,18 @@ import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.controllers.Controller;
-import frc.controllers.AutonomousController;
 import frc.controllers.TeleoperatedController;
+import frc.controllers.AutonomousController;
 import frc.controllers.TestController;
+
+import frc.subsystem.Acquisitions;
+import frc.subsystem.Drives;
 
 import frc.drives.DrivesSensorInterface;
 import frc.drives.DrivesSensors;
 
-import frc.subsystem.Drives;
+import frc.acquisitions.AcquisitionsSensorInterface;
+import frc.acquisitions.AcquisitionsSensors;
 
 /**
  * Controls when subsystems are engaged and grants control to the correct Controller.
@@ -36,12 +40,14 @@ public class Robot extends RobotBase
     
     //The robot subsystems.
     private Drives drives;
+    private Acquisitions acquisitions;
 
     //The acting Controller of the robot.
     private Controller currentController;
 
     //Sensors.
     private DrivesSensorInterface drivesSensors;
+    private AcquisitionsSensorInterface acquisitionsSensors;
 
     //Keeps track of the current state of the robot.
     private RobotState state;
@@ -52,17 +58,20 @@ public class Robot extends RobotBase
         
         //Initialize sensors.
         drivesSensors = new DrivesSensors();
+        acquisitionsSensors = new AcquisitionsSensors();
         
         //Initialize Subsystems.
         drives = new Drives(drivesSensors);
+        acquisitions = new Acquisitions(acquisitionsSensors);
         
         //Initialize Controllers.
-        teleopControls = new TeleoperatedController(drives);
-        autoControls = new AutonomousController(drives);
-        testControls = new TestController(drives);
+        teleopControls = new TeleoperatedController(drives, acquisitions);
+        autoControls = new AutonomousController(drives, acquisitions);
+        testControls = new TestController(drives, acquisitions);
 
         //Start subsystem threads.
         new Thread(drives).start();
+        new Thread(acquisitions).start();
     }
 
     private void disabledStarted()

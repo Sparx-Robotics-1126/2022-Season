@@ -1,26 +1,13 @@
 package frc.controllers;
 
+import frc.subsystem.Acquisitions;
 import frc.subsystem.Drives;
-
-import frc.autonomous.AutonomousRoutine;
 
 public class AutonomousController extends Controller
 {
-	private AutonomousRoutine currentRoutine;
-
-	public AutonomousController(Drives drives) 
+	public AutonomousController(Drives drives, Acquisitions acquisitions) 
 	{
-		super(drives);
-	}
-
-	public void setRoutine(AutonomousRoutine routine)
-	{
-		currentRoutine = routine;
-	}
-
-	public Drives getDrives()
-	{
-		return drives;
+		super(drives, acquisitions);
 	}
 
 	@Override
@@ -29,4 +16,3 @@ public class AutonomousController extends Controller
 		
 	}
 }
-

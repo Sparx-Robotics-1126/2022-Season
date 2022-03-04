@@ -4,8 +4,6 @@ import frc.drives.DrivesCommand;
 import frc.drives.DrivesOutput;
 import frc.drives.DrivesSensorInterface;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 /**
  * DrivesCommand to manually instruct the robot to move forward.
  */
@@ -18,11 +16,6 @@ public class DriveForward extends DrivesCommand
 	private final double TARGET_DISTANCE;
 	private final double TARGET_ANGLE;
 
-	static 
-	{
-		SmartDashboard.putNumber("GYRO_kP", 0.02);
-	}
-
 	/**
 	 * Creates a DrivesCommand instructing the robot to move forward by the specified distance.
 	 * @param sensors A DrivesSensorInterface containing the sensors that should be used with this DrivesCommand.
@@ -33,7 +26,7 @@ public class DriveForward extends DrivesCommand
 		super(sensors);
 		
 		DISTANCE_kP = 0.03;
-		GYRO_kP = SmartDashboard.getNumber("GYRO_kP", 0.02); //0.06
+		GYRO_kP = 0.06;
 		DISTANCE_DEADBAND = 1; //2 inches.
 
 		TARGET_DISTANCE = sensors.getAverageEncoderDistance() + distance;
@@ -60,15 +53,6 @@ public class DriveForward extends DrivesCommand
 			leftSpeed -= gyroOffset;
 		else
 			rightSpeed += gyroOffset;
-
-		/*System.out.println(
-			"ENCODER_DISTANCE: " + sensors.getAverageEncoderDistance() + "\n" +
-			"TARGET_DISTANCE: " + TARGET_DISTANCE + "\n" +
-			"RAW_ANGLE_OFFSET: " + angleError + "\n" +
-			"GYRO_OFFSET: " + gyroOffset + "\n" +
-			"LEFT_SPEED: " + leftSpeed + "\n" +
-			"RIGHT_SPEED: " + rightSpeed + "\n"
-		);*/
 
 		if (sensors.getAverageEncoderDistance() > TARGET_DISTANCE - DISTANCE_DEADBAND)
 			return new DrivesOutput(0, 0, true);

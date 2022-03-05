@@ -3,9 +3,10 @@ package frc.shooter;
 /**
  * Any and all sensor data required for operation of the Shooter subsystem
  */
-public interface ShooterSensorInterface {
+public interface ShooterSensorInterface 
+{
     double getShooterSpeed();
-
+    
     double getAngleToTarget();
     double getDistanceToTarget();
 

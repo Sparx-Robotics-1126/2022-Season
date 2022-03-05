@@ -28,7 +28,7 @@ public class AxisButton extends Button
 	{
 		double value = axis.get();
 		boolean currentlyPressed = value > SENSITIVITY ? true : false;
-		boolean trigger = getTriggered(currentlyPressed, buttonPreviouslyPressed);
+		boolean trigger = isTriggered(currentlyPressed, buttonPreviouslyPressed);
 		buttonPreviouslyPressed = currentlyPressed;
 		return trigger;
 	}

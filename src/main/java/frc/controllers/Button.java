@@ -38,7 +38,7 @@ public class Button
 	public boolean get() 
 	{
 		boolean isCurrentlyPressed = joystick.getRawButton(button);
-		boolean trigger = getTriggered(isCurrentlyPressed, buttonPreviouslyPressed);
+		boolean trigger = isTriggered(isCurrentlyPressed, buttonPreviouslyPressed);
 		buttonPreviouslyPressed = isCurrentlyPressed;
 		return trigger;
 	}
@@ -49,7 +49,7 @@ public class Button
 	 * @param buttonPreviouslyPressed If the button was pressed before now.
 	 * @return A boolean indicating whether or not the button is triggered.
 	 */
-	protected boolean getTriggered(boolean isCurrentlyPressed, boolean buttonPreviouslyPressed) 
+	protected boolean isTriggered(boolean isCurrentlyPressed, boolean buttonPreviouslyPressed) 
 	{
 		if (buttonType == ButtonType.RISING_EDGE)
 			return isCurrentlyPressed && !buttonPreviouslyPressed; //Pressed now, wasn't pressed before.

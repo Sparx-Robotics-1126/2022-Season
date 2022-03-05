@@ -42,7 +42,7 @@ public class TeleoperatedController extends Controller
   {
     //Driver
     if (SmartDashboard.getBoolean("USE_BOTH_JOYSTICKS", true))
-        drives.setJoysticks(driverLeftAxisY.get(), driverRightAxis.get());
+        getDrives().setJoysticks(driverLeftAxisY.get(), driverRightAxis.get());
     else
     {
       double leftAxisY = driverLeftAxisY.get();
@@ -51,7 +51,7 @@ public class TeleoperatedController extends Controller
       if (Math.abs(leftAxisY) >= 0.15 && leftAxisY < 0)
         leftAxisX = -leftAxisX;
 
-      drives.setJoysticks(leftAxisY - leftAxisX, leftAxisY + leftAxisX);
+      getDrives().setJoysticks(leftAxisY - leftAxisX, leftAxisY + leftAxisX);
     }
   }
 }

@@ -8,13 +8,29 @@ import frc.subsystem.Drives;
  */
 public abstract class Controller 
 {
-    protected Drives drives;
-    protected Acquisitions acquisitions;
+    private Drives drives;
+    private Acquisitions acquisitions;
 
     public Controller(Drives drives, Acquisitions acquisitions)
     {
     	this.drives = drives;
         this.acquisitions = acquisitions;
+    }
+
+    /**
+     * @return The Drives subsystem instance associated with this Controller.
+     */
+    public Drives getDrives()
+    {
+        return drives;
+    }
+
+    /**
+     * @return The Acquisitions subsystem instance associated with this Controller.
+     */
+    public Acquisitions getAcquisitions()
+    {
+        return acquisitions;
     }
     
     public abstract void execute();

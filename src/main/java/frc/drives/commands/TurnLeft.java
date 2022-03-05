@@ -37,9 +37,9 @@ public class TurnLeft extends DrivesCommand
 	@Override
 	public DrivesOutput execute() 
 	{
-		distanceToStop = Math.abs(finalAngle - sensors.getGyroAngle());
+		distanceToStop = Math.abs(finalAngle - getSensors().getGyroAngle());
 
-		if (sensors.getGyroAngle() <= finalAngle) 
+		if (getSensors().getGyroAngle() <= finalAngle) 
 			return new DrivesOutput(0, 0, true);
 		else if (distanceToStop <= stopAngle)
 		{

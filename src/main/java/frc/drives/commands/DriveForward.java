@@ -35,8 +35,8 @@ public class DriveForward extends DrivesCommand
 
 	public DrivesOutput execute() 
 	{
-		double distanceError = TARGET_DISTANCE - sensors.getAverageEncoderDistance();
-		double angleError = TARGET_ANGLE - sensors.getGyroAngle();
+		double distanceError = TARGET_DISTANCE - getSensors().getAverageEncoderDistance();
+		double angleError = TARGET_ANGLE - getSensors().getGyroAngle();
 
 		double leftSpeed, rightSpeed;
 		leftSpeed = rightSpeed = distanceError * DISTANCE_kP;
@@ -54,7 +54,7 @@ public class DriveForward extends DrivesCommand
 		else
 			rightSpeed += gyroOffset;
 
-		if (sensors.getAverageEncoderDistance() > TARGET_DISTANCE - DISTANCE_DEADBAND)
+		if (getSensors().getAverageEncoderDistance() > TARGET_DISTANCE - DISTANCE_DEADBAND)
 			return new DrivesOutput(0, 0, true);
 
 		return new DrivesOutput(leftSpeed, rightSpeed);

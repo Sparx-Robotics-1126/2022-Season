@@ -39,7 +39,7 @@ public class Robot extends RobotBase
     private TestController testControls;
     
     //The robot subsystems.
-    private Drives drives;
+    public Drives drives; //TODO probably not a good idea to keep this public (Accessed by Shooter)
     private Acquisitions acquisitions;
 
     //The acting Controller of the robot.

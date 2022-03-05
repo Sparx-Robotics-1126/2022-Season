@@ -1,6 +1,7 @@
 package frc.shooter;
 
-public class ShooterOutput {
+public class ShooterOutput 
+{
     /**
      * Output for the motor. Value between -1 and 1.
      */

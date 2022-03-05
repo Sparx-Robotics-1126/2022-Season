@@ -13,7 +13,7 @@ public class Axis
 	 * The point on the axis relative to the origin in which input 
 	 * should start to be registered.
 	 */
-	private static double DEADBAND = 0.1;
+	private static double DEADBAND = 0.4;
 
 	/**
 	 * The value that the final output value will be multiplied by.

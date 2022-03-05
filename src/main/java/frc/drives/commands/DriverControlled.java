@@ -17,6 +17,6 @@ public class DriverControlled extends DrivesCommand
 	@Override
 	public DrivesOutput execute()
 	{
-		return new DrivesOutput(sensors.getLeftJoyStick(), sensors.getRightJoyStick());
+		return new DrivesOutput(getSensors().getLeftJoyStick(), getSensors().getRightJoyStick());
 	}
 }

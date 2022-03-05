@@ -37,18 +37,18 @@ public class TurnLeft extends DrivesCommand
 	@Override
 	public DrivesOutput execute() 
 	{
-		distanceToStop = Math.abs(finalAngle - sensors.getGyroAngle());
+		distanceToStop = Math.abs(finalAngle - getSensors().getGyroAngle());
 
-		if (sensors.getGyroAngle() <= finalAngle) 
+		if (getSensors().getGyroAngle() <= finalAngle) 
 			return new DrivesOutput(0, 0, true);
 		else if (distanceToStop <= stopAngle)
 		{
 			speedToStop = distanceToStop / stopAngle;
 
 			//Slow down the robot when we near the desired angle to avoid overshooting it.
-			if(speedToStop < minSpeed)
+			if (speedToStop < minSpeed)
 				speedToStop = minSpeed;
-			
+
 			return new DrivesOutput(-speedToStop, speedToStop); 
 		} 
 

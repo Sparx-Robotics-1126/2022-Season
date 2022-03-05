@@ -5,7 +5,7 @@ package frc.drives;
  */
 public abstract class DrivesCommand
 {
-    protected DrivesSensorInterface sensors;
+    private DrivesSensorInterface sensors;
 
     /**
      * Create a new command for use in coordination with the Drives subsystem.
@@ -14,6 +14,14 @@ public abstract class DrivesCommand
     public DrivesCommand(DrivesSensorInterface sensors)
     {
         this.sensors = sensors;
+    }
+
+    /**
+     * @return The DrivesSensorInterface being used for this DrivesCommand.
+     */
+    public DrivesSensorInterface getSensors()
+    {
+        return sensors;
     }
 
     /**

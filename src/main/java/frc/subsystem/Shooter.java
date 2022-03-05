@@ -7,6 +7,7 @@ import frc.robot.IO;
 import frc.shooter.ShooterCommand;
 import frc.shooter.ShooterOutput;
 import frc.shooter.ShooterSensorInterface;
+import frc.shooter.commands.ShooterSpeed;
 import frc.shooter.commands.StopShooter;
 
 public class Shooter extends Subsystem
@@ -32,7 +33,8 @@ public class Shooter extends Subsystem
     }
 
     @Override
-    void execute() {
+    void execute() 
+    {
         if (shooterCommand != null)
         {
             ShooterOutput shooterOutput = shooterCommand.execute();
@@ -44,9 +46,20 @@ public class Shooter extends Subsystem
         }
     }
 
+    /**
+     * Sets the shooter motor speed to 0
+     */
     public void stopShooter() 
     {
         shooterCommand = new StopShooter(shooterSensors);
+    }
+
+    /**
+     * Adjusts the shooter motor speed to shoot correctly
+     */
+    public void shooterSpeed()
+    {
+        shooterCommand = new ShooterSpeed(shooterSensors);
     }
 
     @Override

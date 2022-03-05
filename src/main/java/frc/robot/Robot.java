@@ -4,18 +4,20 @@ import edu.wpi.first.hal.HAL;
 
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.acquisitions.AcquisitionsSensorInterface;
-import frc.acquisitions.AcquisitionsSensors;
-import frc.controllers.AutoControl;
+
 import frc.controllers.Controller;
-import frc.controllers.TeleopControls;
-import frc.controllers.TestControls;
+import frc.controllers.TeleoperatedController;
+import frc.controllers.AutonomousController;
+import frc.controllers.TestController;
 
 import frc.subsystem.Acquisitions;
 import frc.subsystem.Drives;
 
 import frc.drives.DrivesSensorInterface;
 import frc.drives.DrivesSensors;
+
+import frc.acquisitions.AcquisitionsSensorInterface;
+import frc.acquisitions.AcquisitionsSensors;
 
 /**
  * Controls when subsystems are engaged and grants control to the correct Controller.
@@ -32,9 +34,9 @@ public class Robot extends RobotBase
 	}
 
     //Possible controllers.
-    private TeleopControls teleopControls;
-    private AutoControl autoControls;
-    private TestControls testControls;
+    private TeleoperatedController teleopControls;
+    private AutonomousController autoControls;
+    private TestController testControls;
     
     //The robot subsystems.
     private Drives drives;
@@ -63,9 +65,9 @@ public class Robot extends RobotBase
         acquisitions = new Acquisitions(acquisitionsSensors);
         
         //Initialize Controllers.
-        teleopControls = new TeleopControls(drives, acquisitions);
-        autoControls = new AutoControl(drives, acquisitions);
-        testControls = new TestControls(drives, acquisitions);
+        teleopControls = new TeleoperatedController(drives, acquisitions);
+        autoControls = new AutonomousController(drives, acquisitions);
+        testControls = new TestController(drives, acquisitions);
 
         //Start subsystem threads.
         new Thread(drives).start();

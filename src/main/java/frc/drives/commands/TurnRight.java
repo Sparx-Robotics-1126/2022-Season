@@ -9,8 +9,10 @@ import frc.drives.DrivesSensorInterface;
  */
 public class TurnRight extends DrivesCommand
 {
-	private double minSpeed = 0.3;
 	private final double SPEED;
+	private final double ANGLE;
+	
+	private double minSpeed = 0.3;
 	private double finalAngle = 0;
 	private double stopAngle = 90;
 	private double speedToStop = 0;
@@ -22,19 +24,22 @@ public class TurnRight extends DrivesCommand
 	 * @param speed The speed at which to turn by.
 	 * @param angle The amount of degrees that the robot should turn.
 	 */
-	public TurnRight(DrivesSensorInterface sensor, double speed, double angle) 
+	public TurnRight(DrivesSensorInterface sensors, double speed, double angle) 
 	{
-		super(sensor);
+		super(sensors);
+
 		this.SPEED = speed;
-		finalAngle = sensors.getGyroAngle() + angle;
+		this.ANGLE = angle;
+
+		finalAngle = sensors.getGyroAngle() + ANGLE;
 	}
 
 	@Override
 	public DrivesOutput execute() 
 	{
-		distanceToStop = Math.abs(finalAngle - sensors.getGyroAngle());
+		distanceToStop = Math.abs(finalAngle - getSensors().getGyroAngle());
 
-		if (sensors.getGyroAngle() >= finalAngle)
+		if (getSensors().getGyroAngle() >= finalAngle)
 			return new DrivesOutput(0, 0, true);
 		else if (distanceToStop <= stopAngle)
 		{

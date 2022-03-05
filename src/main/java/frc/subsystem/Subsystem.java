@@ -27,8 +27,7 @@ public abstract class Subsystem implements Runnable
     @Override
     public void run()
     {
-    	while (true)
-    		execute();
+    	while (true) execute();
     }
 
     /**

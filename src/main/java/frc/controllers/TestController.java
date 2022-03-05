@@ -10,11 +10,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * Controller for testing.
  */
-public class TestControls extends Controller 
+public class TestController extends Controller 
 {
     DrivesSensorInterface drivesSensors;
 
-    public TestControls(Drives drives, Acquisitions acquisitions) 
+    public TestController(Drives drives, Acquisitions acquisitions) 
     {
         super(drives, acquisitions);
 
@@ -44,22 +44,22 @@ public class TestControls extends Controller
 
         if (moveForward > 0)
         {
-            drives.moveForward(moveForward);
+            getDrives().moveForward(moveForward);
             SmartDashboard.putNumber("DRIVE_FORWARD", 0);
         }
         else if (moveBackward > 0)
         {
-            drives.moveBackward(moveBackward);
+            getDrives().moveBackward(moveBackward);
             SmartDashboard.putNumber("DRIVE_BACKWARD", 0);
         }
         else if (turnLeft > 0)
         {
-            drives.turnLeft(turnLeft);
+            getDrives().turnLeft(turnLeft);
             SmartDashboard.putNumber("TURN_LEFT", 0);
         }
         else if (turnRight > 0)
         {
-            drives.turnRight(turnRight);
+            getDrives().turnRight(turnRight);
             SmartDashboard.putNumber("TURN_RIGHT", 0);
         }
     }

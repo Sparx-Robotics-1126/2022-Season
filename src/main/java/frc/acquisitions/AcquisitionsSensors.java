@@ -3,9 +3,11 @@ package frc.acquisitions;
 import frc.robot.IO;
 
 import frc.sensors.ColorSensor;
-import frc.util.SDUtil;
+
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj.Encoder;
+
+import edu.wpi.first.wpilibj.DriverStation;
 
 public class AcquisitionsSensors implements AcquisitionsSensorInterface
 {
@@ -39,7 +41,7 @@ public class AcquisitionsSensors implements AcquisitionsSensorInterface
 	 */
 	public boolean ballInRange()
 	{
-		return colorSensor.getProximity() > PROXIMITY_MINIMUM;
+		return colorSensor.getProximity() >= PROXIMITY_MINIMUM;
 	}
 
 	/**
@@ -48,7 +50,7 @@ public class AcquisitionsSensors implements AcquisitionsSensorInterface
 	public boolean isCorrectColor()
 	{
 		Color curr = colorSensor.getColor();
-		boolean red = SDUtil.isRedAlliance();
+		boolean red = DriverStation.getAlliance() == DriverStation.Alliance.Red;
 
 		return curr.red > curr.blue && red || curr.blue > curr.red && !red;
 	}

@@ -5,7 +5,7 @@ package frc.acquisitions;
  */
 public abstract class AcquisitionsCommand 
 {
-    protected AcquisitionsSensorInterface sensors;
+    private AcquisitionsSensorInterface sensors;
 
     /**
      * Create a new command for use in coordination with the Acquisitions subsystem.
@@ -14,6 +14,14 @@ public abstract class AcquisitionsCommand
     public AcquisitionsCommand(AcquisitionsSensorInterface sensors)
     {
         this.sensors = sensors;
+    }
+
+    /**
+     * @return The AcquisitionsSensorInterface being used for this AcquisitionsCommand.
+     */
+    public AcquisitionsSensorInterface getSensors()
+    {
+        return sensors;
     }
 
     /**

@@ -35,8 +35,8 @@ public class DriveBackwards extends DrivesCommand
 
 	public DrivesOutput execute() 
 	{
-		double distanceError = TARGET_DISTANCE - sensors.getAverageEncoderDistance();
-		double angleError = TARGET_ANGLE - sensors.getGyroAngle(); //Negative means too far right.
+		double distanceError = TARGET_DISTANCE - getSensors().getAverageEncoderDistance();
+		double angleError = TARGET_ANGLE - getSensors().getGyroAngle();
 
 		double leftSpeed, rightSpeed;
 
@@ -50,12 +50,12 @@ public class DriveBackwards extends DrivesCommand
 
 		double gyroOffset = angleError * GYRO_kP;
 
-		if (gyroOffset > 0) //Too far left.
+		if (gyroOffset < 0)
 			leftSpeed -= gyroOffset;
 		else
 			rightSpeed += gyroOffset;
 
-		if (sensors.getAverageEncoderDistance() < TARGET_DISTANCE + DISTANCE_DEADBAND)
+		if (getSensors().getAverageEncoderDistance() < TARGET_DISTANCE + DISTANCE_DEADBAND)
 			return new DrivesOutput(0, 0, true);
 
 		return new DrivesOutput(leftSpeed, rightSpeed);

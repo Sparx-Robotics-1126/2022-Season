@@ -5,7 +5,8 @@ import edu.wpi.first.wpilibj.Encoder;
 import frc.robot.IO;
 import frc.sensors.Limelight;
 
-public class ShooterSensors implements ShooterSensorInterface{
+public class ShooterSensors implements ShooterSensorInterface
+{
     private Encoder shooterEncoder;
 	private Limelight limeSensor;
 
@@ -36,7 +37,8 @@ public class ShooterSensors implements ShooterSensorInterface{
 	}
 
 	@Override
-	public void enableLimelight(boolean enable) {
+	public void enableLimelight(boolean enable) 
+	{
 		limeSensor.enable(enable);
 	}
 

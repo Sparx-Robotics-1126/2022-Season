@@ -4,8 +4,8 @@ import frc.shooter.ShooterCommand;
 import frc.shooter.ShooterOutput;
 import frc.shooter.ShooterSensorInterface;
 
-public class StopShooter extends ShooterCommand{
-
+public class StopShooter extends ShooterCommand
+{
     /**
      * Create a new command for use in coordination with the Shooter subsystem.
      * @param sensors The ShooterSensorInterface for use within the command.

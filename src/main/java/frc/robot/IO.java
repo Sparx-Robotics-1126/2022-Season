@@ -17,8 +17,6 @@ public final class IO
 	public static final int ACQUISITIONS_ARM_MOTOR			= 28; //PLACEHOLDER
 	public static final int ACQUISITIONS_INTAKE_MOTOR		= 29; //PLACEHOLDER
 
-	public static final int SHOOTER_MOTOR					= 30; //PLACEHOLDER
-
 	public static final int STORAGE_MOTOR					= 6; //PLACEHOLDER
 	
 	//SENSORS
@@ -27,9 +25,6 @@ public final class IO
 
 	public static final int ACQUISITIONS_ARM_ENCODER_A		= 31; //PLACEHOLDER
 	public static final int ACQUISITIONS_ARM_ENCODER_B		= 1; //PLACEHOLDER
-
-	public static final int SHOOTER_ENCODER_A				= 2; //PLACEHOLDER
-	public static final int SHOOTER_ENCODER_B				= 3; //PLACEHOLDER
 
 	public static final int STORAGE_ENCODER_A				= 4; //PLACEHOLDER
 	public static final int STORAGE_ENCODER_B				= 5; //PLACEHOLDER

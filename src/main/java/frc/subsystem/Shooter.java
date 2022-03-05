@@ -3,6 +3,7 @@ package frc.subsystem;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
+import frc.drives.commands.TurnLeft;
 import frc.robot.IO;
 import frc.shooter.ShooterCommand;
 import frc.shooter.ShooterOutput;
@@ -60,6 +61,12 @@ public class Shooter extends Subsystem
     public void shooterSpeed()
     {
         shooterCommand = new ShooterSpeed(shooterSensors);
+    }
+
+    public void findTarget()
+    {
+        double targetAngle = shooterSensors.getAngleToTarget();
+        
     }
 
     @Override

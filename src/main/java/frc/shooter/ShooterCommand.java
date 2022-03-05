@@ -5,7 +5,7 @@ package frc.shooter;
  */
 public abstract class ShooterCommand 
 {
-    protected ShooterSensorInterface sensors;
+    private ShooterSensorInterface sensors;
 
     /**
      * Create a new command for use in coordination with the Shooter subsystem.
@@ -14,6 +14,14 @@ public abstract class ShooterCommand
     public ShooterCommand(ShooterSensorInterface sensors)
     {
         this.sensors = sensors;
+    }
+
+    /**
+     * Returns the ShooterSensorInterface sensors
+     */
+    public ShooterSensorInterface getSensors()
+    {
+        return sensors;
     }
 
     /**

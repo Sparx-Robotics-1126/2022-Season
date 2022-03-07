@@ -9,10 +9,4 @@ public interface AcquisitionsSensorInterface
     double getArmEncoderDistance();
     boolean ballInRange();
     boolean isCorrectColor();
-
-    //Operator input
-    boolean getArmButton();
-    boolean getIntakeButton();
-    void setArmButton(boolean value);
-    void setIntakeButton(boolean vlaue);
 }

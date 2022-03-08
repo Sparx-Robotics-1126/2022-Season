@@ -1,8 +1,6 @@
 package frc.storage;
 
- 
-    
-    /**
+/**
  * Class allowing the storage of speed values for motors. Used when setting motor speeds in the Storage subsystem.
  */
 public class StorageOutput 
@@ -19,8 +17,7 @@ public class StorageOutput
 
     /**
      * Used to set and store new speed values for the motors.
-     * @param armMotor The speed that the arm motor should be set to.
-     * @param intakeMotor The speed that the intake motor should be set to.
+     * @param motor The speed that the storage motor should be set to.
      */
     public StorageOutput(double motor)
     {
@@ -55,5 +52,3 @@ public class StorageOutput
         return isDone;
     }
 }
-
-

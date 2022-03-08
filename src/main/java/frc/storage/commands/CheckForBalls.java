@@ -15,10 +15,9 @@ public class CheckForBalls extends StorageCommand
     }
 
     @Override
-    public StorageOutput execute() {
+    public StorageOutput execute() 
+    {
         // TODO Auto-generated method stub
         return null;
     }
-
-    
 }

@@ -1,7 +1,6 @@
 package frc.controllers;
 
-import frc.subsystem.Drives;
-import frc.subsystem.Acquisitions;
+import frc.robot.Robot;
 
 import frc.drives.DrivesSensorInterface;
 
@@ -14,11 +13,9 @@ public class TestController extends Controller
 {
     DrivesSensorInterface drivesSensors;
 
-    public TestController(Drives drives, Acquisitions acquisitions) 
+    public TestController() 
     {
-        super(drives, acquisitions);
-
-        drivesSensors = drives.getSensors();
+        drivesSensors = Robot.getDrives().getSensors();
 
         SmartDashboard.putNumber("DRIVE_FORWARD", 0);
         SmartDashboard.putNumber("DRIVE_BACKWARD", 0);
@@ -44,22 +41,22 @@ public class TestController extends Controller
 
         if (moveForward > 0)
         {
-            getDrives().moveForward(moveForward);
+            Robot.getDrives().moveForward(moveForward);
             SmartDashboard.putNumber("DRIVE_FORWARD", 0);
         }
         else if (moveBackward > 0)
         {
-            getDrives().moveBackward(moveBackward);
+            Robot.getDrives().moveBackward(moveBackward);
             SmartDashboard.putNumber("DRIVE_BACKWARD", 0);
         }
         else if (turnLeft > 0)
         {
-            getDrives().turnLeft(turnLeft);
+            Robot.getDrives().turnLeft(turnLeft);
             SmartDashboard.putNumber("TURN_LEFT", 0);
         }
         else if (turnRight > 0)
         {
-            getDrives().turnRight(turnRight);
+            Robot.getDrives().turnRight(turnRight);
             SmartDashboard.putNumber("TURN_RIGHT", 0);
         }
     }

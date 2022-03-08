@@ -7,6 +7,6 @@ public interface AcquisitionsSensorInterface
 {
     //Sensors
     double getArmEncoderDistance();
-    boolean ballInRange();
-    boolean isCorrectColor();
+    //boolean ballInRange();
+    //boolean isCorrectColor();
 }

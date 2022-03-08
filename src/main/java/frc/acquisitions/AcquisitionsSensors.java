@@ -2,18 +2,18 @@ package frc.acquisitions;
 
 import frc.robot.IO;
 
-import frc.sensors.ColorSensor;
+//import frc.sensors.ColorSensor;
 
-import edu.wpi.first.wpilibj.util.Color;
+//import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj.Encoder;
 
-import edu.wpi.first.wpilibj.DriverStation;
+//import edu.wpi.first.wpilibj.DriverStation;
 
 public class AcquisitionsSensors implements AcquisitionsSensorInterface
 {
-	private static final int PROXIMITY_MINIMUM = 100;
+	//private static final int PROXIMITY_MINIMUM = 100;
 
-    private ColorSensor colorSensor;
+    //private ColorSensor colorSensor;
 
 	private Encoder armEncoder;
 
@@ -22,8 +22,8 @@ public class AcquisitionsSensors implements AcquisitionsSensorInterface
 	 */
 	public AcquisitionsSensors() 
 	{
-        colorSensor = new ColorSensor(100);
-		colorSensor.start();
+        //colorSensor = new ColorSensor(100);
+		//colorSensor.start();
 
 		armEncoder = new Encoder(IO.ACQUISITIONS_ARM_ENCODER_A, IO.ACQUISITIONS_ARM_ENCODER_B);
 		armEncoder.setDistancePerPulse(0.314789);
@@ -32,15 +32,15 @@ public class AcquisitionsSensors implements AcquisitionsSensorInterface
 	/**
 	 * @return True if there is an object within range of the color sensor.
 	 */
-	public boolean ballInRange()
+	/*public boolean ballInRange()
 	{
 		return colorSensor.getProximity() >= PROXIMITY_MINIMUM;
-	}
+	}*/
 
 	/**
 	 * @return True if the ball color matches our current alliance color.
 	 */
-	public boolean isCorrectColor()
+	/*public boolean isCorrectColor()
 	{
 		Color ballColor = colorSensor.getColor();
 
@@ -48,7 +48,7 @@ public class AcquisitionsSensors implements AcquisitionsSensorInterface
 			ballColor.red > ballColor.green && 
 			DriverStation.getAlliance() == 
 			DriverStation.Alliance.Red;
-	}
+	}*/
 
 	/**
 	 * @return The distance the arm motor has rotated.

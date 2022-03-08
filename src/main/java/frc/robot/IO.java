@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.SerialPort;
  */
 public final class IO 
 {
+	private IO() {}
+
 	//MOTORS
 	public static final int DRIVES_RIGHT_MOTOR_1			= 27; //SECONDARY ROBOT - 24
 	public static final int DRIVES_RIGHT_MOTOR_2			= 25; //SECONDARY ROBOT - 26

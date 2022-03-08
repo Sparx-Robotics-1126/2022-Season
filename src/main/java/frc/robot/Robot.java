@@ -12,10 +12,11 @@ import frc.controllers.TestController;
 
 import frc.subsystem.Acquisitions;
 import frc.subsystem.Drives;
-
+import frc.subsystem.Shooter;
 import frc.drives.DrivesSensorInterface;
 import frc.drives.DrivesSensors;
-
+import frc.shooter.ShooterSensorInterface;
+import frc.shooter.ShooterSensors;
 import frc.acquisitions.AcquisitionsSensorInterface;
 import frc.acquisitions.AcquisitionsSensors;
 
@@ -41,6 +42,7 @@ public class Robot extends RobotBase
     //The robot subsystems.
     public Drives drives; //TODO probably not a good idea to keep this public (Accessed by Shooter)
     private Acquisitions acquisitions;
+    private Shooter shooter;
 
     //The acting Controller of the robot.
     private Controller currentController;
@@ -48,6 +50,7 @@ public class Robot extends RobotBase
     //Sensors.
     private DrivesSensorInterface drivesSensors;
     private AcquisitionsSensorInterface acquisitionsSensors;
+    private ShooterSensorInterface shooterSensors;
 
     //Keeps track of the current state of the robot.
     private RobotState state;
@@ -59,10 +62,12 @@ public class Robot extends RobotBase
         //Initialize sensors.
         drivesSensors = new DrivesSensors();
         acquisitionsSensors = new AcquisitionsSensors();
+        shooterSensors = new ShooterSensors();
         
         //Initialize Subsystems.
         drives = new Drives(drivesSensors);
         acquisitions = new Acquisitions(acquisitionsSensors);
+        shooter = new Shooter(shooterSensors);
         
         //Initialize Controllers.
         teleopControls = new TeleoperatedController(drives, acquisitions);
@@ -171,5 +176,20 @@ public class Robot extends RobotBase
     public void endCompetition() 
     {
     
+    }
+
+    public Drives getDrives()
+    {
+        return drives;
+    }
+
+    public Acquisitions getAcquisitions()
+    {
+        return acquisitions;
+    }
+
+    public Shooter getShooter()
+    {
+        return shooter;
     }
 }

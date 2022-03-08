@@ -21,9 +21,6 @@ public abstract class Subsystem implements Runnable
         state = SubsystemState.NORMAL;
     }
 
-    /**
-     * Called every update/tick of the main loop.
-     */
     @Override
     public void run()
     {

@@ -9,26 +9,21 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class Axis 
 {
+	private Joystick joystick;
+
 	/**
 	 * The point on the axis relative to the origin in which input 
 	 * should start to be registered.
 	 */
-	private static double DEADBAND = 0.4;
+	private double deadband;
 
 	/**
 	 * The value that the final output value will be multiplied by.
 	 */
-	private static double SENSITIVITY = 1;
+	private double sensitivity;
 
-	private Joystick joystick;
 	private int axis;
 	private boolean invert;
-	
-	static
-	{
-		SmartDashboard.putNumber("CONTROLLER_AXIS_DEADBAND", DEADBAND);
-		SmartDashboard.putNumber("CONTROLLER_AXIS_SENSITIVITY", SENSITIVITY);
-	}
 
 	/**
 	 * Create a new axis on the specified Joystick.
@@ -41,6 +36,8 @@ public class Axis
 		this.joystick = joystick;
 		this.axis = axis;
 		this.invert = invert;
+		this.sensitivity = 1;
+		this.deadband = 0.2;
 	}
 
 	/**
@@ -48,23 +45,25 @@ public class Axis
 	 */
 	public double get()
 	{
-		DEADBAND = SmartDashboard.getNumber("CONTROLLER_AXIS_DEADBAND", DEADBAND);
-		SENSITIVITY = SmartDashboard.getNumber("CONTROLLER_AXIS_SENSITIVITY", SENSITIVITY);
-
-		if (DEADBAND == 1 || SENSITIVITY == 0)
+		if (deadband == 1 || sensitivity == 0)
 			return 0;
 
 		double value = joystick.getRawAxis(axis);
 
-		if (Math.abs(value) < DEADBAND) 
+		if (Math.abs(value) < deadband) 
 			return 0;
 		
 		//Apply deadband constraint and assess the -1 to 1 output limit.
-		double outputValue = Math.min(Math.max(-1, (value - DEADBAND) / (1 - DEADBAND) * SENSITIVITY), 1);
+		double outputValue = Math.min(Math.max(-1, (value - deadband) / (1 - deadband) * sensitivity), 1);
 		
 		if (this.invert)
 			return -outputValue;
 		
 		return outputValue;
+	}
+
+	public void setSensitivity(double newSensitivity)
+	{
+		sensitivity = newSensitivity;
 	}
 }

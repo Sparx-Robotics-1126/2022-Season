@@ -15,6 +15,7 @@ import frc.subsystem.Drives;
 import frc.subsystem.Shooter;
 import frc.drives.DrivesSensorInterface;
 import frc.drives.DrivesSensors;
+import frc.sensors.Limelight;
 import frc.shooter.ShooterSensorInterface;
 import frc.shooter.ShooterSensors;
 import frc.acquisitions.AcquisitionsSensorInterface;
@@ -52,6 +53,9 @@ public class Robot extends RobotBase
     private AcquisitionsSensorInterface acquisitionsSensors;
     private ShooterSensorInterface shooterSensors;
 
+    //Limelight
+    private Limelight limelight;
+
     //Keeps track of the current state of the robot.
     private RobotState state;
 
@@ -73,6 +77,9 @@ public class Robot extends RobotBase
         teleopControls = new TeleoperatedController(drives, acquisitions);
         autoControls = new AutonomousController(drives, acquisitions);
         testControls = new TestController(drives, acquisitions);
+
+        //Limelight
+        limelight = new Limelight();
 
         //Start subsystem threads.
         new Thread(drives).start();
@@ -191,5 +198,10 @@ public class Robot extends RobotBase
     public Shooter getShooter()
     {
         return shooter;
+    }
+
+    public static Limelight getLimelight()
+    {
+        return limelight;
     }
 }

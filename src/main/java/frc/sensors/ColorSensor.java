@@ -10,9 +10,12 @@ import com.revrobotics.ColorSensorV3;
 
 public class ColorSensor extends TimedTask
 {
+    private static final Color DEFAULT_COLOR = new Color(0, 0, 0);
+
     private ColorSensorV3 sensor;
 
     private Color currentColor;
+
     private double currentProximity;
 
     /**
@@ -37,6 +40,10 @@ public class ColorSensor extends TimedTask
 
     public Color getColor()
     {
+        //Prevent a race condition NullPointerException if an entity attempts to read the sensor's color before it has been received.
+        if (currentColor == null)
+            return DEFAULT_COLOR;
+        
         return currentColor;
     }
 

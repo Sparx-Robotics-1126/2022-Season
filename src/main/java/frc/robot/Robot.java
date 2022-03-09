@@ -1,10 +1,5 @@
 package frc.robot;
 
-import edu.wpi.first.hal.HAL;
-
-import edu.wpi.first.wpilibj.RobotBase;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import frc.controllers.Controller;
 import frc.controllers.TeleoperatedController;
 import frc.controllers.AutonomousController;
@@ -19,8 +14,13 @@ import frc.drives.DrivesSensors;
 import frc.acquisitions.AcquisitionsSensorInterface;
 import frc.acquisitions.AcquisitionsSensors;
 
+import edu.wpi.first.hal.HAL;
+
+import edu.wpi.first.wpilibj.RobotBase;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /**
- * Controls when subsystems are engaged and grants control to the correct Controller.
+ * The main controlling class of the Robot. Controls all subsystems via specialized Controllers.
  */
 public class Robot extends RobotBase
 {
@@ -39,8 +39,8 @@ public class Robot extends RobotBase
     private TestController testControls;
     
     //The robot subsystems.
-    private Drives drives;
-    private Acquisitions acquisitions;
+    private static Drives drives;
+    private static Acquisitions acquisitions;
 
     //The acting Controller of the robot.
     private Controller currentController;
@@ -65,9 +65,9 @@ public class Robot extends RobotBase
         acquisitions = new Acquisitions(acquisitionsSensors);
         
         //Initialize Controllers.
-        teleopControls = new TeleoperatedController(drives, acquisitions);
-        autoControls = new AutonomousController(drives, acquisitions);
-        testControls = new TestController(drives, acquisitions);
+        teleopControls = new TeleoperatedController();
+        autoControls = new AutonomousController();
+        testControls = new TestController();
 
         //Start subsystem threads.
         new Thread(drives).start();
@@ -99,7 +99,7 @@ public class Robot extends RobotBase
     }
 
     /**
-     * Called when test mode is activated.
+     * Called when test begins.
      */
     private void testStarted()
     {
@@ -129,36 +129,39 @@ public class Robot extends RobotBase
     @Override
     public void startCompetition() 
     {
-        System.out.println("********ROBOT INIT********");
+        System.out.println("******** ROBOT INIT ********");
+
         HAL.observeUserProgramStarting();
         robotInit();
-        System.out.println("************ENGAGING MAIN LOOP************");
+
+        System.out.println("************ ENGAGING MAIN LOOP ************");
+
         while (true)
         {
             if (!isDisabled())
             {
                 if (isAutonomous() && state != RobotState.AUTO)
                 {
-                    System.out.println("**********AUTO STARTED************");
+                    System.out.println("********** AUTONOMOUS STARTED ************");
                     autoStarted();
                     HAL.observeUserProgramAutonomous();
                 }
                 else if (isTeleop() && state != RobotState.TELE)
                 {
                     teleopStarted();
-                    System.out.println("**********TELEOP STARTED************");
+                    System.out.println("********** TELEOPERATED STARTED ************");
                     HAL.observeUserProgramTeleop();
                 }
                 else if (isTest() && state != RobotState.TEST)
                 {
-                    System.out.println("**********TEST STARTED************");
+                    System.out.println("********** TEST STARTED ************");
                     testStarted();
                     HAL.observeUserProgramTest();
                 }
             }
             else if (state != RobotState.STANDBY)
             {
-                System.out.println("**********ROBOT DISABLED************");
+                System.out.println("********** ROBOT DISABLED ************");
                 disabledStarted();
                 HAL.observeUserProgramDisabled();
             }
@@ -171,5 +174,21 @@ public class Robot extends RobotBase
     public void endCompetition() 
     {
     
+    }
+    
+    /**
+     * @return The instance of the Drives subsystem currently in use by the robot. Null if the robot has not been initialized yet.
+     */
+    public static Drives getDrives()
+    {
+        return drives;
+    }
+
+    /**
+     * @return The instance of the Acquisitions subsystem currently in use by the robot. Null if the robot has not been initialized yet.
+     */
+    public static Acquisitions getAcquisitions()
+    {
+        return acquisitions;
     }
 }

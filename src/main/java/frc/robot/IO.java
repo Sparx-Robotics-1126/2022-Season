@@ -9,10 +9,10 @@ import edu.wpi.first.wpilibj.SerialPort;
 public final class IO 
 {
 	//MOTORS
-	public static final int DRIVES_RIGHT_MOTOR_1			= 27; //24
-	public static final int DRIVES_RIGHT_MOTOR_2			= 25; //26
-	public static final int DRIVES_LEFT_MOTOR_1				= 26; //27
-	public static final int DRIVES_LEFT_MOTOR_2				= 24; //25
+	public static final int DRIVES_RIGHT_MOTOR_1			= 24;
+	public static final int DRIVES_RIGHT_MOTOR_2			= 26;
+	public static final int DRIVES_LEFT_MOTOR_1				= 27;
+	public static final int DRIVES_LEFT_MOTOR_2				= 25;
 
 	public static final int ACQUISITIONS_ARM_MOTOR			= 28; //PLACEHOLDER
 	public static final int ACQUISITIONS_INTAKE_MOTOR		= 29; //PLACEHOLDER

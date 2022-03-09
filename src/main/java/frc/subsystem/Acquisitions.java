@@ -41,23 +41,21 @@ public class Acquisitions extends Subsystem
     {
         armMotor = new TalonSRX(IO.ACQUISITIONS_ARM_MOTOR);
         intakeMotor = new TalonSRX(IO.ACQUISITIONS_INTAKE_MOTOR);
+        
+        this.acquisitionsSensors = acquisitionsSensors;
     }
 
     @Override
     void execute()
     {
-        if (getState() == SubsystemState.NORMAL)
-        {
+        /*if (getState() == SubsystemState.NORMAL)
             if (acquisitionsSensors.ballInRange())
-            {
                 if (acquisitionsSensors.isCorrectColor())
                     intakeRollers();
                 else
                     ejectRollers();
-            }
             else
-                stopRollers();
-        }
+                stopRollers();*/
 
         if (intakeCommand != null)
         {

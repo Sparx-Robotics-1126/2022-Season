@@ -1,48 +1,56 @@
 package frc.controllers;
 
+import frc.robot.Robot;
+
 import frc.subsystem.Drives;
 import frc.subsystem.Acquisitions;
+import frc.subsystem.Subsystem.SubsystemState;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TeleoperatedController extends Controller 
 {
-	private Joystick driverJoystick;
+	private Joystick joystick;
 
-	private Axis driverLeftAxisY;
+  private Axis driverLeftAxisY;
   private Axis driverLeftAxisX;
 	private Axis driverRightAxis;
-  
+
+  private Button acquisitionsArmButton;
+  private Button acquisitionsIntakeButton;
+
   static 
   {
     SmartDashboard.putBoolean("USE_BOTH_JOYSTICKS", true);
   }
-
+	
 	/**
 	 * Creates the Controller manager for teleoperated.
 	 * @param drives The Drives subsystem to associate with this Controller.
 	 */
-  public TeleoperatedController(Drives drives, Acquisitions acquisitions)
+  public TeleoperatedController()
   {
-    super(drives, acquisitions);
-    
-    driverJoystick = new Joystick(0);
+    joystick = new Joystick(0);
 
     //For drives.
-    driverLeftAxisY = new Axis(driverJoystick, ControllerMappings.XBOX_LEFT_Y, true);
-    driverLeftAxisX = new Axis(driverJoystick, ControllerMappings.XBOX_LEFT_X, true);
-    driverRightAxis = new Axis(driverJoystick, ControllerMappings.XBOX_RIGHT_Y, true);
-    
-    //Add controls for additional subsystems here.
+    driverLeftAxisY = new Axis(joystick, ControllerMappings.XBOX_LEFT_Y, true);
+    driverLeftAxisX = new Axis(joystick, ControllerMappings.XBOX_LEFT_X, true);
+    driverRightAxis = new Axis(joystick, ControllerMappings.XBOX_RIGHT_Y, true);
+
+    //For Acquisitions
+    acquisitionsArmButton = new Button(joystick, ControllerMappings.XBOX_B);
+    acquisitionsIntakeButton = new Button(joystick, ControllerMappings.XBOX_A);
+
+    //Add additional controls here.
   }
 
   @Override
   public void execute() 
   {
-    //Driver
+    //Drives
     if (SmartDashboard.getBoolean("USE_BOTH_JOYSTICKS", true))
-        getDrives().setJoysticks(driverLeftAxisY.get(), driverRightAxis.get());
+        Robot.getDrives().setJoysticks(driverLeftAxisY.get(), driverRightAxis.get());
     else
     {
       double leftAxisY = driverLeftAxisY.get();
@@ -51,7 +59,20 @@ public class TeleoperatedController extends Controller
       if (Math.abs(leftAxisY) >= 0.15 && leftAxisY < 0)
         leftAxisX = -leftAxisX;
 
-      getDrives().setJoysticks(leftAxisY - leftAxisX, leftAxisY + leftAxisX);
+      Robot.getDrives().setJoysticks(leftAxisY - leftAxisX, leftAxisY + leftAxisX);
     }
+
+    //Acquisitions
+    if (acquisitionsArmButton.get())
+      if (acquisitionsArmButton.previouslyPressed())
+        Robot.getAcquisitions().raiseArm();
+      else
+        Robot.getAcquisitions().dropArm();
+
+    if (acquisitionsIntakeButton.get())
+      if (acquisitionsIntakeButton.previouslyPressed())
+        Robot.getAcquisitions().stopRollers();
+      else
+        Robot.getAcquisitions().intakeRollers();
   }
 }

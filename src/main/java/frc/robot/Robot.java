@@ -54,7 +54,7 @@ public class Robot extends RobotBase
     private ShooterSensorInterface shooterSensors;
 
     //Limelight
-    private Limelight limelight;
+    private static Limelight limelight;
 
     //Keeps track of the current state of the robot.
     private RobotState state;

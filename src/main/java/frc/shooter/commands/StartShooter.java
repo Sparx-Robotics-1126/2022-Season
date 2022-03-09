@@ -4,12 +4,12 @@ import frc.shooter.ShooterCommand;
 import frc.shooter.ShooterOutput;
 import frc.shooter.ShooterSensorInterface;
 
-public class ShooterSpeed extends ShooterCommand
+public class StartShooter extends ShooterCommand
 {
     private final double ACCEPTABLE_ERROR = 1;
     private final double HEIGHT_OF_PORT = 2.4955; //In meters
 
-    public ShooterSpeed(ShooterSensorInterface sensors)
+    public StartShooter(ShooterSensorInterface sensors)
     {
         super(sensors);
     }

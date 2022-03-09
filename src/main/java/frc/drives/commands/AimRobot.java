@@ -12,23 +12,6 @@ public class AimRobot extends DrivesCommand{
 
     @Override
     public DrivesOutput execute(){
-        double tx = getSensors().getAngleToTarget();
-        double speed = 0; 
-        if(Math.abs(tx) > DEADBAND) {
-              speed = tx*p; 
-        }
         
-        double shooterAngle = sensors.getShooterAngleToRobot();
-
-        if(speed>0) {
-        	if(shooterAngle > MAX_ANGLE) {
-        		speed = 0;
-        	}
-        }else{
-        	if(shooterAngle < -MAX_ANGLE) {
-        		speed = 0;
-        	}
-        }
-        return new ShooterOutput(speed, Math.abs(tx) < 1);
     }
 }

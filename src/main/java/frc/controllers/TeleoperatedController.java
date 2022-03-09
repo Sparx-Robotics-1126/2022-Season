@@ -1,5 +1,7 @@
 package frc.controllers;
 
+import frc.robot.Robot;
+
 import frc.subsystem.Drives;
 import frc.subsystem.Acquisitions;
 import frc.subsystem.Subsystem.SubsystemState;
@@ -27,10 +29,8 @@ public class TeleoperatedController extends Controller
 	 * Creates the Controller manager for teleoperated.
 	 * @param drives The Drives subsystem to associate with this Controller.
 	 */
-  public TeleoperatedController(Drives drives, Acquisitions acquisitions)
+  public TeleoperatedController()
   {
-    super(drives, acquisitions);
-    
     joystick = new Joystick(0);
 
     //For drives.
@@ -50,7 +50,7 @@ public class TeleoperatedController extends Controller
   {
     //Drives
     if (SmartDashboard.getBoolean("USE_BOTH_JOYSTICKS", true))
-        getDrives().setJoysticks(driverLeftAxisY.get(), driverRightAxis.get());
+        Robot.getDrives().setJoysticks(driverLeftAxisY.get(), driverRightAxis.get());
     else
     {
       double leftAxisY = driverLeftAxisY.get();
@@ -59,20 +59,20 @@ public class TeleoperatedController extends Controller
       if (Math.abs(leftAxisY) >= 0.15 && leftAxisY < 0)
         leftAxisX = -leftAxisX;
 
-      getDrives().setJoysticks(leftAxisY - leftAxisX, leftAxisY + leftAxisX);
+      Robot.getDrives().setJoysticks(leftAxisY - leftAxisX, leftAxisY + leftAxisX);
     }
 
     //Acquisitions
     if (acquisitionsArmButton.get())
       if (acquisitionsArmButton.previouslyPressed())
-        getAcquisitions().raiseArm();
+        Robot.getAcquisitions().raiseArm();
       else
-        getAcquisitions().dropArm();
+        Robot.getAcquisitions().dropArm();
 
     if (acquisitionsIntakeButton.get())
       if (acquisitionsIntakeButton.previouslyPressed())
-        getAcquisitions().stopRollers();
+        Robot.getAcquisitions().stopRollers();
       else
-        getAcquisitions().intakeRollers();
+        Robot.getAcquisitions().intakeRollers();
   }
 }

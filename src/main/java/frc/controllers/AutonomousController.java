@@ -21,10 +21,8 @@ public class AutonomousController extends Controller
 		new DoNothing()
 	};
 
-	public AutonomousController(Drives drives, Acquisitions acquisitions) 
+	public AutonomousController() 
 	{
-		super(drives, acquisitions);
-
 		selector = new SendableChooser<>();
 
 		for (AutonomousRoutine routine : routines)

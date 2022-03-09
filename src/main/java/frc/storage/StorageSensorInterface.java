@@ -7,4 +7,5 @@ public interface StorageSensorInterface
 {
     //Sensors
     double getStorageEncoderDistance();
+    boolean getStorageIRSensor();
 }

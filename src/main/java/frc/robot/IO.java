@@ -28,4 +28,6 @@ public final class IO
 
 	public static final int STORAGE_ENCODER_A				= 4; //PLACEHOLDER
 	public static final int STORAGE_ENCODER_B				= 5; //PLACEHOLDER
+
+	public static final int STORAGE_IR						= 7; //PLACEHOLDER
 }

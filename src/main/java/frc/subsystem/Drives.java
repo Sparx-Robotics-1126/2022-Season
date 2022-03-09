@@ -102,8 +102,8 @@ public class Drives extends Subsystem
         if (drivesCommand != null) 
         {
             DrivesOutput output = drivesCommand.execute();
-            leftMotorMaster.set(output.getLeftMotor());
-            rightMotorMaster.set(-output.getRightMotor());
+            leftMotorMaster.set(-output.getLeftMotor());
+            rightMotorMaster.set(output.getRightMotor());
             if (output.isDone()) 
             {
                 leftMotorMaster.set(0);

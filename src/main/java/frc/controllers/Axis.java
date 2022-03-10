@@ -1,7 +1,5 @@
 package frc.controllers;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import edu.wpi.first.wpilibj.Joystick;
 
 /**

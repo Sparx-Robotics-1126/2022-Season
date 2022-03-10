@@ -2,10 +2,6 @@ package frc.controllers;
 
 import frc.robot.Robot;
 
-import frc.subsystem.Drives;
-import frc.subsystem.Acquisitions;
-import frc.subsystem.Subsystem.SubsystemState;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 

@@ -15,7 +15,7 @@ public class DriveForwardTest
 	public void motorsAreEqual() 
 	{
 		sensors = new DrivesTestSensors();
-		DriveForward command = new DriveForward(sensors, 100);
+		DriveForward command = new DriveForward(sensors, 1, 100);
 		sensors.setLeftEncoderDistance(20);
 		sensors.setRightEncoderDistance(20);
 		DrivesOutput output = command.execute();
@@ -26,7 +26,7 @@ public class DriveForwardTest
 	public void pointedRight_ShouldSlowLeft() 
 	{
 		sensors = new DrivesTestSensors();
-		DriveForward command = new DriveForward(sensors, 100);
+		DriveForward command = new DriveForward(sensors, 1, 100);
 		sensors.setLeftEncoderDistance(20);
 		sensors.setRightEncoderDistance(20);
 		sensors.setGyroAngle(5);
@@ -39,7 +39,7 @@ public class DriveForwardTest
 	public void pointedLeft_ShouldSlowRight() 
 	{
 		sensors = new DrivesTestSensors();
-		DriveForward command = new DriveForward(sensors, 100);
+		DriveForward command = new DriveForward(sensors, 1, 100);
 		sensors.setLeftEncoderDistance(20);
 		sensors.setRightEncoderDistance(20);
 		sensors.setGyroAngle(-5);
@@ -52,7 +52,7 @@ public class DriveForwardTest
 	public void atDistance_ShouldStop()
 	{
 		sensors = new DrivesTestSensors();
-		DriveForward command = new DriveForward(sensors, 10);
+		DriveForward command = new DriveForward(sensors, 1, 10);
 		DrivesOutput firstOutput = command.execute();
 		assertTrue(firstOutput.getLeftMotor() > 0);
 		assertTrue(firstOutput.getRightMotor() > 0);

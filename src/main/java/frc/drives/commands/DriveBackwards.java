@@ -15,13 +15,16 @@ public class DriveBackwards extends DrivesCommand
 
 	private final double TARGET_DISTANCE;
 	private final double TARGET_ANGLE;
+	
+	private final double REQUESTED_SPEED;
 
 	/**
 	 * Creates a DrivesCommand instructing the robot to move backward by the specified distance.
 	 * @param sensors A DrivesSensorInterface containing the sensors that should be used with this DrivesCommand.
+	 * @param speed The speed at which to drive backwards.
 	 * @param distance The distance to move by.
 	 */
-	public DriveBackwards(DrivesSensorInterface sensors, double distance) 
+	public DriveBackwards(DrivesSensorInterface sensors, double speed, double distance) 
 	{
 		super(sensors);
 		
@@ -31,6 +34,8 @@ public class DriveBackwards extends DrivesCommand
 
 		TARGET_DISTANCE = sensors.getAverageEncoderDistance() - distance;
 		TARGET_ANGLE = sensors.getGyroAngle();
+
+		REQUESTED_SPEED = speed;
 	}
 
 	public DrivesOutput execute() 
@@ -40,7 +45,7 @@ public class DriveBackwards extends DrivesCommand
 
 		double leftSpeed, rightSpeed;
 
-		leftSpeed = rightSpeed = distanceError * DISTANCE_kP;
+		leftSpeed = rightSpeed = distanceError * DISTANCE_kP * REQUESTED_SPEED;
 
 		if (leftSpeed < -1)
 		{

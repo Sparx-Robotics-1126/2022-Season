@@ -41,12 +41,12 @@ public class TestController extends Controller
 
         if (moveForward > 0)
         {
-            Robot.getDrives().moveForward(moveForward);
+            Robot.getDrives().moveForward(0.5, moveForward);
             SmartDashboard.putNumber("DRIVE_FORWARD", 0);
         }
         else if (moveBackward > 0)
         {
-            Robot.getDrives().moveBackward(moveBackward);
+            Robot.getDrives().moveBackward(0.5, moveBackward);
             SmartDashboard.putNumber("DRIVE_BACKWARD", 0);
         }
         else if (turnLeft > 0)

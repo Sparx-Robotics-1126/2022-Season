@@ -17,8 +17,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import javax.swing.text.StyleContext.SmallAttributeSet;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 /**

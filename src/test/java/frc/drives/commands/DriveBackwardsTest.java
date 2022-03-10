@@ -21,7 +21,7 @@ public class DriveBackwardsTest
 	@Test
 	public void motorsAreEqual() 
 	{
-		DriveBackwards backwardC = new DriveBackwards(sensors, 10);
+		DriveBackwards backwardC = new DriveBackwards(sensors, 1, 10);
 		sensors.setLeftEncoderDistance(20);
 		sensors.setRightEncoderDistance(20);
 		DrivesOutput output = backwardC.execute();
@@ -31,7 +31,7 @@ public class DriveBackwardsTest
 	@Test
 	public void pointedRight_ShouldSlowLeft() 
 	{
-		DriveBackwards backwardC = new DriveBackwards(sensors, 10);
+		DriveBackwards backwardC = new DriveBackwards(sensors, 1, 10);
 		sensors.setLeftEncoderDistance(20);
 		sensors.setRightEncoderDistance(20);
 		sensors.setGyroAngle(5);
@@ -43,7 +43,7 @@ public class DriveBackwardsTest
 	@Test
 	public void pointedLeft_ShouldSlowRight() 
 	{
-		DriveBackwards backwardC = new DriveBackwards(sensors, 10);
+		DriveBackwards backwardC = new DriveBackwards(sensors, 1, 10);
 		sensors.setLeftEncoderDistance(20);
 		sensors.setRightEncoderDistance(20);
 		sensors.setGyroAngle(-5);
@@ -57,7 +57,7 @@ public class DriveBackwardsTest
 	{
 		sensors.setLeftEncoderDistance(0);
 		sensors.setRightEncoderDistance(0);
-		DriveBackwards backwardC = new DriveBackwards(sensors, 10);
+		DriveBackwards backwardC = new DriveBackwards(sensors, 1, 10);
 		DrivesOutput firstOutput = backwardC.execute();
 		assertTrue(firstOutput.getLeftMotor() < 0);
 		assertTrue(firstOutput.getRightMotor() < 0);

@@ -135,20 +135,22 @@ public class Drives extends Subsystem
 
     /**
      * Moves the robot forward by the set distance.
-     * @param distance The distance in an arbitrary unit to move forward.
+     * @param speed The speed at which to drive forward.
+     * @param distance The distance in motor shaft rotations to move forward.
      */
-    public void moveForward(double distance) 
+    public void moveForward(double speed, double distance) 
     {
-        drivesCommand = new DriveForward(drivesSensors, distance);
+        drivesCommand = new DriveForward(drivesSensors, speed, distance);
     }
 
     /**
      * Moves the robot backward by the set distance.
-     * @param distance The distance in an arbitrary unit to move backward.
+     * @param speed The speed at which to drive backward.
+     * @param distance The distance in motor shaft rotations to move backward.
      */
-    public void moveBackward(double distance) 
+    public void moveBackward(double speed, double distance) 
     {
-        drivesCommand = new DriveBackwards(drivesSensors, distance);
+        drivesCommand = new DriveBackwards(drivesSensors, speed, distance);
     }
 
     /**

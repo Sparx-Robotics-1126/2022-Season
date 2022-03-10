@@ -16,12 +16,15 @@ public class DriveForward extends DrivesCommand
 	private final double TARGET_DISTANCE;
 	private final double TARGET_ANGLE;
 
+	private final double REQUESTED_SPEED;
+
 	/**
 	 * Creates a DrivesCommand instructing the robot to move forward by the specified distance.
 	 * @param sensors A DrivesSensorInterface containing the sensors that should be used with this DrivesCommand.
+	 * @param speed The speed at which to drive forwards.
 	 * @param distance The distance to move by.
 	 */
-	public DriveForward(DrivesSensorInterface sensors, double distance) 
+	public DriveForward(DrivesSensorInterface sensors, double speed, double distance) 
 	{
 		super(sensors);
 		
@@ -31,6 +34,8 @@ public class DriveForward extends DrivesCommand
 
 		TARGET_DISTANCE = sensors.getAverageEncoderDistance() + distance;
 		TARGET_ANGLE = sensors.getGyroAngle();
+
+		REQUESTED_SPEED = speed;
 	}
 
 	public DrivesOutput execute() 
@@ -39,7 +44,7 @@ public class DriveForward extends DrivesCommand
 		double angleError = TARGET_ANGLE - getSensors().getGyroAngle();
 
 		double leftSpeed, rightSpeed;
-		leftSpeed = rightSpeed = distanceError * DISTANCE_kP;
+		leftSpeed = rightSpeed = distanceError * DISTANCE_kP * REQUESTED_SPEED;
 
 		if (leftSpeed > 1)
 		{

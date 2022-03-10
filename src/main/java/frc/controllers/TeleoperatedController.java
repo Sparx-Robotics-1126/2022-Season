@@ -2,10 +2,6 @@ package frc.controllers;
 
 import frc.robot.Robot;
 
-import frc.subsystem.Drives;
-import frc.subsystem.Acquisitions;
-import frc.subsystem.Subsystem.SubsystemState;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -16,6 +12,7 @@ public class TeleoperatedController extends Controller
   private Axis driverLeftAxisY;
   private Axis driverLeftAxisX;
 	private Axis driverRightAxis;
+  private Axis driverRightTrigger;
 
   private Button acquisitionsArmButton;
   private Button acquisitionsIntakeButton;
@@ -37,6 +34,8 @@ public class TeleoperatedController extends Controller
     driverLeftAxisY = new Axis(joystick, ControllerMappings.XBOX_LEFT_Y, true);
     driverLeftAxisX = new Axis(joystick, ControllerMappings.XBOX_LEFT_X, true);
     driverRightAxis = new Axis(joystick, ControllerMappings.XBOX_RIGHT_Y, true);
+    driverRightTrigger = new Axis(joystick, ControllerMappings.XBOX_R2, true);
+   
 
     //For Acquisitions
     acquisitionsArmButton = new Button(joystick, ControllerMappings.XBOX_B);
@@ -74,5 +73,19 @@ public class TeleoperatedController extends Controller
         Robot.getAcquisitions().stopRollers();
       else
         Robot.getAcquisitions().intakeRollers();
+
+    //Trigger Sensitivity Control
+    if (driverRightTrigger.get() <= -0.8)
+    {
+      driverLeftAxisX.setSensitivity(0.4);
+      driverLeftAxisY.setSensitivity(0.4);
+      driverRightAxis.setSensitivity(0.4);
+    }
+    else
+    {
+      driverLeftAxisX.setSensitivity(1);
+      driverLeftAxisY.setSensitivity(1);
+      driverRightAxis.setSensitivity(1);
+    }
   }
 }

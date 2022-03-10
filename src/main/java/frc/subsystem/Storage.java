@@ -16,8 +16,7 @@ public class Storage extends Subsystem{
     private StorageCommand storageCommand;
 	private StorageSensorInterface sensors;
 
-	private short numOfBallsAquired;
-
+	private static short numBalls;
 	private CANSparkMax storageMotor;
 
     /**
@@ -27,25 +26,40 @@ public class Storage extends Subsystem{
 
     public Storage()
     {
-        numOfBallsAquired = 1;
+        numBalls = 1;
         sensors = new StorageSensors();
 		storageMotor = new CANSparkMax(IO.STORAGE_MOTOR, MotorType.kBrushless);
 
         storageMotor.setSmartCurrentLimit(MAX_CURRENT);
     }
 
+    /**
+     * @return number of balls
+     */
+    public static short getNumBalls(){
+        return numBalls;
+    }
+
+    /**
+     * Sets the number of balls
+     */
+    public static void setNumBalls(int newBallCount){
+        numBalls = (short) newBallCount;
+    }   
+
     @Override
     void execute() {
         if (storageCommand != null) {
 			StorageOutput output = storageCommand.execute();
-			numOfBallsAquired = output.getNumOfBalls();
+            numBalls = getNumBalls();
+            storageMotor.set(output.get());
 			if (output.isDone()) {
 				// TURN OFF All MOTORS
                 storageMotor.set(0);
 				storageCommand = null;
 			}
 		}
-		SmartDashboard.putNumber("Balls Aquired", numOfBallsAquired);
+		//   SmartDashboard.putNumber("Balls Aquired", numBalls);
     }
 
     @Override

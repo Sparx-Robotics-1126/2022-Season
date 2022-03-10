@@ -15,7 +15,7 @@ public class StorageOutput
      */
     private boolean isDone;
 
-    private short numOfBalls;
+    
 
     /**
      * Used to set and store new speed values for the motors.
@@ -30,18 +30,21 @@ public class StorageOutput
     /**
      * Used to set and store new speed values for the motors.
      * @param motor The speed that the motor should be set to.
-     * @param isDone True if the command has finished executing.
+     * @param storageOutput True if the command has finished executing.
      */
-    public StorageOutput(double motor, boolean isDone)
+    public StorageOutput(double motor, StorageOutput storageOutput)
     {
         this.motor = motor;
-        this.isDone = isDone;
+        this.isDone = storageOutput.isDone;
     }
 
-    public StorageOutput(short numOfBalls, boolean isDone)
+    public StorageOutput(double motor, boolean isDone)
     {
         this.isDone = isDone;
-        this.numOfBalls = numOfBalls;
+        this.motor = motor;
+    }
+
+    public StorageOutput(short numBalls, boolean b) {
     }
 
     /**
@@ -58,10 +61,5 @@ public class StorageOutput
     public boolean isDone() 
     {
         return isDone;
-    }
-
-    public short getNumOfBalls()
-    {
-        return numOfBalls;
     }
 }

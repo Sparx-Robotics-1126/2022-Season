@@ -5,6 +5,8 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
+import java.util.HashMap;
+
 import frc.drives.commands.TurnLeft;
 import frc.robot.IO;
 import frc.shooter.ShooterCommand;
@@ -16,6 +18,8 @@ import frc.shooter.commands.StopShooter;
 public class Shooter extends Subsystem
 {
     private CANSparkMax shooterMotor;
+
+    //private HashMap<Double, Double> map;
 
     /*
      * Class containing all sensor data for Shooter.
@@ -34,6 +38,11 @@ public class Shooter extends Subsystem
     {
         shooterMotor = new CANSparkMax(IO.SHOOTER_MOTOR, MotorType.kBrushless);
         shooterSensors.addEncoders(shooterMotor.getEncoder());
+        //map = new HashMap<>();
+
+        //Input values into map
+
+        //map.put(input, return value);
     }
 
     @Override
@@ -49,6 +58,15 @@ public class Shooter extends Subsystem
                 shooterCommand = null;
         }
     }
+
+    // public double getHashMapValue(double inputValue)
+    // {
+    //     double closestValueMin = -1;
+
+    //     for(int i = 0; i < map.size(); i ++){
+    //         double mapX = map.get((double)i);
+    //     }
+    // }
 
     /**
      * Sets the shooter motor speed to 0

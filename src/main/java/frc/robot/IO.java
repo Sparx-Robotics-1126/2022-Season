@@ -19,7 +19,7 @@ public final class IO
 	public static final int ACQUISITIONS_ARM_MOTOR			= 28; //PLACEHOLDER
 	public static final int ACQUISITIONS_INTAKE_MOTOR		= 29; //PLACEHOLDER
 
-	public static final int SHOOTER_MOTOR					= 30; //PLACEHOLDER
+	public static final int SHOOTER_MOTOR					= 1;
 	
 	//SENSORS
 	public static final I2C.Port I2C_ONBOARD				= I2C.Port.kOnboard;

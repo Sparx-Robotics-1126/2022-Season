@@ -18,7 +18,7 @@ public class ShootBall extends StorageCommand{
     public StorageOutput execute() {
         // TODO Auto-generated method stub
         if(getSensors().getStorageEncoderDistance() >= STORAGE_MOTOR_STOPPING_POINT) {
-            Storage.setNumBalls(Storage.getNumBalls() - 1);
+            //Storage.setNumBalls(Storage.getNumBalls() - 1);
             return new StorageOutput(STORAGE_MOTOR_SPEED, false);
         }
         Storage.setNumBalls((Storage.getNumBalls()-1));;

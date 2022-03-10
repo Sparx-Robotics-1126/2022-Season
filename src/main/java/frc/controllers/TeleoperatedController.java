@@ -43,6 +43,8 @@ public class TeleoperatedController extends Controller
     acquisitionsArmDown = new Button(joystick, ControllerMappings.XBOX_X, ButtonType.PRESSED);
     acquisitionsIntake = new Button(joystick, ControllerMappings.XBOX_Y);
 
+    
+
     //Add additional controls here.
   }
 
@@ -82,6 +84,8 @@ public class TeleoperatedController extends Controller
       else
         Robot.getAcquisitions().stopRollers();
     }
+
+   
 
     //Trigger Sensitivity Control
     if (driverRightTrigger.get() <= -0.8)

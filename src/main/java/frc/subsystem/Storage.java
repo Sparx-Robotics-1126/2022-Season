@@ -5,6 +5,7 @@ import frc.storage.StorageCommand;
 import frc.storage.StorageOutput;
 import frc.storage.StorageSensorInterface;
 import frc.storage.StorageSensors;
+import frc.storage.commands.*;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
@@ -66,5 +67,17 @@ public class Storage extends Subsystem{
     public boolean isDone() {
         // TODO Auto-generated method stub
         return false;
+    }
+
+    public void checkForBalls() {
+        storageCommand = new CheckForBalls(sensors);
+    }
+
+    public void indexBall() {
+        storageCommand = new IndexBall(sensors);
+    }
+
+    public void shootBall() {
+        storageCommand = new ShootBall(sensors);
     }
 }

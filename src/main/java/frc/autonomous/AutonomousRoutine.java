@@ -19,7 +19,10 @@ public abstract class AutonomousRoutine
     {
         AutonomousCommand current = commands[position];
 
-        
+        if (!current.hasRan())
+            current.run();
+        else if (current.isDone())
+            position++;
     }
 
     public abstract String getName();

@@ -2,6 +2,24 @@ package frc.autonomous;
 
 public abstract class AutonomousCommand 
 {
-    public abstract void execute();
+    private boolean ran;
+
+    public AutonomousCommand()
+    {
+        ran = false;
+    }
+
+    public final void run()
+    {
+        ran = true;
+        execute();
+    }
+
+    public final boolean hasRan()
+    {
+        return ran;
+    }
+
+    protected abstract void execute();
     public abstract boolean isDone();
 }

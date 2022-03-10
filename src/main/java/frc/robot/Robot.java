@@ -16,10 +16,14 @@ import frc.shooter.ShooterSensors;
 import frc.acquisitions.AcquisitionsSensorInterface;
 import frc.acquisitions.AcquisitionsSensors;
 
+import frc.sensors.Limelight;
+
 import edu.wpi.first.hal.HAL;
 
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import com.kauailabs.navx.frc.AHRS;
 
 /**
  * The main controlling class of the Robot. Controls all subsystems via specialized Controllers.
@@ -56,6 +60,9 @@ public class Robot extends RobotBase
     //Limelight
     private static Limelight limelight;
 
+    private static AHRS gyro;
+    private static Limelight limelight;
+
     //Keeps track of the current state of the robot.
     private RobotState state;
 
@@ -67,6 +74,9 @@ public class Robot extends RobotBase
         drivesSensors = new DrivesSensors();
         acquisitionsSensors = new AcquisitionsSensors();
         shooterSensors = new ShooterSensors();
+        
+        gyro = new AHRS(IO.USB_ONBOARD);
+        limelight = new Limelight();
         
         //Initialize Subsystems.
         drives = new Drives(drivesSensors);
@@ -202,5 +212,21 @@ public class Robot extends RobotBase
     public static Acquisitions getAcquisitions()
     {
         return acquisitions;
+    }
+
+    /**
+     * @return The AHRS interface for the navX sensor currently in use by the robot.
+     */
+    public static AHRS getGyro()
+    {
+        return gyro;
+    }
+
+    /**
+     * @return The Limelight currently in use by the robot.
+     */
+    public static Limelight getLimelight()
+    {
+        return limelight;
     }
 }

@@ -1,10 +1,8 @@
 package frc.drives;
 
-import frc.robot.IO;
+import frc.robot.Robot;
 
 import com.revrobotics.RelativeEncoder;
-
-import com.kauailabs.navx.frc.AHRS;
 
 /**
  * Class for interfacing with the various sensors of the Drives subsystem (e.g. encoders).
@@ -12,8 +10,6 @@ import com.kauailabs.navx.frc.AHRS;
 public class DrivesSensors implements DrivesSensorInterface 
 {
 	private final double MULTIPLIER = 1.2;
-
-	private AHRS gyro;
 
 	private RelativeEncoder rightEncoder;
 	private RelativeEncoder leftEncoder;
@@ -26,7 +22,6 @@ public class DrivesSensors implements DrivesSensorInterface
 	 */
 	public DrivesSensors() 
 	{
-		gyro = new AHRS(IO.USB_ONBOARD);
 		rightJoystick = 0;
 		leftJoystick = 0;
 	}
@@ -103,7 +98,7 @@ public class DrivesSensors implements DrivesSensorInterface
 	@Override
 	public double getGyroAngle() 
 	{
-		return gyro.getAngle();
+		return Robot.getGyro().getAngle();
 	}
 
 	/**

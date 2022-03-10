@@ -1,7 +1,8 @@
 package frc.controllers;
 
-import frc.controllers.Button.ButtonType;
 import frc.robot.Robot;
+
+import frc.controllers.Button.ButtonType;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

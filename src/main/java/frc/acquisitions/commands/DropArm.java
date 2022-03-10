@@ -6,9 +6,6 @@ import frc.acquisitions.AcquisitionsSensorInterface;
 
 public class DropArm extends AcquisitionsCommand
 {
-    final double ARM_SPEED = 0.25;
-    final double ARM_STOPPING_POINT = 0;
-
     public DropArm(AcquisitionsSensorInterface sensors)
     {
         super(sensors);
@@ -16,6 +13,6 @@ public class DropArm extends AcquisitionsCommand
 
     public AcquisitionsOutput execute() 
     {
-        return new AcquisitionsOutput(-ARM_SPEED, true);
+        return new AcquisitionsOutput(-0.8, true);
     }
 }

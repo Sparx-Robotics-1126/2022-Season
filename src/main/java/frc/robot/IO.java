@@ -16,7 +16,7 @@ public final class IO
 	public static final int DRIVES_LEFT_MOTOR_1				= 27;
 	public static final int DRIVES_LEFT_MOTOR_2				= 25;
 
-	public static final int ACQUISITIONS_ARM_MOTOR			= 2;
+	public static final int ACQUISITIONS_ARM_MOTOR			= 3;
 	public static final int ACQUISITIONS_INTAKE_MOTOR		= 11;
 
 <<<<<<< HEAD

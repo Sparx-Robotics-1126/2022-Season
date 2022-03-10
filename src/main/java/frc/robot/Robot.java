@@ -69,10 +69,7 @@ public class Robot extends RobotBase
         drivesSensors = new DrivesSensors();
         acquisitionsSensors = new AcquisitionsSensors();
         shooterSensors = new ShooterSensors();
-<<<<<<< HEAD
-=======
         
->>>>>>> 3c095098ebce734470bf78e411cd1acf1624bdfa
         gyro = new AHRS(IO.USB_ONBOARD);
         limelight = new Limelight();
         

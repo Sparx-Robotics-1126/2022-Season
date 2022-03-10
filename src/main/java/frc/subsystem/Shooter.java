@@ -1,13 +1,8 @@
 package frc.subsystem;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.ctre.phoenix.motorcontrol.ControlMode;
 
-import java.util.HashMap;
-
-import frc.drives.commands.TurnLeft;
 import frc.robot.IO;
 import frc.shooter.ShooterCommand;
 import frc.shooter.ShooterOutput;
@@ -19,17 +14,29 @@ public class Shooter extends Subsystem
 {
     private CANSparkMax shooterMotor;
 
-    //private HashMap<Double, Double> map;
-
     /*
      * Class containing all sensor data for Shooter.
      */
     private ShooterSensorInterface shooterSensors;
 
+    private ShooterData[] trendline;
+
     /**
      * The current ShooterCommand being ran.
      */
     private ShooterCommand shooterCommand;
+
+    private class ShooterData
+    {
+        public double distance;
+        public double speed;
+
+        public ShooterData(double distance, double speed)
+        {
+            this.distance = distance;
+            this.speed = speed;
+        }
+    }
 
     /**
      * Main initializer for the acquisitions subsystem. Called in Robot.java.
@@ -38,12 +45,14 @@ public class Shooter extends Subsystem
     {
         shooterMotor = new CANSparkMax(IO.SHOOTER_MOTOR, MotorType.kBrushless);
         shooterSensors.addEncoders(shooterMotor.getEncoder());
-        //map = new HashMap<>();
 
-        //Input values into map
+        trendline = new ShooterData[5];
 
-        //map.put(input, return value);
+        //Input values into trendline
+        
+        //trendline[0] = new ShooterData(distance, speed);
     }
+
 
     @Override
     void execute() 
@@ -59,14 +68,28 @@ public class Shooter extends Subsystem
         }
     }
 
-    // public double getHashMapValue(double inputValue)
-    // {
-    //     double closestValueMin = -1;
+    public double getTrendlineValue(double distance)
+    {
+        int closestIndexMax = -1;
+        int closestIndexMin;
 
-    //     for(int i = 0; i < map.size(); i ++){
-    //         double mapX = map.get((double)i);
-    //     }
-    // }
+        ShooterData pointMin, pointMax;
+
+        for(int i = 0; i < trendline.length; i ++)
+        {
+            closestIndexMax = i;
+            if(trendline[i].distance >= distance)
+            {
+                break;
+            }
+        }
+        closestIndexMin = closestIndexMax - 1;
+
+        pointMin = trendline[closestIndexMin];
+        pointMax = trendline[closestIndexMax];
+
+        return pointMin.speed + (distance - pointMin.distance) * ((pointMax.speed - pointMin.speed)/(pointMax.distance - pointMin.distance));
+    }
 
     /**
      * Sets the shooter motor speed to 0

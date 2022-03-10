@@ -14,6 +14,11 @@ import frc.acquisitions.AcquisitionsOutput;
 import frc.acquisitions.AcquisitionsSensorInterface;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import javax.swing.text.StyleContext.SmallAttributeSet;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 /**
@@ -43,6 +48,8 @@ public class Acquisitions extends Subsystem
         armMotor = new TalonSRX(IO.ACQUISITIONS_ARM_MOTOR);
         intakeMotor = new TalonSRX(IO.ACQUISITIONS_INTAKE_MOTOR);
         
+        //intakeMotor.overrideLimitSwitchesEnable(false);
+
         this.acquisitionsSensors = acquisitionsSensors;
     }
 
@@ -61,7 +68,7 @@ public class Acquisitions extends Subsystem
         if (intakeCommand != null)
         {
             AcquisitionsOutput intakeOutput = intakeCommand.execute();
-
+            SmartDashboard.putNumber("INTAKE_COMMAND_OUTPUT", intakeOutput.get());
             intakeMotor.set(ControlMode.PercentOutput, intakeOutput.get());
                 
             if (intakeOutput.isDone())
@@ -71,8 +78,8 @@ public class Acquisitions extends Subsystem
         if (armCommand != null)
         {   
             AcquisitionsOutput armOutput = armCommand.execute();
-
-            armMotor.set(ControlMode.PercentOutput, armOutput.get());
+            SmartDashboard.putNumber("ARM_COMMAND_OUTPUT", -armOutput.get());
+            armMotor.set(ControlMode.PercentOutput, -armOutput.get());
 
             if (armOutput.isDone())
                 armCommand = null;

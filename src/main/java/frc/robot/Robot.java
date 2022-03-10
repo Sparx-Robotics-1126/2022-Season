@@ -66,6 +66,7 @@ public class Robot extends RobotBase
         //Initialize sensors.
         drivesSensors = new DrivesSensors();
         acquisitionsSensors = new AcquisitionsSensors();
+        
         gyro = new AHRS(IO.USB_ONBOARD);
         limelight = new Limelight();
         

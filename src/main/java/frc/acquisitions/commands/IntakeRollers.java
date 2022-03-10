@@ -13,6 +13,6 @@ public class IntakeRollers extends AcquisitionsCommand
 
     public AcquisitionsOutput execute() 
     {   
-        return new AcquisitionsOutput(0.25, false);
+        return new AcquisitionsOutput(0.5, false);
     }
 }

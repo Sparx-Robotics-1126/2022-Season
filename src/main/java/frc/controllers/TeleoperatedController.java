@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class TeleoperatedController extends Controller 
 {
 	private Joystick joystick;
+  private Joystick operatorJoystick;
 
   private Axis driverLeftAxisY;
   private Axis driverLeftAxisX;
@@ -16,6 +17,8 @@ public class TeleoperatedController extends Controller
 
   private Button acquisitionsArmButton;
   private Button acquisitionsIntakeButton;
+
+  private Button shooterToggleButton;
 
   static 
   {
@@ -29,6 +32,8 @@ public class TeleoperatedController extends Controller
   public TeleoperatedController()
   {
     joystick = new Joystick(0);
+    operatorJoystick = new Joystick(1);
+
 
     //For drives.
     driverLeftAxisY = new Axis(joystick, ControllerMappings.XBOX_LEFT_Y, true);
@@ -40,6 +45,9 @@ public class TeleoperatedController extends Controller
     //For Acquisitions
     acquisitionsArmButton = new Button(joystick, ControllerMappings.XBOX_B);
     acquisitionsIntakeButton = new Button(joystick, ControllerMappings.XBOX_A);
+
+    //For shooter
+    shooterToggleButton = new Button(operatorJoystick, ControllerMappings.XBOX_A);
 
     //Add additional controls here.
   }
@@ -68,11 +76,18 @@ public class TeleoperatedController extends Controller
       else
         Robot.getAcquisitions().dropArm();
 
-    if (acquisitionsIntakeButton.get())
-      if (acquisitionsIntakeButton.previouslyPressed())
-        Robot.getAcquisitions().stopRollers();
+        if (acquisitionsIntakeButton.get())
+        if (acquisitionsIntakeButton.previouslyPressed())
+          Robot.getAcquisitions().stopRollers();
+        else
+          Robot.getAcquisitions().intakeRollers();
+
+    //Shooter
+    if (shooterToggleButton.get())
+      if (shooterToggleButton.previouslyPressed())
+        Robot.getShooter().singleSpeed();
       else
-        Robot.getAcquisitions().intakeRollers();
+        Robot.getShooter().stopShooter();
 
     //Trigger Sensitivity Control
     if (driverRightTrigger.get() <= -0.8)

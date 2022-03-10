@@ -7,6 +7,7 @@ import frc.robot.IO;
 import frc.shooter.ShooterCommand;
 import frc.shooter.ShooterOutput;
 import frc.shooter.ShooterSensorInterface;
+import frc.shooter.commands.SingleSpeed;
 import frc.shooter.commands.StartShooter;
 import frc.shooter.commands.StopShooter;
 
@@ -49,7 +50,7 @@ public class Shooter extends Subsystem
         trendline = new ShooterData[5];
 
         //Input values into trendline
-        
+
         //trendline[0] = new ShooterData(distance, speed);
     }
 
@@ -111,6 +112,11 @@ public class Shooter extends Subsystem
     {
         double targetAngle = shooterSensors.getAngleToTarget();
         
+    }
+
+    public void singleSpeed()
+    {
+        shooterCommand = new SingleSpeed(shooterSensors);
     }
 
     @Override

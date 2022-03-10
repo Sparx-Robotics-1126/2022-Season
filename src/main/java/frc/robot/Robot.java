@@ -209,6 +209,11 @@ public class Robot extends RobotBase
         return acquisitions;
     }
 
+    public static Shooter getShooter()
+    {
+        return shooter;
+    }
+
     /**
      * @return The AHRS interface for the navX sensor currently in use by the robot.
      */

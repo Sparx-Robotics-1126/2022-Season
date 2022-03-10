@@ -15,10 +15,7 @@ public class DropArm extends AcquisitionsCommand
     }
 
     public AcquisitionsOutput execute() 
-    {   
-        if (getSensors().getArmEncoderDistance() <= ARM_STOPPING_POINT)
-            return new AcquisitionsOutput(0, true);
-        
-        return new AcquisitionsOutput(-ARM_SPEED, false);
+    {
+        return new AcquisitionsOutput(-ARM_SPEED, true);
     }
 }

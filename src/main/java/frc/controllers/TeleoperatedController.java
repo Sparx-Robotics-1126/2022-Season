@@ -1,10 +1,7 @@
 package frc.controllers;
 
+import frc.controllers.Button.ButtonType;
 import frc.robot.Robot;
-
-import frc.subsystem.Drives;
-import frc.subsystem.Acquisitions;
-import frc.subsystem.Subsystem.SubsystemState;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -16,9 +13,11 @@ public class TeleoperatedController extends Controller
   private Axis driverLeftAxisY;
   private Axis driverLeftAxisX;
 	private Axis driverRightAxis;
+  private Axis driverRightTrigger;
 
-  private Button acquisitionsArmButton;
-  private Button acquisitionsIntakeButton;
+  private Button acquisitionsArmUp;
+  private Button acquisitionsArmDown;
+  private Button acquisitionsIntake;
 
   static 
   {
@@ -37,10 +36,12 @@ public class TeleoperatedController extends Controller
     driverLeftAxisY = new Axis(joystick, ControllerMappings.XBOX_LEFT_Y, true);
     driverLeftAxisX = new Axis(joystick, ControllerMappings.XBOX_LEFT_X, true);
     driverRightAxis = new Axis(joystick, ControllerMappings.XBOX_RIGHT_Y, true);
-
+    driverRightTrigger = new Axis(joystick, ControllerMappings.XBOX_R2, true);
+   
     //For Acquisitions
-    acquisitionsArmButton = new Button(joystick, ControllerMappings.XBOX_B);
-    acquisitionsIntakeButton = new Button(joystick, ControllerMappings.XBOX_A);
+    acquisitionsArmUp = new Button(joystick, ControllerMappings.XBOX_B, ButtonType.PRESSED);
+    acquisitionsArmDown = new Button(joystick, ControllerMappings.XBOX_X, ButtonType.PRESSED);
+    acquisitionsIntake = new Button(joystick, ControllerMappings.XBOX_Y);
 
     //Add additional controls here.
   }
@@ -63,16 +64,37 @@ public class TeleoperatedController extends Controller
     }
 
     //Acquisitions
-    if (acquisitionsArmButton.get())
-      if (acquisitionsArmButton.previouslyPressed())
-        Robot.getAcquisitions().raiseArm();
-      else
-        Robot.getAcquisitions().dropArm();
+    if (acquisitionsArmUp.get())
+      Robot.getAcquisitions().raiseArm();
 
-    if (acquisitionsIntakeButton.get())
-      if (acquisitionsIntakeButton.previouslyPressed())
-        Robot.getAcquisitions().stopRollers();
-      else
+    if (acquisitionsArmDown.get())
+      Robot.getAcquisitions().dropArm();
+
+    if (!acquisitionsArmDown.get() && !acquisitionsArmUp.get())
+      Robot.getAcquisitions().stopArm();
+
+    if (acquisitionsIntake.get())
+    {
+      int timesPressed = acquisitionsIntake.timesPressed();
+
+      if (timesPressed % 2 == 1)
         Robot.getAcquisitions().intakeRollers();
+      else
+        Robot.getAcquisitions().stopRollers();
+    }
+
+    //Trigger Sensitivity Control
+    if (driverRightTrigger.get() <= -0.8)
+    {
+      driverLeftAxisX.setSensitivity(0.4);
+      driverLeftAxisY.setSensitivity(0.4);
+      driverRightAxis.setSensitivity(0.4);
+    }
+    else
+    {
+      driverLeftAxisX.setSensitivity(1);
+      driverLeftAxisY.setSensitivity(1);
+      driverRightAxis.setSensitivity(1);
+    }
   }
 }

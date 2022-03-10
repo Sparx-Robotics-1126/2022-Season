@@ -16,10 +16,10 @@ public final class IO
 	public static final int DRIVES_LEFT_MOTOR_1				= 27;
 	public static final int DRIVES_LEFT_MOTOR_2				= 25;
 
-	public static final int ACQUISITIONS_ARM_MOTOR			= 28; //PLACEHOLDER
-	public static final int ACQUISITIONS_INTAKE_MOTOR		= 29; //PLACEHOLDER
+	public static final int ACQUISITIONS_ARM_MOTOR			= 2;
+	public static final int ACQUISITIONS_INTAKE_MOTOR		= 11;
 
-	public static final int STORAGE_MOTOR					= 6; //PLACEHOLDER
+	public static final int STORAGE_MOTOR					= 3;
 	
 	//SENSORS
 	public static final I2C.Port I2C_ONBOARD				= I2C.Port.kOnboard;

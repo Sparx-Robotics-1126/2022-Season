@@ -17,6 +17,8 @@ public abstract class AutonomousRoutine
 
     public void execute()
     {
+        AutonomousCommand current = commands[position];
+
         
     }
 

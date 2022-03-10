@@ -2,6 +2,7 @@ package frc.subsystem;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import frc.drives.commands.TurnLeft;
@@ -32,6 +33,7 @@ public class Shooter extends Subsystem
     public Shooter(ShooterSensorInterface shooterSensors) 
     {
         shooterMotor = new CANSparkMax(IO.SHOOTER_MOTOR, MotorType.kBrushless);
+        shooterSensors.addEncoders(shooterMotor.getEncoder());
     }
 
     @Override
@@ -41,7 +43,7 @@ public class Shooter extends Subsystem
         {
             ShooterOutput shooterOutput = shooterCommand.execute();
 
-            shooterMotor.set(ControlMode.PercentOutput, shooterOutput.get());
+            shooterMotor.set(shooterOutput.get());
                 
             if (shooterOutput.isDone())
                 shooterCommand = null;

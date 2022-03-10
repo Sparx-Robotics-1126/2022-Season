@@ -1,6 +1,7 @@
 package frc.subsystem;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANSparkMax;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import frc.drives.commands.TurnLeft;
@@ -8,12 +9,12 @@ import frc.robot.IO;
 import frc.shooter.ShooterCommand;
 import frc.shooter.ShooterOutput;
 import frc.shooter.ShooterSensorInterface;
-import frc.shooter.commands.ShooterSpeed;
+import frc.shooter.commands.StartShooter;
 import frc.shooter.commands.StopShooter;
 
 public class Shooter extends Subsystem
 {
-    private TalonSRX shooterMotor;
+    private CANSparkMax shooterMotor;
 
     /*
      * Class containing all sensor data for Shooter.
@@ -30,7 +31,7 @@ public class Shooter extends Subsystem
      */
     public Shooter(ShooterSensorInterface shooterSensors) 
     {
-        shooterMotor = new TalonSRX(IO.SHOOTER_MOTOR);
+        shooterMotor = new CANSparkMax(IO.SHOOTER_MOTOR, MotorType.kBrushless);
     }
 
     @Override
@@ -58,9 +59,9 @@ public class Shooter extends Subsystem
     /**
      * Adjusts the shooter motor speed to shoot correctly
      */
-    public void shooterSpeed()
+    public void startShooter()
     {
-        shooterCommand = new ShooterSpeed(shooterSensors);
+        shooterCommand = new StartShooter(shooterSensors);
     }
 
     public void findTarget()

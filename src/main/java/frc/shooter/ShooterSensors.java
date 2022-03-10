@@ -1,5 +1,7 @@
 package frc.shooter;
 
+import com.revrobotics.CANSparkMax;
+
 import edu.wpi.first.wpilibj.Encoder;
 
 import frc.robot.IO;
@@ -7,7 +9,7 @@ import frc.sensors.Limelight;
 
 public class ShooterSensors implements ShooterSensorInterface
 {
-    private Encoder shooterEncoder;
+    private RelativeEncoder shooterEncoder;
 	private Limelight limeSensor;
 
     /**
@@ -49,5 +51,15 @@ public class ShooterSensors implements ShooterSensorInterface
 	public double getShooterSpeed() 
 	{
 		return shooterEncoder.getRate();
+	}
+
+	public Encoder getEncoder()
+	{
+		return shooterEncoder;
+	}
+
+	public double getMotorDistance()
+	{
+		return shooterEncoder.getDistance();
 	}
 }

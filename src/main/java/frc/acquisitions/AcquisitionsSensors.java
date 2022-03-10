@@ -1,11 +1,11 @@
 package frc.acquisitions;
 
-import frc.robot.IO;
+//import frc.robot.IO;
 
 //import frc.sensors.ColorSensor;
 
 //import edu.wpi.first.wpilibj.util.Color;
-import edu.wpi.first.wpilibj.Encoder;
+//import edu.wpi.first.wpilibj.Encoder;
 
 //import edu.wpi.first.wpilibj.DriverStation;
 
@@ -15,7 +15,7 @@ public class AcquisitionsSensors implements AcquisitionsSensorInterface
 
     //private ColorSensor colorSensor;
 
-	private Encoder armEncoder;
+	//private Encoder armEncoder;
 
     /**
 	 * Creates a new object for interfacing with the various sensors of the Aquisitions subsystem (e.g. encoders).

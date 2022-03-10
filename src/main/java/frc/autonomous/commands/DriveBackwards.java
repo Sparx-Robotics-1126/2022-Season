@@ -16,7 +16,7 @@ public class DriveBackwards extends AutonomousCommand
     @Override
     public void execute() 
     {
-        Robot.getDrives().moveBackward(distance);
+        Robot.getDrives().moveBackward(0.5, distance);
     }
 
     @Override

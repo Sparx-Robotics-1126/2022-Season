@@ -7,14 +7,17 @@ import frc.controllers.TestController;
 
 import frc.subsystem.Acquisitions;
 import frc.subsystem.Drives;
-
+import frc.subsystem.Shooter;
+import frc.subsystem.Storage;
 import frc.drives.DrivesSensorInterface;
 import frc.drives.DrivesSensors;
-
+import frc.sensors.Limelight;
+import frc.shooter.ShooterSensorInterface;
+import frc.shooter.ShooterSensors;
+import frc.storage.StorageSensorInterface;
+import frc.storage.StorageSensors;
 import frc.acquisitions.AcquisitionsSensorInterface;
 import frc.acquisitions.AcquisitionsSensors;
-
-import frc.sensors.Limelight;
 
 import edu.wpi.first.hal.HAL;
 
@@ -45,6 +48,8 @@ public class Robot extends RobotBase
     //The robot subsystems.
     private static Drives drives;
     private static Acquisitions acquisitions;
+    private static Shooter shooter;
+    private static Storage storage;
 
     //The acting Controller of the robot.
     private Controller currentController;
@@ -52,6 +57,8 @@ public class Robot extends RobotBase
     //Sensors.
     private DrivesSensorInterface drivesSensors;
     private AcquisitionsSensorInterface acquisitionsSensors;
+    private ShooterSensorInterface shooterSensors;
+    private StorageSensorInterface storageSensors;
 
     private static AHRS gyro;
     private static Limelight limelight;
@@ -66,6 +73,8 @@ public class Robot extends RobotBase
         //Initialize sensors.
         drivesSensors = new DrivesSensors();
         acquisitionsSensors = new AcquisitionsSensors();
+        shooterSensors = new ShooterSensors();
+        storageSensors = new StorageSensors();
         
         gyro = new AHRS(IO.USB_ONBOARD);
         limelight = new Limelight();
@@ -73,6 +82,8 @@ public class Robot extends RobotBase
         //Initialize Subsystems.
         drives = new Drives(drivesSensors);
         acquisitions = new Acquisitions(acquisitionsSensors);
+        shooter = new Shooter(shooterSensors);
+        storage = new Storage(storageSensors);
         
         //Initialize Controllers.
         teleopControls = new TeleoperatedController();
@@ -82,6 +93,8 @@ public class Robot extends RobotBase
         //Start subsystem threads.
         new Thread(drives).start();
         new Thread(acquisitions).start();
+        new Thread(shooter).start();
+        new Thread(storage).start();
     }
 
     private void disabledStarted()
@@ -200,6 +213,15 @@ public class Robot extends RobotBase
     public static Acquisitions getAcquisitions()
     {
         return acquisitions;
+    }
+
+    public static Shooter getShooter()
+    {
+        return shooter;
+    }
+    
+    public static Storage getStorage() {
+        return storage;
     }
 
     /**

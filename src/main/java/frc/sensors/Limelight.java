@@ -10,6 +10,8 @@ public class Limelight
 	final double ROBOT_HEIGHT = 37.5;
 	final double TARGET_HEIGHT = 90; // 83.25  89.5
 
+	final int VIEWPORT_X_SIZE = 320;
+
 	NetworkTableEntry tx;
 	NetworkTableEntry tv;
 	NetworkTableEntry ty;
@@ -40,6 +42,11 @@ public class Limelight
 		double x = tx.getDouble(0);
 		return x;
 	}
+
+	public double getHorizontalFromTarget()
+	{
+		return tx.getDouble(0) - (VIEWPORT_X_SIZE / 2);
+	} 
 	
 	public boolean getLock() 
 	{

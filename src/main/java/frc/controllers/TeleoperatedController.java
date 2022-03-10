@@ -1,5 +1,6 @@
 package frc.controllers;
 
+import frc.controllers.Button.ButtonType;
 import frc.robot.Robot;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -15,8 +16,9 @@ public class TeleoperatedController extends Controller
 	private Axis driverRightAxis;
   private Axis driverRightTrigger;
 
-  private Button acquisitionsArmButton;
-  private Button acquisitionsIntakeButton;
+  private Button acquisitionsArmUp;
+  private Button acquisitionsArmDown;
+  private Button acquisitionsIntake;
 
   private Button shooterToggleButton;
 
@@ -41,10 +43,12 @@ public class TeleoperatedController extends Controller
     driverRightAxis = new Axis(joystick, ControllerMappings.XBOX_RIGHT_Y, true);
     driverRightTrigger = new Axis(joystick, ControllerMappings.XBOX_R2, true);
    
-
     //For Acquisitions
-    acquisitionsArmButton = new Button(joystick, ControllerMappings.XBOX_B);
-    acquisitionsIntakeButton = new Button(joystick, ControllerMappings.XBOX_A);
+    acquisitionsArmUp = new Button(joystick, ControllerMappings.XBOX_B, ButtonType.PRESSED);
+    acquisitionsArmDown = new Button(joystick, ControllerMappings.XBOX_X, ButtonType.PRESSED);
+    acquisitionsIntake = new Button(joystick, ControllerMappings.XBOX_Y);
+
+    
 
     //For shooter
     shooterToggleButton = new Button(operatorJoystick, ControllerMappings.XBOX_A);
@@ -69,25 +73,35 @@ public class TeleoperatedController extends Controller
       Robot.getDrives().setJoysticks(leftAxisY - leftAxisX, leftAxisY + leftAxisX);
     }
 
-    //Acquisitions
-    if (acquisitionsArmButton.get())
-      if (acquisitionsArmButton.previouslyPressed())
-        Robot.getAcquisitions().raiseArm();
-      else
-        Robot.getAcquisitions().dropArm();
-
-        if (acquisitionsIntakeButton.get())
-        if (acquisitionsIntakeButton.previouslyPressed())
-          Robot.getAcquisitions().stopRollers();
-        else
-          Robot.getAcquisitions().intakeRollers();
-
     //Shooter
     if (shooterToggleButton.get())
-      if (shooterToggleButton.previouslyPressed())
+    {
+      int timesPressed = shooterToggleButton.timesPressed();
+
+      if (timesPressed % 2 == 1)
         Robot.getShooter().singleSpeed();
       else
         Robot.getShooter().stopShooter();
+    }
+
+    //Acquisitions
+    if (acquisitionsArmDown.get())
+      Robot.getAcquisitions().dropArm();
+
+    if (!acquisitionsArmDown.get() && !acquisitionsArmUp.get())
+      Robot.getAcquisitions().stopArm();
+
+    if (acquisitionsIntake.get())
+    {
+      int timesPressed = acquisitionsIntake.timesPressed();
+
+      if (timesPressed % 2 == 1)
+        Robot.getAcquisitions().intakeRollers();
+      else
+        Robot.getAcquisitions().stopRollers();
+    }
+
+   
 
     //Trigger Sensitivity Control
     if (driverRightTrigger.get() <= -0.8)

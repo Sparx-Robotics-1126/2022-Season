@@ -16,10 +16,14 @@ public final class IO
 	public static final int DRIVES_LEFT_MOTOR_1				= 27;
 	public static final int DRIVES_LEFT_MOTOR_2				= 25;
 
-	public static final int ACQUISITIONS_ARM_MOTOR			= 28; //PLACEHOLDER
-	public static final int ACQUISITIONS_INTAKE_MOTOR		= 29; //PLACEHOLDER
+	public static final int ACQUISITIONS_ARM_MOTOR			= 2;
+	public static final int ACQUISITIONS_INTAKE_MOTOR		= 11;
 
+<<<<<<< HEAD
 	public static final int SHOOTER_MOTOR					= 1;
+=======
+	public static final int STORAGE_MOTOR					= 3;
+>>>>>>> origin/feature/storage-subsystem
 	
 	//SENSORS
 	public static final I2C.Port I2C_ONBOARD				= I2C.Port.kOnboard;
@@ -28,6 +32,8 @@ public final class IO
 	public static final int ACQUISITIONS_ARM_ENCODER_A		= 31; //PLACEHOLDER
 	public static final int ACQUISITIONS_ARM_ENCODER_B		= 1; //PLACEHOLDER
 
-	public static final int SHOOTER_ENCODER_A				= 2; //PLACEHOLDER
-	public static final int SHOOTER_ENCODER_B				= 3; //PLACEHOLDER
+	public static final int STORAGE_ENCODER_A				= 4; //PLACEHOLDER
+	public static final int STORAGE_ENCODER_B				= 5; //PLACEHOLDER
+
+	public static final int STORAGE_IR						= 7; //PLACEHOLDER
 }

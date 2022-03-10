@@ -8,6 +8,7 @@ import frc.controllers.TestController;
 import frc.subsystem.Acquisitions;
 import frc.subsystem.Drives;
 import frc.subsystem.Shooter;
+import frc.subsystem.Storage;
 import frc.drives.DrivesSensorInterface;
 import frc.drives.DrivesSensors;
 import frc.sensors.Limelight;
@@ -46,6 +47,7 @@ public class Robot extends RobotBase
     private static Drives drives;
     private static Acquisitions acquisitions;
     private static Shooter shooter;
+    private static Storage storage;
 
     //The acting Controller of the robot.
     private Controller currentController;
@@ -77,6 +79,7 @@ public class Robot extends RobotBase
         drives = new Drives(drivesSensors);
         acquisitions = new Acquisitions(acquisitionsSensors);
         shooter = new Shooter(shooterSensors);
+        storage = new Storage();
         
         //Initialize Controllers.
         teleopControls = new TeleoperatedController();
@@ -212,6 +215,10 @@ public class Robot extends RobotBase
     public static Shooter getShooter()
     {
         return shooter;
+    }
+    
+    public static Storage getStorage() {
+        return storage;
     }
 
     /**

@@ -16,9 +16,9 @@ public class Button
 	private ButtonType buttonType;
 
 	private int button;
+	private int timesPressed;
 
 	private boolean buttonAlreadyPressed;
-	private boolean buttonPreviouslyPressed;
 	
 	public Button(Joystick joystick, int button) 
 	{
@@ -26,7 +26,7 @@ public class Button
 		this.button = button;
 		this.buttonType = ButtonType.RISING_EDGE;
 		buttonAlreadyPressed = false;
-		buttonPreviouslyPressed = true;
+		timesPressed = 0;
 	}
 	
 	public Button(Joystick joystick, int button, ButtonType type) 
@@ -35,7 +35,7 @@ public class Button
 		this.button = button;
 		this.buttonType = type;
 		buttonAlreadyPressed = false;
-		buttonPreviouslyPressed = true;
+		timesPressed = 0;
 	}
 	
 	/**
@@ -49,7 +49,7 @@ public class Button
 		buttonAlreadyPressed = isCurrentlyPressed;
 
 		if (trigger)
-			buttonPreviouslyPressed = !buttonPreviouslyPressed;
+			timesPressed++;
 
 		return trigger;
 	}
@@ -71,10 +71,10 @@ public class Button
 	}
 
 	/**
-	 * @return True if this button has been pressed an even number of times.
+	 * @return The amount of times that this button has been pressed (after a call to get).
 	 */
-	public boolean previouslyPressed()
+	public int timesPressed()
 	{
-		return buttonPreviouslyPressed;
+		return timesPressed;
 	}
 }

@@ -6,6 +6,7 @@ import frc.acquisitions.commands.IntakeRollers;
 import frc.acquisitions.commands.StopRollers;
 import frc.acquisitions.commands.RaiseArm;
 import frc.acquisitions.commands.DropArm;
+import frc.acquisitions.commands.StopArm;
 import frc.acquisitions.commands.EjectRollers;
 
 import frc.acquisitions.AcquisitionsCommand;
@@ -76,6 +77,11 @@ public class Acquisitions extends Subsystem
             if (armOutput.isDone())
                 armCommand = null;
         }
+    }
+
+    public void stopArm()
+    {
+        armCommand = new StopArm(acquisitionsSensors);
     }
 
     public void dropArm() 

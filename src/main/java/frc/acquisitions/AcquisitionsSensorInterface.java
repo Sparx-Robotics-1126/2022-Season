@@ -6,7 +6,7 @@ package frc.acquisitions;
 public interface AcquisitionsSensorInterface
 {
     //Sensors
-    double getArmEncoderDistance();
+    //double getArmEncoderDistance();
     //boolean ballInRange();
     //boolean isCorrectColor();
 }

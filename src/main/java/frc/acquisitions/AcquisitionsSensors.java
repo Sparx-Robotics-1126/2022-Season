@@ -24,9 +24,6 @@ public class AcquisitionsSensors implements AcquisitionsSensorInterface
 	{
         //colorSensor = new ColorSensor(100);
 		//colorSensor.start();
-
-		armEncoder = new Encoder(IO.ACQUISITIONS_ARM_ENCODER_A, IO.ACQUISITIONS_ARM_ENCODER_B);
-		armEncoder.setDistancePerPulse(0.314789);
 	}
 
 	/**
@@ -53,9 +50,9 @@ public class AcquisitionsSensors implements AcquisitionsSensorInterface
 	/**
 	 * @return The distance the arm motor has rotated.
 	 */
-	@Override
+	/*@Override
 	public double getArmEncoderDistance() 
 	{
 		return armEncoder.getDistance();
-	}
+	}*/
 }

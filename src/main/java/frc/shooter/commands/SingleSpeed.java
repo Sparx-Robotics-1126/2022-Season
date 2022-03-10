@@ -4,9 +4,14 @@ import frc.shooter.ShooterCommand;
 import frc.shooter.ShooterOutput;
 import frc.shooter.ShooterSensorInterface;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class SingleSpeed extends ShooterCommand
 {
-    private final double TURN_SPEED = 0.5;
+    static
+    {
+        SmartDashboard.putNumber("SHOOTER_SPEED", 0.5);
+    }
 
     public SingleSpeed(ShooterSensorInterface sensors)
     {
@@ -16,6 +21,6 @@ public class SingleSpeed extends ShooterCommand
     @Override
     public ShooterOutput execute() 
     {
-        return new ShooterOutput(TURN_SPEED, true);
+        return new ShooterOutput(SmartDashboard.getNumber("SHOOTER_SPEED", 0.5), false);
     }
 }

@@ -17,7 +17,8 @@ public class ShooterSensors implements ShooterSensorInterface
 	}
 
 	@Override
-	public void addEncoders(RelativeEncoder shooterSpark) {
+	public void addEncoders(RelativeEncoder shooterSpark) 
+	{
 		this.shooterEncoder = shooterSpark;
 	}
 

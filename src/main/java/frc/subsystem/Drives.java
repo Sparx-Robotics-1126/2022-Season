@@ -25,7 +25,7 @@ public class Drives extends Subsystem
      * The maximum amount of current in amps that should be permitted during motor operation.
      */
     private static final int MAX_CURRENT = 30;
-
+ 
     /**
      * The ideal voltage that the motors should attempt to match.
      */
@@ -102,8 +102,10 @@ public class Drives extends Subsystem
         if (drivesCommand != null) 
         {
             DrivesOutput output = drivesCommand.execute();
+            
             leftMotorMaster.set(output.getLeftMotor());
             rightMotorMaster.set(-output.getRightMotor());
+
             if (output.isDone()) 
             {
                 leftMotorMaster.set(0);

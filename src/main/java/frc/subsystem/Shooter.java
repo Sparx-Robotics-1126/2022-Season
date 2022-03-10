@@ -62,7 +62,7 @@ public class Shooter extends Subsystem
         {
             ShooterOutput shooterOutput = shooterCommand.execute();
 
-            shooterMotor.set(shooterOutput.get());
+            shooterMotor.set(-shooterOutput.get());
                 
             if (shooterOutput.isDone())
                 shooterCommand = null;
@@ -76,10 +76,10 @@ public class Shooter extends Subsystem
 
         ShooterData pointMin, pointMax;
 
-        for(int i = 0; i < trendline.length; i ++)
+        for (int i = 0; i < trendline.length; i ++)
         {
             closestIndexMax = i;
-            if(trendline[i].distance >= distance)
+            if (trendline[i].distance >= distance)
             {
                 break;
             }
@@ -89,7 +89,7 @@ public class Shooter extends Subsystem
         pointMin = trendline[closestIndexMin];
         pointMax = trendline[closestIndexMax];
 
-        return pointMin.speed + (distance - pointMin.distance) * ((pointMax.speed - pointMin.speed)/(pointMax.distance - pointMin.distance));
+        return pointMin.speed + (distance - pointMin.distance) * ((pointMax.speed - pointMin.speed) / (pointMax.distance - pointMin.distance));
     }
 
     /**

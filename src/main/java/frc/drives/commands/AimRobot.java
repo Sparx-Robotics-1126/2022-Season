@@ -8,7 +8,7 @@ import frc.sensors.Limelight;
 
 public class AimRobot extends DrivesCommand
 {
-    private final double ACCEPTED_ERROR = 0.5; //TODO PLACEHOLDER
+    private final double ACCEPTED_ERROR = 0.5; //TODO: PLACEHOLDER
 
     public AimRobot(DrivesSensorInterface sensors)
     {

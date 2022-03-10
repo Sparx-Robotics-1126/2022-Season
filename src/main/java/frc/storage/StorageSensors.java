@@ -15,8 +15,6 @@ public class StorageSensors implements StorageSensorInterface
 	 */
 	public StorageSensors() 
 	{
-		storageEncoder = new Encoder(IO.STORAGE_ENCODER_A, IO.STORAGE_ENCODER_B);
-		storageEncoder.setDistancePerPulse(0.314789);
 		storageIR = new DigitalInput(IO.STORAGE_IR);
 	}
 

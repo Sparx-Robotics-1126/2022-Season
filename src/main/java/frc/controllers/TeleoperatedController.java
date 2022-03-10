@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TeleoperatedController extends Controller 
 {
-	private Joystick joystick;
+	private Joystick driverJoystick;
   private Joystick operatorJoystick;
 
   private Axis driverLeftAxisY;
@@ -34,24 +34,21 @@ public class TeleoperatedController extends Controller
 	 */
   public TeleoperatedController()
   {
-    joystick = new Joystick(0);
+    driverJoystick = new Joystick(0);
     operatorJoystick = new Joystick(1);
 
-
-    //For drives.
-    driverLeftAxisY = new Axis(joystick, ControllerMappings.XBOX_LEFT_Y, true);
-    driverLeftAxisX = new Axis(joystick, ControllerMappings.XBOX_LEFT_X, true);
-    driverRightAxis = new Axis(joystick, ControllerMappings.XBOX_RIGHT_Y, true);
-    driverRightTrigger = new Axis(joystick, ControllerMappings.XBOX_R2, true);
+    //DRIVES
+    driverLeftAxisY = new Axis(driverJoystick, ControllerMappings.XBOX_LEFT_Y, true);
+    driverLeftAxisX = new Axis(driverJoystick, ControllerMappings.XBOX_LEFT_X, true);
+    driverRightAxis = new Axis(driverJoystick, ControllerMappings.XBOX_RIGHT_Y, true);
+    driverRightTrigger = new Axis(driverJoystick, ControllerMappings.XBOX_R2, true);
    
-    //For Acquisitions
-    acquisitionsArmUp = new Button(joystick, ControllerMappings.XBOX_B, ButtonType.PRESSED);
-    acquisitionsArmDown = new Button(joystick, ControllerMappings.XBOX_X, ButtonType.PRESSED);
-    acquisitionsIntake = new Button(joystick, ControllerMappings.XBOX_Y);
+    //ACQUISITIONS
+    acquisitionsArmUp = new Button(operatorJoystick, ControllerMappings.XBOX_B, ButtonType.PRESSED);
+    acquisitionsArmDown = new Button(operatorJoystick, ControllerMappings.XBOX_X, ButtonType.PRESSED);
+    acquisitionsIntake = new Button(operatorJoystick, ControllerMappings.XBOX_Y);
 
-    
-
-    //For shooter
+    //SHOOTER
     shooterToggleButton = new Button(operatorJoystick, ControllerMappings.XBOX_A);
 
     //Add additional controls here.
@@ -79,13 +76,17 @@ public class TeleoperatedController extends Controller
     {
       int timesPressed = shooterToggleButton.timesPressed();
 
-      if (timesPressed % 2 == 1)
+      if (timesPressed % 2 == 1) {
         Robot.getShooter().singleSpeed();
+      }
       else
         Robot.getShooter().stopShooter();
     }
 
     //Acquisitions
+    if (acquisitionsArmUp.get())
+      Robot.getAcquisitions().raiseArm();
+
     if (acquisitionsArmDown.get())
       Robot.getAcquisitions().dropArm();
 
@@ -101,8 +102,6 @@ public class TeleoperatedController extends Controller
       else
         Robot.getAcquisitions().stopRollers();
     }
-
-   
 
     //Trigger Sensitivity Control
     if (driverRightTrigger.get() <= -0.8)

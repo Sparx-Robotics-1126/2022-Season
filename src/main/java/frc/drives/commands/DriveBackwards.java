@@ -9,12 +9,10 @@ import frc.drives.DrivesSensorInterface;
  */
 public class DriveBackwards extends DrivesCommand 
 {
-	private final double DISTANCE_kP;
-	private final double GYRO_kP;
-	private final double DISTANCE_DEADBAND;
+	private static final double DISTANCE_kP = 0.03;
+	private static final double DISTANCE_DEADBAND = 1; //2 inches.
 
 	private final double TARGET_DISTANCE;
-	private final double TARGET_ANGLE;
 	
 	private final double REQUESTED_SPEED;
 
@@ -27,21 +25,15 @@ public class DriveBackwards extends DrivesCommand
 	public DriveBackwards(DrivesSensorInterface sensors, double speed, double distance) 
 	{
 		super(sensors);
-		
-		DISTANCE_kP = 0.03;
-		GYRO_kP = 0.06;
-		DISTANCE_DEADBAND = 1; //2 inches.
 
 		TARGET_DISTANCE = sensors.getAverageEncoderDistance() - distance;
-		TARGET_ANGLE = sensors.getGyroAngle();
-
 		REQUESTED_SPEED = speed;
 	}
 
 	public DrivesOutput execute() 
 	{
 		double distanceError = TARGET_DISTANCE - getSensors().getAverageEncoderDistance();
-		double angleError = TARGET_ANGLE - getSensors().getGyroAngle();
+		//double angleError = TARGET_ANGLE - getSensors().getGyroAngle();
 
 		double leftSpeed, rightSpeed;
 
@@ -53,12 +45,12 @@ public class DriveBackwards extends DrivesCommand
 			rightSpeed = -1;
 		}
 
-		double gyroOffset = angleError * GYRO_kP;
+		/*double gyroOffset = angleError * GYRO_kP;
 
 		if (gyroOffset < 0)
 			leftSpeed -= gyroOffset;
 		else
-			rightSpeed += gyroOffset;
+			rightSpeed += gyroOffset;*/
 
 		if (getSensors().getAverageEncoderDistance() < TARGET_DISTANCE + DISTANCE_DEADBAND)
 			return new DrivesOutput(0, 0, true);

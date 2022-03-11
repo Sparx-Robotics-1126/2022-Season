@@ -17,7 +17,7 @@ public class AimRobot extends DrivesCommand
 
     @Override
     public DrivesOutput execute(){
-        double offset = Robot.getGyro().getAngle() - Robot.getLimelight().getHorizontalFromTarget();
+        double offset = Robot.getGyro().getAngle() - Robot.getLimelight().getHorizontalPixelsFromTarget();
         
         if (offset > ACCEPTED_ERROR)
             Robot.getDrives().turnRight(offset);

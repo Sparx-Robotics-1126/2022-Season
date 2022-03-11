@@ -10,8 +10,6 @@ import frc.storage.commands.*;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 public class Storage extends Subsystem
 {
     private StorageCommand storageCommand;
@@ -46,18 +44,10 @@ public class Storage extends Subsystem
 
     @Override
     void execute() 
-    {
-        SmartDashboard.putBoolean("STORAGE_IR_SENSOR", sensors.getStorageIRSensor());
-
-        if (storageCommand == null)
-            checkForBalls();
-
-        SmartDashboard.putString("STORAGE_COMMAND", storageCommand.getClass().getName());
-
+    {   
         if (storageCommand != null) 
         {
 			StorageOutput output = storageCommand.execute();
-            SmartDashboard.putNumber("STORAGE_OUTPUT", output.get());
             storageMotor.set(output.get());
 
 			if (output.isDone()) 
@@ -66,12 +56,24 @@ public class Storage extends Subsystem
 				storageCommand = null;
 			}
 		}
+        else
+            storageMotor.set(new CheckForBalls(sensors).execute().get());
     }
 
     @Override
     public boolean isDone() 
     {
         return storageCommand == null;
+    }
+
+    public void staticSpeed()
+    {
+        storageCommand = new StaticSpeed(sensors);
+    }
+
+    public void stopStorage()
+    {
+        storageCommand = new StopStorage(sensors);
     }
 
     public void checkForBalls() 

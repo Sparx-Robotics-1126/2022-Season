@@ -35,7 +35,7 @@ public class ShooterSensors implements ShooterSensorInterface
 	 */
 	public double getAngleToTarget() 
 	{
-		return Robot.getLimelight().getAngleFromTarget();
+		return Robot.getLimelight().getHorizontalPixelsFromTarget();
 	}
 
 	@Override

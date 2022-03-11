@@ -6,14 +6,14 @@ import frc.shooter.ShooterSensorInterface;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class SingleSpeed extends ShooterCommand
+public class StaticSpeed extends ShooterCommand
 {
     static
     {
-        SmartDashboard.putNumber("SHOOTER_SPEED", 0.5);
+        SmartDashboard.putNumber("SHOOTER_SPEED", 0.15);
     }
 
-    public SingleSpeed(ShooterSensorInterface sensors)
+    public StaticSpeed(ShooterSensorInterface sensors)
     {
         super(sensors);
     }
@@ -21,6 +21,6 @@ public class SingleSpeed extends ShooterCommand
     @Override
     public ShooterOutput execute() 
     {
-        return new ShooterOutput(SmartDashboard.getNumber("SHOOTER_SPEED", 0.5), false);
+        return new ShooterOutput(SmartDashboard.getNumber("SHOOTER_SPEED", 0.15), false);
     }
 }

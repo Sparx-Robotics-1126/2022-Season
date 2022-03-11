@@ -23,6 +23,8 @@ public class TeleoperatedController extends Controller
 
   private Button shooterToggleButton;
 
+  private Button storageButton;
+
   static 
   {
     SmartDashboard.putBoolean("USE_BOTH_JOYSTICKS", true);
@@ -44,20 +46,22 @@ public class TeleoperatedController extends Controller
     driverRightTrigger = new Axis(driverJoystick, ControllerMappings.XBOX_R2, true);
    
     //ACQUISITIONS
-    acquisitionsArmUp = new Button(operatorJoystick, ControllerMappings.XBOX_B, ButtonType.PRESSED);
-    acquisitionsArmDown = new Button(operatorJoystick, ControllerMappings.XBOX_X, ButtonType.PRESSED);
-    acquisitionsIntake = new Button(operatorJoystick, ControllerMappings.XBOX_Y);
+    acquisitionsArmUp = new Button(operatorJoystick, ControllerMappings.XBOX_Y, ButtonType.PRESSED);
+    acquisitionsArmDown = new Button(operatorJoystick, ControllerMappings.XBOX_A, ButtonType.PRESSED);
+    acquisitionsIntake = new Button(operatorJoystick, ControllerMappings.XBOX_B);
 
     //SHOOTER
     shooterToggleButton = new Button(driverJoystick, ControllerMappings.XBOX_A);
 
+    //STORAGE
+    storageButton = new Button(driverJoystick, ControllerMappings.XBOX_X);
     //Add additional controls here.
   }
 
   @Override
   public void execute() 
   {
-    //Drives
+    //DRIVES
     if (SmartDashboard.getBoolean("USE_BOTH_JOYSTICKS", true))
         Robot.getDrives().setJoysticks(driverLeftAxisY.get(), driverRightAxis.get());
     else
@@ -71,7 +75,7 @@ public class TeleoperatedController extends Controller
       Robot.getDrives().setJoysticks(leftAxisY - leftAxisX, leftAxisY + leftAxisX);
     }
 
-    //Shooter
+    //SHOOTER
     if (shooterToggleButton.get())
     {
       int timesPressed = shooterToggleButton.timesPressed();
@@ -83,7 +87,7 @@ public class TeleoperatedController extends Controller
         Robot.getShooter().stopShooter();
     }
 
-    //Acquisitions
+    //ACQUISITIONS
     if (acquisitionsArmUp.get())
       Robot.getAcquisitions().raiseArm();
 
@@ -101,6 +105,19 @@ public class TeleoperatedController extends Controller
         Robot.getAcquisitions().intakeRollers();
       else
         Robot.getAcquisitions().stopRollers();
+    }
+
+    //STORAGE
+    if (storageButton.get())
+    {
+      int timesPressed = storageButton.timesPressed();
+      System.out.println("storage button has been pressed " + timesPressed);
+      
+      if (timesPressed % 2 == 1) {
+        Robot.getStorage().staticSpeed();
+        System.out.println("storage button start static speed");
+      } else
+        Robot.getStorage().stopStorage();
     }
 
     //Trigger Sensitivity Control

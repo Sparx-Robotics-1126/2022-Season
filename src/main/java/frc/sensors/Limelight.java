@@ -4,6 +4,8 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class Limelight 
 {
 	final double CAMERA_ANGLE = 13.35;
@@ -28,6 +30,8 @@ public class Limelight
 		ty = table.getEntry("ty");
 
 		ledMode = table.getEntry("ledMode");
+
+		SmartDashboard.putNumber("PIXELS_CONSTANT", 0.223);
 	}
 	
 	public double getDistanceFromTarget()
@@ -41,17 +45,16 @@ public class Limelight
 	{
 		return ty.getDouble(0);
 	}
-	
-	public double getAngleFromTarget() 
-	{
-		double x = tx.getDouble(0);
-		return x;
-	}
 
-	public double getHorizontalFromTarget()
+	public double getHorizontalPixelsFromTarget()
 	{
 		return tx.getDouble(0) - (VIEWPORT_X_SIZE / 2);
-	} 
+	}
+
+	public double getHorizontalDegreesFromTarget()
+	{
+		return getHorizontalPixelsFromTarget() * SmartDashboard.getNumber("PIXELS_CONSTANT", 0);
+	}
 	
 	public boolean getLock() 
 	{

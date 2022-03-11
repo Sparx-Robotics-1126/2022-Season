@@ -1,5 +1,6 @@
 package frc.shooter.commands;
 
+import frc.robot.Robot;
 import frc.shooter.ShooterCommand;
 import frc.shooter.ShooterOutput;
 import frc.shooter.ShooterSensorInterface;
@@ -9,6 +10,11 @@ public class StartShooter extends ShooterCommand
     private final double ACCEPTABLE_ERROR = 1;
     private final double HEIGHT_OF_PORT = 2.4955; //In meters
 
+    private final int MINIMUM_PIXEL = 10;
+    private final int MAXIMUM_PIXEL = 230;
+
+    private double[] trendline = {0.2,.31,.42,.53,.64,.75};
+
     public StartShooter(ShooterSensorInterface sensors)
     {
         super(sensors);
@@ -17,7 +23,7 @@ public class StartShooter extends ShooterCommand
     @Override
     public ShooterOutput execute() 
     {
-        double distance = getSensors().getDistanceToTarget();
+        double distance = Robot.getLimelight().getTargetHeight();
         double wantedSpeed = calcShootingSpeed(distance);
 
         double actualSpeed = getSensors().getShooterSpeed();
@@ -25,9 +31,21 @@ public class StartShooter extends ShooterCommand
         return new ShooterOutput(wantedSpeed, (Math.abs(actualSpeed - wantedSpeed) < ACCEPTABLE_ERROR));
     }
 
-    private double calcShootingSpeed(double distanceFromTarget)
+    private double calcShootingSpeed(double distance)
     {
-        //return .136*distanceFromTarget+44.8; //Using trendline
-		return Math.sqrt((distanceFromTarget*distanceFromTarget*9.8)/(2*Math.cos(35)*HEIGHT_OF_PORT-Math.tan(35))); //Using math
+        int baseIndex = (int) getScaledIndex(distance);
+        return trendline[baseIndex] + (distance - baseIndex*getTrendlineStep()) * (( trendline[baseIndex + 1] - trendline[baseIndex]) / ((baseIndex + 1) * getTrendlineStep() - baseIndex * getTrendlineStep()));//*HEIGHT_OF_PORT-Math.tan(35))); //Using math
     }
+
+    private double getTrendlineStep() {
+        return MAXIMUM_PIXEL/MINIMUM_PIXEL;
+    }
+
+    private double getScaledIndex(double distance) {
+        return distance/getTrendlineStep();
+    }
+
+
+
+
 }

@@ -7,7 +7,7 @@ import frc.shooter.ShooterSensorInterface;
 public class PlopBall extends ShooterCommand
 {
     private final double TURN_DISTANCE = 1;
-    private final double TURN_SPEED = 0.5;
+    private final double TURN_SPEED = 0.15;
 
     public PlopBall(ShooterSensorInterface sensors)
     {

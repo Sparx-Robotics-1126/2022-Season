@@ -32,6 +32,11 @@ public class Shooter extends Subsystem
         public double distance;
         public double speed;
 
+        /*
+        HEIGHT: 
+        SPEED: 
+        */
+
         public ShooterData(double distance, double speed)
         {
             this.distance = distance;

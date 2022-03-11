@@ -49,7 +49,7 @@ public class TeleoperatedController extends Controller
     acquisitionsIntake = new Button(operatorJoystick, ControllerMappings.XBOX_Y);
 
     //SHOOTER
-    shooterToggleButton = new Button(operatorJoystick, ControllerMappings.XBOX_A);
+    shooterToggleButton = new Button(driverJoystick, ControllerMappings.XBOX_A);
 
     //Add additional controls here.
   }

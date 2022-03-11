@@ -14,22 +14,28 @@ public class CheckForBalls extends StorageCommand
     public CheckForBalls(StorageSensorInterface sensors)
     {
         super(sensors);
+
         pastStorageSensorValue = sensors.getStorageIRSensor();
     } 
 
     @Override
     public StorageOutput execute() 
     {
-        if (!pastStorageSensorValue && getSensors().getStorageIRSensor())
+        //!pastStorageSensorValue &&
+        if (getSensors().getStorageIRSensor())
         {
-            pastStorageSensorValue = true;
-            
-            if (Storage.getNumBalls() < 2)
+            if (!pastStorageSensorValue && Storage.getNumBalls() < 2)
                 Storage.setNumBalls(Storage.getNumBalls() + 1);
-        }
-        else if(pastStorageSensorValue && !getSensors().getStorageIRSensor())
-            pastStorageSensorValue = false;
 
-        return new StorageOutput(Storage.getNumBalls(), true);
+            pastStorageSensorValue = true;
+
+            return new StorageOutput(0.6, false);
+        }
+        else //if (pastStorageSensorValue) //&& !getSensors().getStorageIRSensor()
+        {
+            pastStorageSensorValue = false;
+            
+            return new StorageOutput(0, true);
+        }
     }
 }

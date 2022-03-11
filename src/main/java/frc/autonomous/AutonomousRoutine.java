@@ -8,15 +8,15 @@ public abstract class AutonomousRoutine
 
     public AutonomousRoutine(AutonomousCommand[] commands)
     {
-        if (commands.length == 0)
-            throw new IllegalArgumentException("The passed command array must contain at least one AutonomousCommand.");
-
         this.commands = commands;
         position = 0;
     }
 
     public void execute()
     {
+        if (position > commands.length - 1)
+            return;
+
         AutonomousCommand current = commands[position];
 
         if (!current.hasRan())

@@ -28,7 +28,8 @@ public class StorageSensors implements StorageSensorInterface
 	}
 
 	@Override
-	public boolean getStorageIRSensor() {
+	public boolean getStorageIRSensor() 
+	{
         return !storageIR.get();
 	}
 }

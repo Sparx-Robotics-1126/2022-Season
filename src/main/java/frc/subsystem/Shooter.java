@@ -27,23 +27,6 @@ public class Shooter extends Subsystem
      */
     private ShooterCommand shooterCommand;
 
-    // private class ShooterData
-    // {
-    //     public double distance;
-    //     public double speed;
-
-    //     /*
-    //     HEIGHT: 
-    //     SPEED: 
-    //     */
-
-    //     public ShooterData(double distance, double speed)
-    //     {
-    //         this.distance = distance;
-    //         this.speed = speed;
-    //     }
-    // }
-
     /**
      * Main initializer for the acquisitions subsystem. Called in Robot.java.
      */
@@ -51,12 +34,6 @@ public class Shooter extends Subsystem
     {
         shooterMotor = new CANSparkMax(IO.SHOOTER_MOTOR, MotorType.kBrushless);
         shooterSensors.addEncoders(shooterMotor.getEncoder());
-
-       // trendline = new ShooterData[5];
-
-        //Input values into trendline
-
-        //trendline[0] = new ShooterData(distance, speed);
     }
 
 
@@ -73,29 +50,6 @@ public class Shooter extends Subsystem
                 shooterCommand = null;
         }
     }
-
-    // public double getTrendlineValue(double distance)
-    // {
-    //     int closestIndexMax = -1;
-    //     int closestIndexMin;
-
-    //     ShooterData pointMin, pointMax;
-
-    //     for (int i = 0; i < trendline.length; i ++)
-    //     {
-    //         closestIndexMax = i;
-    //         if (trendline[i].distance >= distance)
-    //         {
-    //             break;
-    //         }
-    //     }
-    //     closestIndexMin = closestIndexMax - 1;
-
-    //     pointMin = trendline[closestIndexMin];
-    //     pointMax = trendline[closestIndexMax];
-
-    //     return pointMin.speed + (distance - pointMin.distance) * ((pointMax.speed - pointMin.speed) / (pointMax.distance - pointMin.distance));
-    // }
 
     /**
      * Sets the shooter motor speed to 0

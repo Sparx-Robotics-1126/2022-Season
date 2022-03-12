@@ -38,12 +38,6 @@ public class ShooterSensors implements ShooterSensorInterface
 		return Robot.getLimelight().getHorizontalPixelsFromTarget();
 	}
 
-	@Override
-	public void enableLimelight(boolean enable) 
-	{
-		Robot.getLimelight().enable(enable);
-	}
-
     /**
 	 * Gets the speed that the motor is rotating.
 	 */
@@ -56,5 +50,10 @@ public class ShooterSensors implements ShooterSensorInterface
 	public double getMotorDistance()
 	{
 		return shooterEncoder.getPosition();
+	}
+
+	public double percentageToRPM(double percentage)
+	{
+		return percentage * 5561.90511;
 	}
 }

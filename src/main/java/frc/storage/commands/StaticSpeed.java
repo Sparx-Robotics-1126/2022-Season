@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class StaticSpeed extends StorageCommand
 {
+    private double speed;
+
     static
     {
         SmartDashboard.putNumber("STORAGE_SPEED", 0.25);
@@ -16,12 +18,20 @@ public class StaticSpeed extends StorageCommand
     public StaticSpeed(StorageSensorInterface sensors)
     {
         super(sensors);
-        System.out.println("new static speed command");
+
+        speed = SmartDashboard.getNumber("SHOOTER_SPEED", 0.25);
+    }
+
+    public StaticSpeed(StorageSensorInterface sensors, double speed)
+    {
+        super(sensors);
+        
+        this.speed = speed;
     }
 
     @Override
     public StorageOutput execute() 
     {
-        return new StorageOutput(SmartDashboard.getNumber("STORAGE_SPEED", 0.25), false);
+        return new StorageOutput(speed, false);
     }
 }

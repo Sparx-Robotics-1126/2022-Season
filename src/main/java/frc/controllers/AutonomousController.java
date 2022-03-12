@@ -3,7 +3,7 @@ package frc.controllers;
 import frc.autonomous.AutonomousRoutine;
 
 import frc.autonomous.routines.DoNothing;
-import frc.autonomous.routines.ShootTwoBalls;
+import frc.autonomous.routines.ShootOneBall;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -16,7 +16,7 @@ public class AutonomousController extends Controller
 
 	//Index 0 should contain the default autonomous routine.
 	private AutonomousRoutine[] routines = {
-		new ShootTwoBalls(),
+		new ShootOneBall(),
 		new DoNothing()
 	};
 

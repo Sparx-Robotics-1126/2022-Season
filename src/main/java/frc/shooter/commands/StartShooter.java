@@ -13,6 +13,11 @@ public class StartShooter extends ShooterCommand
     private final int MINIMUM_PIXEL = 10;
     private final int MAXIMUM_PIXEL = 230;
 
+    /*
+    DISTANCE (Y VALUE): 
+    SPEED: 
+    */
+
     private double[] trendline = {0.2,.31,.42,.53,.64,.75};
 
     public StartShooter(ShooterSensorInterface sensors)
@@ -38,7 +43,7 @@ public class StartShooter extends ShooterCommand
     }
 
     private double getTrendlineStep() {
-        return MAXIMUM_PIXEL/MINIMUM_PIXEL;
+        return (MAXIMUM_PIXEL-MINIMUM_PIXEL)/trendline.length;
     }
 
     private double getScaledIndex(double distance) {

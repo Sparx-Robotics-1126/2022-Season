@@ -66,9 +66,14 @@ public class Storage extends Subsystem
         return storageCommand == null;
     }
 
-    public void staticSpeed()
+    public void setSpeed()
     {
         storageCommand = new StaticSpeed(sensors);
+    }
+
+    public void setSpeed(double speed)
+    {
+        storageCommand = new StaticSpeed(sensors, speed);
     }
 
     public void stopStorage()

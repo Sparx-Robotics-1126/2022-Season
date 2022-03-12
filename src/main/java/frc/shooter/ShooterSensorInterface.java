@@ -8,13 +8,9 @@ import com.revrobotics.RelativeEncoder;
 public interface ShooterSensorInterface 
 {
     void addEncoders(RelativeEncoder shooterSpark);
-
     double getShooterSpeed();
-    
     double getAngleToTarget();
     double getDistanceToTarget();
-
     double getMotorDistance();
-
-    void enableLimelight(boolean enable);
+    double percentageToRPM(double percentage);
 }

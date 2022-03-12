@@ -80,9 +80,8 @@ public class TeleoperatedController extends Controller
     {
       int timesPressed = shooterToggleButton.timesPressed();
 
-      if (timesPressed % 2 == 1) {
-        Robot.getShooter().singleSpeed();
-      }
+      if (timesPressed % 2 == 1)
+        Robot.getShooter().setSpeed();
       else
         Robot.getShooter().stopShooter();
     }
@@ -111,12 +110,10 @@ public class TeleoperatedController extends Controller
     if (storageButton.get())
     {
       int timesPressed = storageButton.timesPressed();
-      System.out.println("storage button has been pressed " + timesPressed);
       
-      if (timesPressed % 2 == 1) {
-        Robot.getStorage().staticSpeed();
-        System.out.println("storage button start static speed");
-      } else
+      if (timesPressed % 2 == 1)
+        Robot.getStorage().setSpeed();
+      else
         Robot.getStorage().stopStorage();
     }
 

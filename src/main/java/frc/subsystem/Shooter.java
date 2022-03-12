@@ -3,6 +3,7 @@ package frc.subsystem;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.IO;
 import frc.shooter.ShooterCommand;
 import frc.shooter.ShooterOutput;
@@ -27,6 +28,8 @@ public class Shooter extends Subsystem
      */
     private ShooterCommand shooterCommand;
 
+    private double requestedSpeed;
+
     // private class ShooterData
     // {
     //     public double distance;
@@ -50,7 +53,9 @@ public class Shooter extends Subsystem
     public Shooter(ShooterSensorInterface shooterSensors) 
     {
         shooterMotor = new CANSparkMax(IO.SHOOTER_MOTOR, MotorType.kBrushless);
+        this.shooterSensors = shooterSensors;
         shooterSensors.addEncoders(shooterMotor.getEncoder());
+        requestedSpeed = 0;
 
        // trendline = new ShooterData[5];
 
@@ -58,7 +63,6 @@ public class Shooter extends Subsystem
 
         //trendline[0] = new ShooterData(distance, speed);
     }
-
 
     @Override
     void execute() 
@@ -68,7 +72,13 @@ public class Shooter extends Subsystem
             ShooterOutput shooterOutput = shooterCommand.execute();
 
             shooterMotor.set(-shooterOutput.get());
-                
+
+            requestedSpeed = -shooterOutput.get();
+
+            SmartDashboard.putBoolean("SHOOTER_AT_SPEED", shooterAtSpeed());
+            SmartDashboard.putNumber("SHOOTER_ACTUAL_SPEED", shooterSensors.getShooterSpeed());
+            SmartDashboard.putNumber("SHOOTER_REQUESTED_SPEED", shooterSensors.percentageToRPM(requestedSpeed));
+            
             if (shooterOutput.isDone())
                 shooterCommand = null;
         }
@@ -97,6 +107,11 @@ public class Shooter extends Subsystem
     //     return pointMin.speed + (distance - pointMin.distance) * ((pointMax.speed - pointMin.speed) / (pointMax.distance - pointMin.distance));
     // }
 
+    public boolean shooterAtSpeed()
+    {
+        return Math.abs(shooterSensors.getShooterSpeed() - shooterSensors.percentageToRPM(requestedSpeed)) <= 20;
+    }
+
     /**
      * Sets the shooter motor speed to 0
      */
@@ -119,9 +134,14 @@ public class Shooter extends Subsystem
         
     }
 
-    public void singleSpeed()
+    public void setSpeed()
     {
         shooterCommand = new StaticSpeed(shooterSensors);
+    }
+
+    public void setSpeed(double speed)
+    {
+        shooterCommand = new StaticSpeed(shooterSensors, speed);
     }
 
     @Override

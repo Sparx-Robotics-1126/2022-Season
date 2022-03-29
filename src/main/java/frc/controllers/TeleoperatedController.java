@@ -21,9 +21,7 @@ public class TeleoperatedController extends Controller
   private Button acquisitionsArmDown;
   private Button acquisitionsIntake;
 
-  private Button shooterToggleButton;
-
-  private Button storageButton;
+  private Button shootBall;
 
   static 
   {
@@ -51,10 +49,8 @@ public class TeleoperatedController extends Controller
     acquisitionsIntake = new Button(operatorJoystick, ControllerMappings.XBOX_B);
 
     //SHOOTER
-    shooterToggleButton = new Button(driverJoystick, ControllerMappings.XBOX_A);
+    shootBall = new Button(driverJoystick, ControllerMappings.XBOX_A, ButtonType.PRESSED);
 
-    //STORAGE
-    storageButton = new Button(driverJoystick, ControllerMappings.XBOX_X);
     //Add additional controls here.
   }
 
@@ -76,14 +72,12 @@ public class TeleoperatedController extends Controller
     }
 
     //SHOOTER
-    if (shooterToggleButton.get())
+    if (shootBall.get())
+      Robot.getShooter().shootBall();
+    else
     {
-      int timesPressed = shooterToggleButton.timesPressed();
-
-      if (timesPressed % 2 == 1)
-        Robot.getShooter().setSpeed();
-      else
-        Robot.getShooter().stopShooter();
+      Robot.getShooter().stopShooter();
+      Robot.getStorage().stopStorage();
     }
 
     //ACQUISITIONS
@@ -104,17 +98,6 @@ public class TeleoperatedController extends Controller
         Robot.getAcquisitions().intakeRollers();
       else
         Robot.getAcquisitions().stopRollers();
-    }
-
-    //STORAGE
-    if (storageButton.get())
-    {
-      int timesPressed = storageButton.timesPressed();
-      
-      if (timesPressed % 2 == 1)
-        Robot.getStorage().setSpeed();
-      else
-        Robot.getStorage().stopStorage();
     }
 
     //Trigger Sensitivity Control

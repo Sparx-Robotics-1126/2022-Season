@@ -61,11 +61,6 @@ public class Drives extends Subsystem
 
         driveSensors.addEncoders(leftMotorMaster.getEncoder(), rightMotorMaster.getEncoder());
         drivesSensors = driveSensors;
-
-        rightMotorMaster.setSmartCurrentLimit(MAX_CURRENT);
-        leftMotorMaster.setSmartCurrentLimit(MAX_CURRENT);
-        rightMotorSlave.setSmartCurrentLimit(MAX_CURRENT);
-        leftMotorSlave.setSmartCurrentLimit(MAX_CURRENT);
     }
 
     /**
@@ -79,12 +74,16 @@ public class Drives extends Subsystem
         master.set(0);
         master.setIdleMode(IdleMode.kCoast);
         master.enableVoltageCompensation(NOMINAL_VOLTAGE);
+        master.setSmartCurrentLimit(MAX_CURRENT);
+        master.setOpenLoopRampRate(1);
 
         for (CANSparkMax slave : slaves) 
         {
             slave.restoreFactoryDefaults();
             slave.follow(master);
             slave.setIdleMode(IdleMode.kCoast);
+            slave.setSmartCurrentLimit(MAX_CURRENT);
+            slave.setOpenLoopRampRate(1);
         }
     }
 

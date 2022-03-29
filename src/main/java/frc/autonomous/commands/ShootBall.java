@@ -4,11 +4,11 @@ import frc.robot.Robot;
 
 import frc.autonomous.AutonomousCommand;
 
-public class SetStorageSpeed extends AutonomousCommand
+public class ShootBall extends AutonomousCommand
 {
     private double speed;
 
-    public SetStorageSpeed(double speed)
+    public ShootBall(double speed)
     {
         this.speed = speed;
     }
@@ -16,12 +16,12 @@ public class SetStorageSpeed extends AutonomousCommand
     @Override
     public void execute() 
     {
-        Robot.getStorage().setSpeed(speed);
+        Robot.getShooter().shootBall(speed);
     }
 
     @Override
     public boolean isDone() 
     {
-        return true;
+        return Robot.getShooter().isDone();
     }
 }

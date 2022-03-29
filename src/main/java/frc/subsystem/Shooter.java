@@ -1,16 +1,18 @@
 package frc.subsystem;
 
+import frc.robot.IO;
+
+import frc.shooter.ShooterCommand;
+import frc.shooter.ShooterOutput;
+import frc.shooter.ShooterSensorInterface;
+
+import frc.shooter.commands.StopShooter;
+import frc.shooter.commands.ShootBall;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.IO;
-import frc.shooter.ShooterCommand;
-import frc.shooter.ShooterOutput;
-import frc.shooter.ShooterSensorInterface;
-import frc.shooter.commands.StaticSpeed;
-import frc.shooter.commands.StartShooter;
-import frc.shooter.commands.StopShooter;
 
 public class Shooter extends Subsystem
 {
@@ -71,12 +73,12 @@ public class Shooter extends Subsystem
         {
             ShooterOutput shooterOutput = shooterCommand.execute();
 
-            shooterMotor.set(-shooterOutput.get());
-
             requestedSpeed = -shooterOutput.get();
 
+            shooterMotor.set(requestedSpeed);
+
             SmartDashboard.putBoolean("SHOOTER_AT_SPEED", shooterAtSpeed());
-            SmartDashboard.putNumber("SHOOTER_ACTUAL_SPEED", shooterSensors.getShooterSpeed());
+            SmartDashboard.putNumber("SHOOTER_ACTUAL_SPEED", shooterSensors.getSpeed());
             SmartDashboard.putNumber("SHOOTER_REQUESTED_SPEED", shooterSensors.percentageToRPM(requestedSpeed));
             
             if (shooterOutput.isDone())
@@ -109,7 +111,7 @@ public class Shooter extends Subsystem
 
     public boolean shooterAtSpeed()
     {
-        return Math.abs(shooterSensors.getShooterSpeed() - shooterSensors.percentageToRPM(requestedSpeed)) <= 20;
+        return Math.abs(shooterSensors.getSpeed() - shooterSensors.percentageToRPM(requestedSpeed)) <= 100;
     }
 
     /**
@@ -120,28 +122,19 @@ public class Shooter extends Subsystem
         shooterCommand = new StopShooter(shooterSensors);
     }
 
-    /**
-     * Adjusts the shooter motor speed to shoot correctly
-     */
-    public void startShooter()
-    {
-        shooterCommand = new StartShooter(shooterSensors);
-    }
-
     public void findTarget()
     {
-        double targetAngle = shooterSensors.getAngleToTarget();
-        
+
     }
 
-    public void setSpeed()
+    public void shootBall()
     {
-        shooterCommand = new StaticSpeed(shooterSensors);
+        shooterCommand = new ShootBall(shooterSensors);
     }
 
-    public void setSpeed(double speed)
+    public void shootBall(double speed)
     {
-        shooterCommand = new StaticSpeed(shooterSensors, speed);
+        shooterCommand = new ShootBall(shooterSensors, speed);
     }
 
     @Override

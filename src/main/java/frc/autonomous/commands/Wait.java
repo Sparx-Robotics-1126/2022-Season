@@ -18,7 +18,8 @@ public class Wait extends AutonomousCommand
     }
 
     @Override
-    public boolean isDone() {
+    public boolean isDone() 
+    {
         return true;
     }
 }

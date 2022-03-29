@@ -18,10 +18,13 @@ public class Storage extends Subsystem
     
 	private static short numBalls;
 
+    private double requestedSpeed;
+
     public Storage(StorageSensorInterface sensors)
     {
         numBalls = 1;
         this.sensors = sensors;
+        requestedSpeed = 0;
 
 		storageMotor = new CANSparkMax(IO.STORAGE_MOTOR, MotorType.kBrushless);
     }
@@ -48,7 +51,10 @@ public class Storage extends Subsystem
         if (storageCommand != null) 
         {
 			StorageOutput output = storageCommand.execute();
-            storageMotor.set(output.get());
+
+            requestedSpeed = output.get();
+
+            storageMotor.set(requestedSpeed);
 
 			if (output.isDone()) 
             {
@@ -84,15 +90,5 @@ public class Storage extends Subsystem
     public void checkForBalls() 
     {
         storageCommand = new CheckForBalls(sensors);
-    }
-
-    public void indexBall() 
-    {
-        storageCommand = new IndexBall(sensors);
-    }
-
-    public void shootBall() 
-    {
-        storageCommand = new ShootBall(sensors);
     }
 }

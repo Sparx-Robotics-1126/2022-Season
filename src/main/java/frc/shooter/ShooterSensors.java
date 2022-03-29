@@ -42,7 +42,7 @@ public class ShooterSensors implements ShooterSensorInterface
 	 * Gets the speed that the motor is rotating.
 	 */
 	@Override
-	public double getShooterSpeed() 
+	public double getSpeed() 
 	{
 		return shooterEncoder.getVelocity();
 	}

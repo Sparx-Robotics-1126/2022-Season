@@ -8,7 +8,7 @@ import com.revrobotics.RelativeEncoder;
 public interface ShooterSensorInterface 
 {
     void addEncoders(RelativeEncoder shooterSpark);
-    double getShooterSpeed();
+    double getSpeed();
     double getAngleToTarget();
     double getDistanceToTarget();
     double getMotorDistance();

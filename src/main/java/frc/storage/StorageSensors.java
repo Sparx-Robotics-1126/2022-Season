@@ -1,12 +1,14 @@
 package frc.storage;
 
 import frc.robot.IO;
+
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Encoder;
+
+import com.revrobotics.RelativeEncoder;
 
 public class StorageSensors implements StorageSensorInterface
 {
-	private Encoder storageEncoder;
+	private RelativeEncoder storageEncoder;
 
     private DigitalInput storageIR;
 
@@ -18,13 +20,18 @@ public class StorageSensors implements StorageSensorInterface
 		storageIR = new DigitalInput(IO.STORAGE_IR);
 	}
 
+	public void addEncoders(RelativeEncoder encoder)
+	{
+		storageEncoder = encoder;
+	}
+
 	/**
 	 * Gets the distance the storage motor has rotated.
 	 */
 	@Override
 	public double getStorageEncoderDistance() 
 	{
-		return storageEncoder.getDistance();
+		return storageEncoder.getPosition();
 	}
 
 	@Override

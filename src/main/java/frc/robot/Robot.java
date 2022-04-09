@@ -77,7 +77,7 @@ public class Robot extends RobotBase
         storageSensors = new StorageSensors();
         
         gyro = new AHRS(IO.USB_ONBOARD);
-        limelight = new Limelight();
+        //limelight = new Limelight();
         
         //Initialize Subsystems.
         drives = new Drives(drivesSensors);
@@ -135,8 +135,6 @@ public class Robot extends RobotBase
      */
     private void mainLoop() 
     {
-        SmartDashboard.putNumber("LIMELIGHT_Y", limelight.getHorizontalPixelsFromTarget());
-
         switch (state)
         {
             case STANDBY:

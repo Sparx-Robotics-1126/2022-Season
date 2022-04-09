@@ -10,12 +10,18 @@ import frc.shooter.commands.StopShooter;
 import frc.shooter.commands.ShootBall;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.ControlType;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import com.revrobotics.SparkMaxPIDController;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Shooter extends Subsystem
 {
+    private static final double MAX_RPM = 4000;
+
     private CANSparkMax shooterMotor;
 
     /*
@@ -31,6 +37,8 @@ public class Shooter extends Subsystem
     private ShooterCommand shooterCommand;
 
     private double requestedSpeed;
+
+    private SparkMaxPIDController pid;
 
     // private class ShooterData
     // {
@@ -49,14 +57,32 @@ public class Shooter extends Subsystem
     //     }
     // }
 
+    static
+    {
+        SmartDashboard.putNumber("PID_PROPORTIONAL_COEFFICIENT", 0.0005);
+        SmartDashboard.putNumber("PID_INTEGRAL_COEFFICIENT", 0);
+        SmartDashboard.putNumber("PID_DERIVATIVE_COEFFICIENT", 0);
+    }
+
     /**
      * Main initializer for the acquisitions subsystem. Called in Robot.java.
      */
     public Shooter(ShooterSensorInterface shooterSensors) 
     {
         shooterMotor = new CANSparkMax(IO.SHOOTER_MOTOR, MotorType.kBrushless);
+
+        shooterMotor.setIdleMode(IdleMode.kBrake);
+
+        pid = shooterMotor.getPIDController();
+        pid.setOutputRange(-1, 1);
+        pid.setP(0.0005);
+        pid.setI(0);
+        pid.setD(0);
+        
         this.shooterSensors = shooterSensors;
+
         shooterSensors.addEncoders(shooterMotor.getEncoder());
+        
         requestedSpeed = 0;
 
        // trendline = new ShooterData[5];
@@ -69,17 +95,20 @@ public class Shooter extends Subsystem
     @Override
     void execute() 
     {
+        pid.setP(SmartDashboard.getNumber("PID_PROPORTIONAL_COEFFICIENT", 0.0005));
+        pid.setI(SmartDashboard.getNumber("PID_INTEGRAL_COEFFICIENT", 0));
+        pid.setD(SmartDashboard.getNumber("PID_DERIVATIVE_COEFFICIENT", 0));
+
         if (shooterCommand != null)
         {
             ShooterOutput shooterOutput = shooterCommand.execute();
-
-            requestedSpeed = -shooterOutput.get();
-
-            shooterMotor.set(requestedSpeed);
-
+            
+            requestedSpeed = -shooterOutput.get() * MAX_RPM;
+            pid.setReference(requestedSpeed, ControlType.kVelocity);
+            
             SmartDashboard.putBoolean("SHOOTER_AT_SPEED", shooterAtSpeed());
             SmartDashboard.putNumber("SHOOTER_ACTUAL_SPEED", shooterSensors.getSpeed());
-            SmartDashboard.putNumber("SHOOTER_REQUESTED_SPEED", shooterSensors.percentageToRPM(requestedSpeed));
+            SmartDashboard.putNumber("SHOOTER_REQUESTED_SPEED", requestedSpeed);
             
             if (shooterOutput.isDone())
                 shooterCommand = null;
@@ -111,7 +140,7 @@ public class Shooter extends Subsystem
 
     public boolean shooterAtSpeed()
     {
-        return Math.abs(shooterSensors.getSpeed() - shooterSensors.percentageToRPM(requestedSpeed)) <= 100;
+        return Math.abs(requestedSpeed - shooterSensors.getSpeed()) <= 20;
     }
 
     /**

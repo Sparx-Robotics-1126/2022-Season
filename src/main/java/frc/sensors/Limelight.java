@@ -30,8 +30,6 @@ public class Limelight
 		ty = table.getEntry("ty");
 
 		ledMode = table.getEntry("ledMode");
-
-		SmartDashboard.putNumber("PIXELS_CONSTANT", 0.223);
 	}
 	
 	public double getDistanceFromTarget()

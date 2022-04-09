@@ -135,8 +135,6 @@ public class Robot extends RobotBase
      */
     private void mainLoop() 
     {
-        SmartDashboard.putNumber("LIMELIGHT_Y", limelight.getHorizontalPixelsFromTarget());
-
         switch (state)
         {
             case STANDBY:

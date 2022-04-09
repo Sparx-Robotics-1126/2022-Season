@@ -10,6 +10,7 @@ import frc.shooter.commands.StopShooter;
 import frc.shooter.commands.ShootBall;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -58,6 +59,8 @@ public class Shooter extends Subsystem
         this.shooterSensors = shooterSensors;
         shooterSensors.addEncoders(shooterMotor.getEncoder());
         requestedSpeed = 0;
+        shooterMotor.restoreFactoryDefaults();
+        shooterMotor.setIdleMode(IdleMode.kBrake);
 
        // trendline = new ShooterData[5];
 

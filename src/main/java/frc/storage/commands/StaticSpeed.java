@@ -12,14 +12,14 @@ public class StaticSpeed extends StorageCommand
 
     static
     {
-        SmartDashboard.putNumber("STORAGE_SPEED", 0.15);
+        SmartDashboard.putNumber("STORAGE_SPEED", 0.12);
     }
 
     public StaticSpeed(StorageSensorInterface sensors)
     {
         super(sensors);
 
-        speed = SmartDashboard.getNumber("STORAGE_SPEED", 0.15);
+        speed = SmartDashboard.getNumber("STORAGE_SPEED", 0.12);
     }
 
     public StaticSpeed(StorageSensorInterface sensors, double speed)

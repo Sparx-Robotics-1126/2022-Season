@@ -29,7 +29,7 @@ public class CheckForBalls extends StorageCommand
 
             pastStorageSensorValue = true;
 
-            return new StorageOutput(0.15, false);
+            return new StorageOutput(0.12, false);
         }
         else //if (pastStorageSensorValue) //&& !getSensors().getStorageIRSensor()
         {

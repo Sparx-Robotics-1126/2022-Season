@@ -8,6 +8,7 @@ import frc.storage.StorageSensorInterface;
 import frc.storage.commands.*;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class Storage extends Subsystem
@@ -27,6 +28,7 @@ public class Storage extends Subsystem
         requestedSpeed = 0;
 
 		storageMotor = new CANSparkMax(IO.STORAGE_MOTOR, MotorType.kBrushless);
+        storageMotor.restoreFactoryDefaults();
     }
 
     /**
